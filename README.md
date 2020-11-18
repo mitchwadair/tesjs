@@ -15,6 +15,7 @@ Keep in mind that in order for your subscriptions to work, the url you are point
 ```js
 const TES = require('tesjs');
 
+// initialize TESjs
 const tes = new TES({
     identity: {
         id: YOUR_CLIENT_ID,
@@ -25,10 +26,15 @@ const tes = new TES({
     }
 });
 
+// define an event handler for the 'channel.update' event
+// NOTES: 
+//   this handles ALL events of that type
+//   events will not be fired until there is a subscription made for them
 tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
     console.log(`${userName}'s new title is ${title}`);
 });
 
+// create a new subscription for the 'channel.update' event for broadcaster '1337'
 tes.subscribe('channel.update', {
     broadcaster_user_id: 1337
 }).then(_ => {
@@ -44,6 +50,7 @@ TESjs uses Express under the hood to host a webhooks endpoint.  If you already h
 const TES = require('tesjs');
 const express = require('express');
 
+// create our Express server
 const app = express();
 
 app.get('/', (req, res) => {
@@ -52,6 +59,7 @@ app.get('/', (req, res) => {
 
 app.listen(8080);
 
+// initialize TESjs
 const tes = new TES({
     identity: {
         id: YOUR_CLIENT_ID,
@@ -63,10 +71,15 @@ const tes = new TES({
     }
 });
 
+// define an event handler for the 'channel.update' event
+// NOTES: 
+//   this handles ALL events of that type
+//   events will not be fired until there is a subscription made for them
 tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
     console.log(`${userName}'s new title is ${title}`);
 });
 
+// create a new subscription for the 'channel.update' event for broadcaster '1337'
 tes.subscribe('channel.update', {
     broadcaster_user_id: 1337
 }).then(_ => {
