@@ -37,7 +37,7 @@ module.exports = function(port, server, secret) {
                 // handle a webhook verification request
                 if (req.body.hasOwnProperty('challenge') && req.headers['twitch-eventsub-message-type'] === 'webhook_callback_verification') {
                     console.log('Got subscription verification challenge, returning challenge');
-                    res.status(200).type('text/plain').send(req.body.challenge); //ensure plain string response
+                    res.status(200).type('text/plain').send(encodeURIComponent(req.body.challenge)); //ensure plain string response
                     return;
                 }
 
