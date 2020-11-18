@@ -1,6 +1,11 @@
 # TESjs
 A module to streamline the use of Twitch EventSub in Node.js applications
 
+<p align="center">
+    <img src="https://github.com/mitchwadair/mthebot/workflows/CodeQL/badge.svg?branch=master" alt="codeql"/>
+    <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
+</p>
+
 # Disclaimer
 The current version of TESjs is likely to be extremely unstable, as it has not had rigorous testing yet.
 
@@ -66,7 +71,7 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
-        baseURL: "https://example.com"
+        baseURL: "https://example.com",
         server: app
     }
 });
