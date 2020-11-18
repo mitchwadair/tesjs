@@ -6,11 +6,30 @@
     "type": "git",
     "url": "git+https://github.com/mitchwadair/tesjs.git"
   },
-  "keywords": [],
+  "keywords": [
+    "tes",
+    "tesjs",
+    "twitch",
+    "twitch.tv",
+    "eventsub",
+    "event",
+    "subscription",
+    "webhooks"
+  ],
+  "main": "main.js",
+  "files": [
+    "src",
+    "main.js",
+    "LICENSE"
+  ],
   "author": "Mitchell Adair (https://github.com/mitchwadair)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mitchwadair/tesjs/issues"
   },
-  "homepage": "https://github.com/mitchwadair/tesjs#readme"
+  "homepage": "https://github.com/mitchwadair/tesjs#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }
