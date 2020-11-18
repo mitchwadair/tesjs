@@ -16,24 +16,62 @@ Keep in mind that in order for your subscriptions to work, the url you are point
 const TES = require('tesjs');
 
 const tes = new TES({
-  identity: {
-    id: YOUR_CLIENT_ID,
-    secret: YOUR_CLIENT_SECRET
-  },
-  listener: {
-    baseURL: "https://example.com"
-  }
+    identity: {
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET
+    },
+    listener: {
+        baseURL: "https://example.com"
+    }
 });
 
 tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
-  console.log(`${userName}'s new title is ${title}`);
+    console.log(`${userName}'s new title is ${title}`);
 });
 
 tes.subscribe('channel.update', {
-  broadcaster_user_id: 1337
+    broadcaster_user_id: 1337
 }).then(_ => {
-  console.log('Subscription successful');
+    console.log('Subscription successful');
 }).catch(err => {
-  console.log(err);
+    console.log(err);
+});
+```
+
+# Use an Existing Express Server
+TESjs uses Express under the hood to host a webhooks endpoint.  If you already have a server running on Express that you want to use, you can pass it into the configuration object for TESjs.
+```js
+const TES = require('tesjs');
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('OK');
+});
+
+app.listen(8080);
+
+const tes = new TES({
+    identity: {
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET
+    },
+    listener: {
+        baseURL: "https://example.com"
+        server: app
+    }
+});
+
+tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
+    console.log(`${userName}'s new title is ${title}`);
+});
+
+tes.subscribe('channel.update', {
+    broadcaster_user_id: 1337
+}).then(_ => {
+    console.log('Subscription successful');
+}).catch(err => {
+    console.log(err);
 });
 ```
