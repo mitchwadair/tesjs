@@ -1,10 +1,10 @@
 # TESjs
-A module to streamline the use of Twitch EventSub in Node.js applications
-
 <p align="center">
     <img src="https://github.com/mitchwadair/mthebot/workflows/CodeQL/badge.svg?branch=master" alt="codeql"/>
     <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
 </p>
+
+A module to streamline the use of Twitch EventSub in Node.js applications
 
 # Disclaimer
 The current version of TESjs is likely to be extremely unstable, as it has not had rigorous testing yet.
