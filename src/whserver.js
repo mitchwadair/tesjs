@@ -43,7 +43,11 @@ module.exports = function(port, server, secret) {
 
                 // if normal event, send OK and handle event
                 res.status(200).send('OK');
-                EventManager.fire(req.body.subscription.type, req.body.event);
+
+                // if the request is not revoking the subscription, fire the event
+                if (req.body.subscription.status !== 'authorization-revoked') {
+                    EventManager.fire(req.body.subscription.type, req.body.event);
+                }
             } else {
                 console.log('Request signature mismatch');
                 res.status(401).send('Request signature mismatch');
