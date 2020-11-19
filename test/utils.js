@@ -1,11 +1,32 @@
 const utils = require('../src/utils');
-const assert = require('assert');
+const should = require('chai').should();
 
 describe('utils', _ => {
     describe('request()', _ => {
-        it('should get an OK response', done => {
-            utils.request('GET', 'https://yesno.wtf/api').then(data => {
-                assert.notStrictEqual(data, null);
+        it('POST should get an OK response', done => {
+            const data = {
+                title: 'foo',
+                text: 'bar'
+            }
+            const headers = {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+            utils.request('POST', 'https://jsonplaceholder.typicode.com/posts', headers, data).then(data => {
+                data.title.should.eq('foo');
+                done();
+            });
+        });
+
+        it('GET should get an OK response', done => {
+            utils.request('GET', 'https://jsonplaceholder.typicode.com/posts/1').then(data => {
+                data.id.should.eq(1);
+                done();
+            });
+        });
+
+        it('DELETE should get OK response', done => {
+            utils.request('DELETE', 'https://jsonplaceholder.typicode.com/posts/1').then(data => {
+                data.should.be.an('object').that.is.empty;
                 done();
             });
         });
@@ -21,7 +42,7 @@ describe('utils', _ => {
                 k1: 'key1',
                 k2: 'key2'
             }
-            assert.strictEqual(utils.objectShallowEquals(obj1, obj2), true);
+            utils.objectShallowEquals(obj1, obj2).should.eq(true);
             done();
         });
     
@@ -33,7 +54,7 @@ describe('utils', _ => {
             const obj2 = {
                 wrong: 'different'
             }
-            assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
+            utils.objectShallowEquals(obj1, obj2).should.eq(false);
             done();
         });
     
@@ -46,7 +67,7 @@ describe('utils', _ => {
                 k1: 'not key1',
                 k2: 'not key2'
             }
-            assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
+            utils.objectShallowEquals(obj1, obj2).should.eq(false);
             done();
         });
     
@@ -60,7 +81,7 @@ describe('utils', _ => {
                 k2: 'key2',
                 k3: 'new key'
             }
-            assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
+            utils.objectShallowEquals(obj1, obj2).should.eq(false);
             done();
         });
     });
