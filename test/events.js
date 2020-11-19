@@ -7,7 +7,13 @@ beforeEach(done => {
 });
 
 describe('EventManager', _ => {
-    it('adds new event handlers', done => {
+    it('should not add a listener which is passed a non-function handler', done => {
+        should.not.exist(EventManager._events['test']);
+        EventManager.addListener.bind('test', 'not a function').should.throw(Error);
+        done();
+    });
+
+    it('adds new event listeners', done => {
         should.not.exist(EventManager._events['test']);
         EventManager.addListener('test', _ => {return});
         EventManager._events['test'].should.be.a('function');
