@@ -24,13 +24,40 @@ describe('objectShallowEquals', _ => {
         done();
     });
 
-    it('should return false when two objects do not match', done => {
+    it('should return false when second object keys dont match first object keys', done => {
         const obj1 = {
             k1: 'key1',
             k2: 'key2'
         }
         const obj2 = {
             wrong: 'different'
+        }
+        assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
+        done();
+    });
+
+    it('should return false when second object values dont match first object values', done => {
+        const obj1 = {
+            k1: 'key1',
+            k2: 'key2'
+        }
+        const obj2 = {
+            k1: 'not key1',
+            k2: 'not key2'
+        }
+        assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
+        done();
+    });
+
+    it('should return false when second object has extra keys', done => {
+        const obj1 = {
+            k1: 'key1',
+            k2: 'key2'
+        }
+        const obj2 = {
+            k1: 'key1',
+            k2: 'key2',
+            k3: 'new key'
         }
         assert.strictEqual(utils.objectShallowEquals(obj1, obj2), false);
         done();
