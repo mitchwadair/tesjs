@@ -26,7 +26,7 @@ const verify = (secret, req, res, buf, encoding) => {
     }
 }
 
-module.exports = function(port, server, secret) {
+module.exports = function(server, secret) {
     const whserver = server || express();
 
     whserver.post('/teswh/event', bodyParser.json({verify: (req, res, buf, encoding) => {verify(secret, req, res, buf, encoding)}}), (req, res) => {
