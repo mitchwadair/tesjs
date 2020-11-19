@@ -45,7 +45,7 @@ module.exports = function(port, server, secret) {
                 res.status(200).send('OK');
 
                 // if the request is not revoking the subscription, fire the event
-                if (req.body.subscription.status !== 'authorization-revoked') {
+                if (req.headers['twitch-eventsub-message-type'] !== 'revocation') {
                     EventManager.fire(req.body.subscription.type, req.body.event);
                 }
             } else {
