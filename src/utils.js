@@ -42,22 +42,23 @@ module.exports = {
         })
     },
     objectShallowEquals: (obj1, obj2) => {
-        try {
-            Object.keys(obj1).forEach(key => {
-                if (!(key in obj2) || obj1[key] !== obj2[key])
-                    throw Error;
+        let isEq = true;
+        Object.keys(obj1).every(key => {
+            if (!(key in obj2) || obj1[key] !== obj2[key]) {
+                isEq = false;
+                return false;
+            }
+            return true;
+        });
+        if (isEq) {
+            Object.keys(obj2).every(key => {
+                if (!(key in obj1) || obj1[key] !== obj2[key]) {
+                    isEq = false;
+                    return false;
+                }
+                return true;
             });
-        } catch (err) {
-            return false;
         }
-        try {
-            Object.keys(obj2).forEach(key => {
-                if (!(key in obj1) || obj1[key] !== obj2[key])
-                    throw Error;
-            });
-        } catch (err) {
-            return false;
-        }
-        return true;
+        return isEq;
     }
 }
