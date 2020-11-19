@@ -1,7 +1,7 @@
 const utils = require('../src/utils');
 const assert = require('assert');
 
-describe('request()', _ => {
+describe('utils - request()', _ => {
     it('should get an OK response', done => {
         utils.request('GET', 'https://yesno.wtf/api').then(data => {
             assert.notStrictEqual(data, null);
@@ -10,7 +10,7 @@ describe('request()', _ => {
     });
 });
 
-describe('objectShallowEquals', _ => {
+describe('utils - objectShallowEquals()', _ => {
     it('should return true when two objects match', done => {
         const obj1 = {
             k1: 'key1',
