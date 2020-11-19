@@ -27,6 +27,7 @@ class TES {
         this.baseURL = config.listener.baseURL;
         this.port = config.listener.port || process.env.PORT || 8080;
         this.whserver = whserver(this.port, config.listener.server, this.clientSecret);
+        this._whserverlistener = config.listener.server ? null : this.whserver.listen(this.port);
     }
 
     getSubscriptions() {

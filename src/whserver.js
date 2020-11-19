@@ -58,8 +58,5 @@ module.exports = function(port, server, secret) {
         }
     });
 
-    if (!server)
-        whserver.listen(port);
-
     return whserver;
 }
