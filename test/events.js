@@ -29,6 +29,13 @@ describe('EventManager', _ => {
         done();
     });
 
+    it('does nothing when removing invalid listener', done => {
+        should.not.exist(EventManager._events['test']);
+        EventManager.removeListener('test');
+        should.not.exist(EventManager._events['test']);
+        done();
+    })
+
     it('removes all listeners correctly', done => {
         should.not.exist(EventManager._events['test']);
         EventManager.addListener('test', _ => {return});
