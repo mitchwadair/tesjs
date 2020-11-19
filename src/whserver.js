@@ -53,7 +53,7 @@ module.exports = function(port, server, secret) {
                 res.status(401).send('Request signature mismatch');
             }
         } else {
-            console.log('Ivalid webhook request');
+            console.log('Invalid webhook request');
             res.status(401).send('Unauthorized request to EventSub webhook');
         }
     });
