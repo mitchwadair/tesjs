@@ -23,7 +23,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "mocha --exit"
+    "test": "nyc mocha --exit"
   },
   "author": "Mitchell Adair (https://github.com/mitchwadair)",
   "license": "MIT",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "supertest": "^6.0.1"
   }
 }
