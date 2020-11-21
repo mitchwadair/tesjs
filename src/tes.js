@@ -7,7 +7,9 @@ const whserver = require('./whserver');
 const EventManager = require('./events');
 const {request, objectShallowEquals} = require('./utils');
 
-// constructor
+/**
+ *  Twitch EventSub
+ */
 class TES {
     constructor(config) {
         // TES singleton
@@ -30,14 +32,19 @@ class TES {
         this._whserverlistener = config.listener.server ? null : this.whserver.listen(this.port);
     }
 
-    getSubscriptions() {
+    /**
+     * Get subscriptions (with option for pagination)
+     * 
+     * @param {string} cursor (optional) the pagination cursor
+     */
+    getSubscriptions(cursor) {
         return new Promise((resolve, reject) => {
             this._refreshAppAccessToken().then(_ => {
                 const headers = {
                     'Client-ID': this.clientID,
                     'Authorization': `Bearer ${this._authToken}`
                 }
-                request('GET', 'https://api.twitch.tv/helix/eventsub/subscriptions', headers).then(data => {
+                request('GET', `https://api.twitch.tv/helix/eventsub/subscriptions${cursor ? `?after=${cursor}` : ''}`, headers).then(data => {
                     resolve(data);
                 }).catch(err => {
                     reject(err);
@@ -48,47 +55,96 @@ class TES {
         });
     }
 
-    subscribe(type, condition) {
+    /**
+     * Get a specific condition by id or by type and condition
+     * 
+     * @param  {...any} args 
+     *      @param {string} id the id of the subscription
+     *      OR
+     *      @param {string} type the type of the subscription
+     *      @param {Object} condition the condition of the subscription
+     */
+    getSubscription(...args) {
         return new Promise((resolve, reject) => {
-            this.getSubscriptions().then(res => {
-                // make sure we are not already subscribed to this topic
-                const existingSub = res.data.find(sub => {
-                    if (sub.type == type) {
-                        return objectShallowEquals(sub.condition, condition);
+            let comparator;
+            if (arguments.length === 1) {
+                comparator = sub => sub.id === args[0];
+            } else if (arguments.length === 2) {
+                comparator = sub => {
+                    if (sub.type == args[0]) {
+                        return objectShallowEquals(sub.condition, args[1]);
                     } else
                         return false;
-                });
-                if (!existingSub) {
-                    const headers = {
-                        'Client-ID': this.clientID,
-                        'Authorization': `Bearer ${this._authToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                    const body = {
-                        type: type,
-                        version: '1',
-                        condition: condition,
-                        transport: {
-                            method: 'webhook',
-                            callback: `${this.baseURL}/teswh/event`,
-                            secret: this.clientSecret
-                        }
-                    }
-                    request('POST', 'https://api.twitch.tv/helix/eventsub/subscriptions', headers, body).then(data => {
-                        resolve(data);
-                    }).catch(err => {
-                        reject(err);
-                    });
-                } else {
-                    resolve(existingSub);
                 }
-            }).catch(err => {
-                reject(err);
+            } else { 
+                reject('unsubscribe must only have 1 or 2 arguments');
+            }
+            const getUntilFound = (callback, cursor) => {
+                this.getSubscriptions(cursor).then(data => {
+                    const sub = data.data.find(comparator);
+                    if (!sub) {
+                        if (data.pagination.cursor)
+                            getUntilFound(callback, data.pagination.cursor);
+                        else
+                            callback(null);
+                    } else
+                        callback(sub);
+                });
+            }
+            getUntilFound(resolve);
+        });
+    }
+
+    /**
+     * Subscribe to a new event of given type and condition
+     * 
+     * @param {string} type the event type
+     * @param {Object} condition the event condition
+     */
+    subscribe(type, condition) {
+        return new Promise((resolve, reject) => {
+            this._refreshAppAccessToken().then(_ => {
+                const headers = {
+                    'Client-ID': this.clientID,
+                    'Authorization': `Bearer ${this._authToken}`,
+                    'Content-Type': 'application/json',
+                }
+                const body = {
+                    type: type,
+                    version: '1',
+                    condition: condition,
+                    transport: {
+                        method: 'webhook',
+                        callback: `${this.baseURL}/teswh/event`,
+                        secret: this.clientSecret
+                    }
+                }
+                request('POST', 'https://api.twitch.tv/helix/eventsub/subscriptions', headers, body).then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    if (err.status === 409) {
+                        this.getSubscription(type, condition).then(res => {
+                            resolve(res);
+                        }).catch(err => {
+                            reject(err);
+                        });
+                    } else 
+                        reject(err);
+                });
             });
         });
     }
 
-    unsubscribe(arg1, arg2) {
+    /**
+     * Unsubscribe from event of given id or given type and condition
+     * 
+     * @param  {...any} args 
+     *      @param {string} id the id of the subscription
+     *      OR
+     *      @param {string} type the type of the subscription
+     *      @param {Object} condition the condition of the subscription
+     */
+    unsubscribe(...args) {
         return new Promise((resolve, reject) => {
             this._refreshAppAccessToken().then(_ => {
                 const headers = {
@@ -96,24 +152,18 @@ class TES {
                     'Authorization': `Bearer ${this._authToken}`,
                 }
                 if (arguments.length === 1) {
-                    const id = arg1;
+                    const id = args[0];
                     request('DELETE', `https://api.twitch.tv/helix/eventsub/subscriptions?id=${id}`, headers).then(_ => {
                         resolve();
                     }).catch(err => {
                         reject(err);
                     });
                 } else if (arguments.length === 2) {
-                    const type = arg1;
-                    const condition = arg2;
-                    this.getSubscriptions().then(res => {
-                        const existingSub = res.data.find(sub => {
-                            if (sub.type == type) {
-                                return objectShallowEquals(sub.condition, condition);
-                            } else
-                                return false;
-                        });
-                        if (existingSub) {
-                            request('DELETE', `https://api.twitch.tv/helix/eventsub/subscriptions?id=${existingSub.id}`, headers).then(_ => {
+                    const type = args[0];
+                    const condition = args[1];
+                    this.getSubscription(type, condition).then(res => {
+                        if (res) {
+                            request('DELETE', `https://api.twitch.tv/helix/eventsub/subscriptions?id=${res.id}`, headers).then(_ => {
                                 resolve();
                             }).catch(err => {
                                 reject(err);
@@ -131,6 +181,12 @@ class TES {
         });
     }
 
+    /**
+     * Provide a callback function to respond to when event of given type is fired
+     * 
+     * @param {string} type 
+     * @param {function} callback 
+     */
     on(type, callback) {
         EventManager.addListener(type, callback);
     }
