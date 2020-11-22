@@ -77,7 +77,7 @@ class TES {
                         return false;
                 }
             } else { 
-                reject('unsubscribe must only have 1 or 2 arguments');
+                reject('getSubscription must have 1 or 2 arguments');
             }
             const getUntilFound = (callback, cursor) => {
                 this.getSubscriptions(cursor).then(data => {
