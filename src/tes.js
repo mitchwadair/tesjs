@@ -46,6 +46,7 @@ class TES {
      * @param {string} cursor (optional) the pagination cursor
      */
     getSubscriptions(cursor) {
+        logger.debug(`Getting ${cursor ? `subscriptions for cursor ${cursor}` : 'first page of subscriptions'}`);
         return new Promise((resolve, reject) => {
             this._refreshAppAccessToken().then(_ => {
                 const headers = {
@@ -76,8 +77,10 @@ class TES {
         return new Promise((resolve, reject) => {
             let comparator;
             if (arguments.length === 1) {
+                logger.debug(`Getting subscription for id ${args[0]}`);
                 comparator = sub => sub.id === args[0];
             } else if (arguments.length === 2) {
+                logger.debug(`Getting subscription for type ${args[0]} and condition ${args[1]}`);
                 comparator = sub => {
                     if (sub.type == args[0]) {
                         return objectShallowEquals(sub.condition, args[1]);
@@ -110,6 +113,7 @@ class TES {
      * @param {Object} condition the event condition
      */
     subscribe(type, condition) {
+        logger.debug(`Subscribing to topic with type ${type} and condition ${condition}`);
         return new Promise((resolve, reject) => {
             this._refreshAppAccessToken().then(_ => {
                 const headers = {
@@ -161,6 +165,7 @@ class TES {
                 }
                 if (arguments.length === 1) {
                     const id = args[0];
+                    logger.debug(`Unsubscribing from topic ${id}`);
                     request('DELETE', `https://api.twitch.tv/helix/eventsub/subscriptions?id=${id}`, headers).then(_ => {
                         resolve();
                     }).catch(err => {
@@ -169,6 +174,7 @@ class TES {
                 } else if (arguments.length === 2) {
                     const type = args[0];
                     const condition = args[1];
+                    logger.debug(`Unsubscribing from topic with type ${type} and condition ${condition}`);
                     this.getSubscription(type, condition).then(res => {
                         if (res) {
                             request('DELETE', `https://api.twitch.tv/helix/eventsub/subscriptions?id=${res.id}`, headers).then(_ => {
@@ -196,6 +202,7 @@ class TES {
      * @param {function} callback 
      */
     on(type, callback) {
+        logger.debug(`Adding notification listener for type ${type}`);
         EventManager.addListener(type, callback);
     }
 
