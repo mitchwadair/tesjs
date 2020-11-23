@@ -15,15 +15,14 @@ let engine = console;
 
 const formattedDate = _ => {
     const date = new Date();
-    const formattedDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(date);
-    return `${formattedDate} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}:${date.getMilliseconds()}`;
+    const dateString = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(date);
+    return `${dateString} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}:${date.getMilliseconds()}`;
 }
 
 const log = lvl => {
     return message => {
-        if (lvl >= levels[level]) {
-            engine.log(`${formattedDate} - TESjs - ${message}`);
-        }
+        if (levels[lvl] >= levels[level])
+            engine.log(`${formattedDate()} - TESjs - ${message}`);
     }
 }
 
