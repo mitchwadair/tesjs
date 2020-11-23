@@ -11,7 +11,6 @@ const levels = {
 }
 
 let level = 'warn';
-let engine = console;
 
 const formattedDate = _ => {
     const date = new Date();
@@ -22,13 +21,12 @@ const formattedDate = _ => {
 const log = lvl => {
     return message => {
         if (levels[lvl] >= levels[level])
-            engine.log(`${formattedDate()} - TESjs - ${message}`);
+            console.log(`${formattedDate()} - TESjs - ${message}`);
     }
 }
 
 module.exports = {
     setLevel: lvl => level = lvl,
-    setEngine: e => engine = e,
     debug: log('debug'),
     error: log('error'),
     warn: log('warn'),
