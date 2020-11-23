@@ -16,7 +16,11 @@ let level = 'warn';
 const formattedDate = _ => {
     const date = new Date();
     const dateString = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(date);
-    return `${dateString} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}:${date.getMilliseconds()}`;
+    const hours = `00${date.getHours()}`.slice(-2);
+    const mins = `00${date.getMinutes()}`.slice(-2);
+    const seconds = `00${date.getSeconds()}`.slice(-2);
+    const millis = `000${date.getMilliseconds()}`.slice(-3);
+    return `${dateString} ${hours}:${mins}:${seconds}:${millis}`;
 }
 
 const log = lvl => {
