@@ -1,4 +1,4 @@
-const utils = require('../src/utils');
+const utils = require('../lib/utils');
 const should = require('chai').should();
 
 describe('utils', _ => {

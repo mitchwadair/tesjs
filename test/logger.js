@@ -1,4 +1,4 @@
-const logger = require('../src/logger');
+const logger = require('../lib/logger');
 const sinon = require('sinon');
 
 describe('logger', _ => {

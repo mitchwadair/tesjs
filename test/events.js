@@ -1,4 +1,4 @@
-const EventManager = require('../src/events');
+const EventManager = require('../lib/events');
 const should = require('chai').should();
 
 beforeEach(done => {
