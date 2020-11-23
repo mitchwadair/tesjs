@@ -37,6 +37,7 @@ class TES {
         this._whserverlistener = config.listener.server ? null : this.whserver.listen(this.port);
 
         config.options.debug && logger.setLevel('debug');
+        config.options.logging === false && logger.setLevel('none');
     }
 
     /**
