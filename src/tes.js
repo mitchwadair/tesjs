@@ -6,6 +6,7 @@
 const whserver = require('./whserver');
 const EventManager = require('./events');
 const {request, objectShallowEquals} = require('./utils');
+const logger = require('./logger');
 
 /**
  *  Twitch EventSub
@@ -21,6 +22,10 @@ class TES {
 
         TES._instance = this;
 
+        config.identity = config.identity ? config.identity : {};
+        config.listener = config.listener ? config.listener : {};
+        config.options = config.options ? config.options : {};
+
         this._authToken = undefined;
 
         this.clientID = config.identity.id;
@@ -30,6 +35,9 @@ class TES {
         this.port = config.listener.port || process.env.PORT || 8080;
         this.whserver = whserver(config.listener.server, this.clientSecret);
         this._whserverlistener = config.listener.server ? null : this.whserver.listen(this.port);
+
+        config.options.logger && logger.setEngine(config.options.logger);
+        config.options.debug && logger.setLevel('debug');
     }
 
     /**
@@ -196,6 +204,7 @@ class TES {
             if (this._authToken) {
                 resolve();
             } else {
+                logger.debug('Refreshing app access token');
                 request('POST', `https://id.twitch.tv/oauth2/token?client_id=${this.clientID}&client_secret=${this.clientSecret}&grant_type=client_credentials`).then(data => {
                     this._authToken = data.access_token;
                     setTimeout(_ => {this._authToken = undefined}, data.expires_in);

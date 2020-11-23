@@ -3,6 +3,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+const logger = require('./logger');
+
 class EventManager {
     constructor() {
         EventManager._instance = this;
@@ -12,7 +14,7 @@ class EventManager {
     fire(type, data) {
         const handler = this._events[type];
         if (!handler) {
-            console.log(`Recieved event for unhandled type: ${type}`);
+            logger.warn(`Recieved event for unhandled type: ${type}`);
             return false;
         } else {
             handler.call(this, ...Object.values(data));
