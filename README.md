@@ -1,6 +1,7 @@
 # TESjs
 <p align="center">
-    <img src="https://github.com/mitchwadair/mthebot/workflows/CodeQL/badge.svg?branch=master" alt="codeql"/>
+    <img src="https://github.com/mitchwadair/tesjs/workflows/code%20analysis/badge.svg?branch=main" alt="code analysis"/>
+    <img src="https://github.com/mitchwadair/tesjs/workflows/tests/badge.svg?branch=main" alt="tests"/>
     <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
     <a href="https://www.npmjs.com/package/tesjs"><img src='https://img.shields.io/npm/dt/tesjs' alt="license"></a>
 </p>
