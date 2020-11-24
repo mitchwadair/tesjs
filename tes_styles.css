@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'Josefin-Sans';
+    src: url('./fonts/JosefinSansBoldItalic-EaJRg.ttf');
+}
+
+/* color pallette: https://coolors.co/1a1423-31303f-372549-615585-738290-f5efed */
+:root {
+    --font-color-primary: #f5efed;
+    --bg-primary: #1a1423;
+    --bg-grey-dark: #31303f;
+    --bg-secondary: #372549;
+    --primary: #615585;
+    --secondary: #738290;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--font-color-primary);
+    height: 100vh;
+}
+
+header,footer {
+    background-color: var(--bg-secondary);
+    height: 3rem;
+}
+
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-link {
+    text-decoration: none;
+    background-color: var(--primary);
+    color: var(--font-color-primary);
+    font-size: 1.25rem;
+    padding: .5rem .75rem;
+    margin: .25rem .5rem;
+    border-radius: .25rem;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    max-width: 60rem;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.footer-link {
+    color: var(--font-color-primary);
+}
+
+.header-logo {
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.tes-logo {
+   font-family: 'Josefin-Sans';
+   color: var(--font-color-primary);
+}
+
+.tes-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
+    max-width: 60rem;
+    width: 90%;
+    margin: 0 auto;
+    background-color: var(--bg-grey-dark);
+    height: calc(100% - 6rem);
+    overflow: auto;
+}
+
+@media (max-width: 700px) {
+    .tes-content-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 4rem 2rem;
+    }
+
+    .tes-content-logo {
+        max-width: 60% !important;
+    }
+}
+
+.tes-content-heading {
+    display: flex;
+    align-items: center;
+    margin: 4rem 2rem;
+}
+
+.tes-content-logo {
+    max-width: 40%;
+    width: 100%;
+    margin: 0 2rem;
+    fill: var(--font-color-primary);
+}
+
