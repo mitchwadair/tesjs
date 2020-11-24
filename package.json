@@ -1,6 +1,6 @@
 {
   "name": "tesjs",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A module to streamline the use of Twitch EventSub in Node.js applications",
   "repository": {
     "type": "git",
@@ -18,10 +18,13 @@
   ],
   "main": "main.js",
   "files": [
-    "src",
+    "/lib",
     "main.js",
     "LICENSE"
   ],
+  "scripts": {
+    "test": "nyc mocha --exit"
+  },
   "author": "Mitchell Adair (https://github.com/mitchwadair)",
   "license": "MIT",
   "bugs": {
@@ -31,5 +34,12 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.1",
+    "supertest": "^6.0.1"
   }
 }
