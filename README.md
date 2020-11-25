@@ -103,3 +103,6 @@ If you have any questions, suggestions, need to report a bug, etc, [submit an is
 
 # Contribute
 Want to contribute to TESjs?  Check out the [contribution guidelines](/CONTRIBUTE.md) to see how.
+
+# Support
+Want to help support me in maintaining TESjs? Consider sponsoring me on [GitHub Sponsors](https://github.com/sponsors/mitchwadair).  You can also give a one-time donation through [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD).
