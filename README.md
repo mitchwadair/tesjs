@@ -8,9 +8,6 @@
 
 A module to streamline the use of Twitch EventSub in Node.js applications
 
-# Disclaimer
-The current version of TESjs is likely to be unstable, as it has not had rigorous testing yet.
-
 # Install
 TESjs is available for install through npm
 ```sh
