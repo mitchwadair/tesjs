@@ -1,4 +1,6 @@
-# TESjs
+<p align="center">
+    <img src="/assets/tesjs_logo_stroke.png?raw=true" alt="code analysis"/>
+</p>
 <p align="center">
     <img src="https://github.com/mitchwadair/tesjs/workflows/code%20analysis/badge.svg?branch=main" alt="code analysis"/>
     <img src="https://github.com/mitchwadair/tesjs/workflows/tests/badge.svg?branch=main" alt="tests"/>
@@ -7,6 +9,9 @@
 </p>
 
 A module to streamline the use of Twitch EventSub in Node.js applications
+
+# Documentation
+Learn how to use TESjs by reading through the [documentation](/doc).  Supplement your development with the Twitch EventSub [documentation](https://dev.twitch.tv/docs/eventsub) as well.
 
 # Install
 TESjs is available for install through npm
