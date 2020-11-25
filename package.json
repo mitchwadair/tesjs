@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/mitchwadair/tesjs/issues"
   },
-  "homepage": "https://github.com/mitchwadair/tesjs#readme",
+  "homepage": "https://www.tesjs.net",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
