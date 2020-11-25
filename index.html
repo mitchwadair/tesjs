@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="./tes_styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
 
         <link rel='canonical' href='https://www.tesjs.com'/>
         <link rel='canonical' href='https://tesjs.com'/>
@@ -18,6 +18,10 @@
         <header>
             <div class='header-container'>
                 <a href='#' class='header-logo tes-logo'>TESjs</a>
+                <div class='button-row' style='margin: 0 1rem 0 auto'>
+                    <a href='https://www.npmjs.com/package/tesjs' class='button-icon mdi mdi-npm' target='_blank' rel='noopener noreferrer'></a>
+                    <a href='https://github.com/mitchwadair/tesjs' class='button-icon mdi mdi-github' target='_blank' rel='noopener noreferrer'></a>
+                </div>
             </div>
         </header>
         <div class='tes-body'>
@@ -29,12 +33,53 @@
                 </div>
                 <div class='tes-content-heading-blurb'>
                     <h1>Streamlining the use of Twitch EventSub</h1>
-                    <p>Easily subscribe to Twitch EventSub topics.  Quickly start up a webhooks endpoint and listen to Twitch EventSub notifications.</p>
-                    <div class='button-row' style='margin-top: 1rem;'>
-                        <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer'> NPM</a>
-                        <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer'> GitHub</a>
+                    <p>Easily subscribe to Twitch EventSub topics.  Quickly start up a webhooks endpoint and listen for Twitch EventSub notifications.</p>
+                    <div style='display: flex; flex-direction: row; align-items: center; margin-top: 1rem;'>
+                        <span style="font-weight: lighter; font-size: 1.5rem;">Visit TESjs:</span>
+                        <div class='button-row'>
+                            <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer'> NPM</a>
+                            <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer'> GitHub</a>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class='tes-blurb'>
+                <div class='tes-tile'>
+                    <h2>Skip the Hard Stuff</h2>
+                    <p>
+                        TESjs makes it easy to get up and running by taking care of the tough stuff.  Under the hood, TESjs uses Express to create a wehbooks endpoint 
+                        for Twitch to send notifications to.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
+                    </p>
+                </div>
+                <div class='tes-tile'>
+                    <h2>Integrate Seamlessly</h2>
+                    <p>
+                        Already running an Express server in your app?  TESjs has you covered!  Just pass the Express object into TESjs' config and it will build a 
+                        webhooks route on top of your existing server!
+                    </p>
+                </div>
+            </div>
+            <div class='tes-examples'>
+                <section>
+                    <span id='install'></span>
+                    <a href='#install' class='tes-anchor'>
+                        <h1>Install</h1>
+                    </a>
+                    <code>
+                        npm install tesjs
+                    </code>
+                </section>
+                <section>
+                    <span id='init-tes'></span>
+                    <a href='#init-tes' class='tes-anchor'>
+                        <h1>Initialise a TES Instance</h1>
+                    </a>
+                    <pre>
+                        <code>
+                            
+                        </code>
+                    </pre>
+                </section>
             </div>
         </div>
         <footer>

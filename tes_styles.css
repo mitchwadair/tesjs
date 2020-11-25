@@ -3,18 +3,21 @@
     src: url('./fonts/JosefinSansBoldItalic-EaJRg.ttf');
 }
 
-/* color pallette: https://coolors.co/1a1423-31303f-372549-615585-738290-f5efed */
+/* color pallette: https://coolors.co/1a1423-31303f-363546-372549-615585-6c5f95-738290-f5efed */
 :root {
     --font-color-primary: #f5efed;
     --bg-primary: #1a1423;
     --bg-grey-dark: #31303f;
+    --bg-grey-light: #363546;
     --bg-secondary: #372549;
     --primary: #615585;
+    --primary-hover: #6c5f95;
     --secondary: #738290;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     margin: 0;
     background-color: var(--bg-primary);
     color: var(--font-color-primary);
@@ -40,6 +43,26 @@ header,footer {
     padding: .5rem .75rem;
     margin: .25rem .5rem;
     border-radius: .25rem;
+}
+
+.button-link:hover {
+    background-color: var(--primary-hover);
+}
+
+.button-icon {
+    text-decoration: none;
+    text-align: center;
+    color: var(--font-color-primary);
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .25rem .5rem;
+    border-radius: 50%;
+}
+
+.button-icon:hover {
+    background-color: var(--primary-hover);
 }
 
 .header-container {
@@ -102,7 +125,17 @@ header,footer {
 .tes-content-heading {
     display: flex;
     align-items: center;
-    margin: 4rem 2rem;
+    padding: 4rem 0;
+    margin: 0 1rem;
+    border-bottom: 1px solid var(--bg-primary);
+}
+
+.tes-content-heading-blurb > h1 {
+    font-weight: lighter;
+}
+
+.tes-content-heading-blurb > p {
+    font-size: 1.125rem;
 }
 
 .tes-content-logo {
@@ -112,3 +145,45 @@ header,footer {
     fill: var(--font-color-primary);
 }
 
+.tes-blurb {
+    display: flex;
+    margin: 0 1rem;
+    border-bottom: 1px solid var(--bg-primary);
+}
+
+.tes-examples {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 0 1rem;
+}
+
+.tes-examples > section {
+    margin: 1rem;
+}
+
+.tes-tile {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 1rem;
+    max-width: 50%;
+    width: 100%;
+    border-radius: .5rem;
+    text-align: center;
+}
+
+.tes-tile > h2 {
+    font-weight: lighter;
+    font-size: 1.75em;
+}
+
+.tes-anchor {
+    text-decoration: none;
+    color: var(--font-color-primary);
+    margin: 1rem 0;
+}
+
+.tes-anchor:hover {
+    text-decoration: underline;
+}
