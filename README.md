@@ -106,3 +106,13 @@ Want to contribute to TESjs?  Check out the [contribution guidelines](/CONTRIBUT
 
 # Support
 Want to help support me in maintaining TESjs? Consider sponsoring me on [GitHub Sponsors](https://github.com/sponsors/mitchwadair).  You can also give a one-time donation through [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD).
+
+<p align="center">
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD">
+        <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" height="75px" alt="PayPal Logo">
+    </a>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a href="https://github.com/sponsors/mitchwadair">
+        <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" height="75px" alt="GH Sponsors">
+    </a>
+</p>
