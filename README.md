@@ -3,13 +3,13 @@
     <img src="https://github.com/mitchwadair/tesjs/workflows/code%20analysis/badge.svg?branch=main" alt="code analysis"/>
     <img src="https://github.com/mitchwadair/tesjs/workflows/tests/badge.svg?branch=main" alt="tests"/>
     <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
-    <a href="https://www.npmjs.com/package/tesjs"><img src='https://img.shields.io/npm/dt/tesjs' alt="license"></a>
+    <a href="https://www.npmjs.com/package/tesjs"><img src='https://img.shields.io/npm/dt/tesjs' alt="downloads"></a>
 </p>
 
 A module to streamline the use of Twitch EventSub in Node.js applications
 
 # Disclaimer
-The current version of TESjs is likely to be extremely unstable, as it has not had rigorous testing yet.
+The current version of TESjs is likely to be unstable, as it has not had rigorous testing yet.
 
 # Install
 TESjs is available for install through npm
