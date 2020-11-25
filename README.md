@@ -102,4 +102,4 @@ tes.subscribe('channel.update', {
 If you have any questions, suggestions, need to report a bug, etc, [submit an issue](https://github.com/mitchwadair/tesjs/issues/new/choose).
 
 # Contribute
-Want to contribute to TESjs?  Check out the [contribution quidelines](/CONTRIBUTE.md) to see how.
+Want to contribute to TESjs?  Check out the [contribution guidelines](/CONTRIBUTE.md) to see how.
