@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/styles/default.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/styles/agate.min.css">
 
         <link rel='canonical' href='https://www.tesjs.com'/>
         <link rel='canonical' href='https://tesjs.com'/>
@@ -20,8 +20,8 @@
             <div class='header-container'>
                 <a href='#' class='header-logo tes-logo'>TESjs</a>
                 <div class='button-row' style='margin: 0 1rem 0 auto'>
-                    <a href='https://www.npmjs.com/package/tesjs' class='button-icon mdi mdi-npm' target='_blank' rel='noopener noreferrer'></a>
-                    <a href='https://github.com/mitchwadair/tesjs' class='button-icon mdi mdi-github' target='_blank' rel='noopener noreferrer'></a>
+                    <a href='https://www.npmjs.com/package/tesjs' class='button-icon mdi mdi-npm' target='_blank' rel='noopener noreferrer' title='TESjs on npm'></a>
+                    <a href='https://github.com/mitchwadair/tesjs' class='button-icon mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'></a>
                 </div>
             </div>
         </header>
@@ -39,8 +39,8 @@
                         <div style='display: flex; flex-direction: row; align-items: center; margin-top: 1rem;'>
                             <span style="font-weight: lighter; font-size: 1.5rem;">Visit TESjs:</span>
                             <div class='button-row'>
-                                <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer'> NPM</a>
-                                <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer'> GitHub</a>
+                                <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer' title='TESjs on npm'> NPM</a>
+                                <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'> GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <h2>Skip the Hard Stuff</h2>
                         <p>
                             TESjs makes it easy to get up and running by taking care of the tough stuff.  Under the hood, TESjs uses Express to create a wehbooks endpoint 
-                            for Twitch to send notifications to.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
+                            for Twitch's EventSub notifications.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
                         </p>
                     </div>
                     <div class='tes-tile'>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class='tes-examples'>
-                    <section>
+                    <section style='margin-bottom: 1rem'>
                         <span id='install'></span>
                         <a href='#install' class='tes-anchor'>
                             <h1>Install</h1>
@@ -72,7 +72,7 @@
                     <section>
                         <span id='init-tes'></span>
                         <a href='#init-tes' class='tes-anchor'>
-                            <h1>Initialise a TES Instance</h1>
+                            <h1>Initialise the TES Instance</h1>
                         </a>
                         <pre>
                             <code class='js tes-code'>
@@ -85,8 +85,43 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
-        baseURL: "https://example.com"
+        baseURL: "https://example.com" //this MUST be an HTTPS endpoint on port 443
     }
+});
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <span id='create-event-listener'></span>
+                        <a href='#create-event-listener' class='tes-anchor'>
+                            <h1>Create an Event Listener</h1>
+                        </a>
+                        <pre>
+                            <code class='js tes-code'>
+// define an event handler for the 'channel.update' event
+// NOTES: 
+//   this handles ALL events of that type
+//   events will not be fired until there is a subscription made for them
+tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
+    console.log(`${userName}'s new title is ${title}`);
+});
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <span id='subscribe-to-event'></span>
+                        <a href='#subscribe-to-event' class='tes-anchor'>
+                            <h1>Subscribe to an Event</h1>
+                        </a>
+                        <pre>
+                            <code class='js tes-code'>
+// create a new subscription for the 'channel.update' event for broadcaster '1337'
+tes.subscribe('channel.update', {
+    broadcaster_user_id: 1337
+}).then(_ => {
+    console.log('Subscription successful');
+}).catch(err => {
+    console.log(err);
 });
                             </code>
                         </pre>

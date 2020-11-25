@@ -171,10 +171,6 @@ pre {
     margin-left: 2rem;
 }
 
-.tes-examples > section {
-    margin: .5rem 0;
-}
-
 .tes-tile {
     display: flex;
     flex-direction: column;
@@ -183,7 +179,6 @@ pre {
     max-width: 50%;
     width: 100%;
     border-radius: .5rem;
-    text-align: center;
 }
 
 .tes-tile > h2 {
