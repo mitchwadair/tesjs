@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/styles/default.min.css">
 
         <link rel='canonical' href='https://www.tesjs.com'/>
         <link rel='canonical' href='https://tesjs.com'/>
@@ -25,69 +26,82 @@
             </div>
         </header>
         <div class='tes-body'>
-            <div class='tes-content-heading'>
-                <div class='tes-content-logo'>
-                    <svg viewBox='0 0 42 16' width='100%' height='100%'>
-                        <text x='50%' y='50%' dy='25%' text-anchor='middle' font-family='Josefin Sans'>TESjs</text>
-                    </svg>
-                </div>
-                <div class='tes-content-heading-blurb'>
-                    <h1>Streamlining the use of Twitch EventSub</h1>
-                    <p>Easily subscribe to Twitch EventSub topics.  Quickly start up a webhooks endpoint and listen for Twitch EventSub notifications.</p>
-                    <div style='display: flex; flex-direction: row; align-items: center; margin-top: 1rem;'>
-                        <span style="font-weight: lighter; font-size: 1.5rem;">Visit TESjs:</span>
-                        <div class='button-row'>
-                            <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer'> NPM</a>
-                            <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer'> GitHub</a>
+            <div class='tes-content'>
+                <div class='tes-content-heading'>
+                    <div class='tes-content-logo'>
+                        <svg viewBox='0 0 42 16' width='100%' height='100%'>
+                            <text x='50%' y='50%' dy='25%' text-anchor='middle' font-family='Josefin Sans'>TESjs</text>
+                        </svg>
+                    </div>
+                    <div class='tes-content-heading-blurb'>
+                        <h1>Streamlining the use of Twitch EventSub</h1>
+                        <p>Easily subscribe to Twitch EventSub topics.  Quickly start up a webhooks endpoint and listen for Twitch EventSub notifications.</p>
+                        <div style='display: flex; flex-direction: row; align-items: center; margin-top: 1rem;'>
+                            <span style="font-weight: lighter; font-size: 1.5rem;">Visit TESjs:</span>
+                            <div class='button-row'>
+                                <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer'> NPM</a>
+                                <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer'> GitHub</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class='tes-blurb'>
-                <div class='tes-tile'>
-                    <h2>Skip the Hard Stuff</h2>
-                    <p>
-                        TESjs makes it easy to get up and running by taking care of the tough stuff.  Under the hood, TESjs uses Express to create a wehbooks endpoint 
-                        for Twitch to send notifications to.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
-                    </p>
+                <div class='tes-blurb'>
+                    <div class='tes-tile'>
+                        <h2>Skip the Hard Stuff</h2>
+                        <p>
+                            TESjs makes it easy to get up and running by taking care of the tough stuff.  Under the hood, TESjs uses Express to create a wehbooks endpoint 
+                            for Twitch to send notifications to.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
+                        </p>
+                    </div>
+                    <div class='tes-tile'>
+                        <h2>Integrate Seamlessly</h2>
+                        <p>
+                            Already running an Express server in your app?  TESjs has you covered!  Just pass the Express object into TESjs' config and it will build a 
+                            webhooks route on top of your existing server!
+                        </p>
+                    </div>
                 </div>
-                <div class='tes-tile'>
-                    <h2>Integrate Seamlessly</h2>
-                    <p>
-                        Already running an Express server in your app?  TESjs has you covered!  Just pass the Express object into TESjs' config and it will build a 
-                        webhooks route on top of your existing server!
-                    </p>
+                <div class='tes-examples'>
+                    <section>
+                        <span id='install'></span>
+                        <a href='#install' class='tes-anchor'>
+                            <h1>Install</h1>
+                        </a>
+                        <pre><code class='sh tes-code'>npm install tesjs</code></pre>
+                    </section>
+                    <section>
+                        <span id='init-tes'></span>
+                        <a href='#init-tes' class='tes-anchor'>
+                            <h1>Initialise a TES Instance</h1>
+                        </a>
+                        <pre>
+                            <code class='js tes-code'>
+const TES = require('tesjs');
+
+// initialize TESjs
+const tes = new TES({
+    identity: {
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
+    },
+    listener: {
+        baseURL: "https://example.com"
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
                 </div>
             </div>
-            <div class='tes-examples'>
-                <section>
-                    <span id='install'></span>
-                    <a href='#install' class='tes-anchor'>
-                        <h1>Install</h1>
-                    </a>
-                    <code>
-                        npm install tesjs
-                    </code>
-                </section>
-                <section>
-                    <span id='init-tes'></span>
-                    <a href='#init-tes' class='tes-anchor'>
-                        <h1>Initialise a TES Instance</h1>
-                    </a>
-                    <pre>
-                        <code>
-                            
-                        </code>
-                    </pre>
-                </section>
-            </div>
+            <footer>
+                <div class='footer-container'>
+                    <span class='mdi mdi-copyright' style="padding-right: .25rem;"></span>
+                    <a href='https://github.com/mitchwadair' class='footer-link' target='_blank' rel='noopener noreferrer'>Mitchell Adair</a>
+                    <span style="padding-left: .25rem;">2020</span>
+                </div>
+            </footer>
         </div>
-        <footer>
-            <div class='footer-container'>
-                <span class='mdi mdi-copyright' style="padding-right: .25rem;"></span>
-                <a href='https://github.com/mitchwadair' class='footer-link' target='_blank' rel='noopener noreferrer'>Mitchell Adair</a>
-                <span style="padding-left: .25rem;">2020</span>
-            </div>
-        </footer>
+        <script src="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

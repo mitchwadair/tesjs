@@ -27,6 +27,11 @@ body {
 header,footer {
     background-color: var(--bg-secondary);
     height: 3rem;
+    width: 100%;
+}
+
+pre {
+    margin-right: 4rem;
 }
 
 .button-row {
@@ -101,12 +106,19 @@ header,footer {
     flex-direction: column;
     align-items: center;
     flex: 1 0 auto;
+    height: calc(100% - 3rem);
+    overflow: auto;
+}
+
+.tes-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
     max-width: 60rem;
     width: 90%;
     margin: 0 auto;
     background-color: var(--bg-grey-dark);
-    height: calc(100% - 6rem);
-    overflow: auto;
 }
 
 @media (max-width: 700px) {
@@ -155,11 +167,12 @@ header,footer {
     display: flex;
     flex-direction: column;
     align-self: flex-start;
-    margin: 0 1rem;
+    max-width: 100%;
+    margin-left: 2rem;
 }
 
 .tes-examples > section {
-    margin: 1rem;
+    margin: .5rem 0;
 }
 
 .tes-tile {
@@ -186,4 +199,10 @@ header,footer {
 
 .tes-anchor:hover {
     text-decoration: underline;
+}
+
+.tes-code {
+    background-color: var(--bg-grey-light);
+    border-radius: .25rem;
+    max-width: 57rem;
 }
