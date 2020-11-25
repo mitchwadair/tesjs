@@ -132,6 +132,16 @@ pre {
     .tes-content-logo {
         max-width: 60% !important;
     }
+
+    .tes-blurb {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tes-tile {
+        max-width: 90% !important;
+        margin: 0 1rem !important;
+    }
 }
 
 .tes-content-heading {
