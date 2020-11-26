@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Josefin-Sans';
     src: url('./fonts/JosefinSansBoldItalic-EaJRg.ttf');
+    font-display: swap;
 }
 
 /* color pallette: https://coolors.co/1a1423-31303f-363546-372549-615585-6c5f95-738290-f5efed */
