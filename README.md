@@ -1,4 +1,6 @@
-# TESjs
+<p align="center">
+    <img src="/assets/tesjs_logo_stroke.png?raw=true" height="175px" alt="code analysis"/>
+</p>
 <p align="center">
     <img src="https://github.com/mitchwadair/tesjs/workflows/code%20analysis/badge.svg?branch=main" alt="code analysis"/>
     <img src="https://github.com/mitchwadair/tesjs/workflows/tests/badge.svg?branch=main" alt="tests"/>
@@ -8,8 +10,8 @@
 
 A module to streamline the use of Twitch EventSub in Node.js applications
 
-# Disclaimer
-The current version of TESjs is likely to be unstable, as it has not had rigorous testing yet.
+# Documentation
+Learn how to use TESjs by reading through the [documentation](/doc).  Supplement your development with the Twitch EventSub [documentation](https://dev.twitch.tv/docs/eventsub) as well.
 
 # Install
 TESjs is available for install through npm
@@ -95,3 +97,22 @@ tes.subscribe('channel.update', {
     console.log(err);
 });
 ```
+
+# Problems/Suggestions/Questions?
+If you have any questions, suggestions, need to report a bug, etc, [submit an issue](https://github.com/mitchwadair/tesjs/issues/new/choose).
+
+# Contribute
+Want to contribute to TESjs?  Check out the [contribution guidelines](/CONTRIBUTE.md) to see how.
+
+# Support
+Want to help support me in maintaining TESjs? Consider sponsoring me on [GitHub Sponsors](https://github.com/sponsors/mitchwadair).  You can also give a one-time donation through [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD).
+
+<p align="center">
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD">
+        <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" height="75px" alt="PayPal Logo">
+    </a>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a href="https://github.com/sponsors/mitchwadair">
+        <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" height="75px" alt="GH Sponsors">
+    </a>
+</p>
