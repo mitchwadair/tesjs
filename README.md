@@ -45,7 +45,7 @@ tes.on('channel.update', (userId, userName, title, language, categoryId, categor
 
 // create a new subscription for the 'channel.update' event for broadcaster '1337'
 tes.subscribe('channel.update', {
-    broadcaster_user_id: 1337
+    broadcaster_user_id: '1337'
 }).then(_ => {
     console.log('Subscription successful');
 }).catch(err => {
@@ -90,7 +90,7 @@ tes.on('channel.update', (userId, userName, title, language, categoryId, categor
 
 // create a new subscription for the 'channel.update' event for broadcaster '1337'
 tes.subscribe('channel.update', {
-    broadcaster_user_id: 1337
+    broadcaster_user_id: '1337'
 }).then(_ => {
     console.log('Subscription successful');
 }).catch(err => {
