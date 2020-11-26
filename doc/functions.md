@@ -60,7 +60,7 @@ let subsArray = []
 //define a recursive function to get ALL subscriptions
 const getAll = (finishedCallback, cursor) => {
   tes.getSubscriptions(cursor).then(data => {
-    subsArray.concat(data.data);
+    subsArray = subsArray.concat(data.data);
     if (data.pagination.cursor)
       getAll(callback, data.pagination.cursor);
     else
