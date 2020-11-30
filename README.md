@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/assets/tesjs_logo_stroke.png?raw=true" height="175px" alt="code analysis"/>
+    <img src="/assets/tesjs_logo_stroke.png?raw=true" height="175px" alt="TESjs logo"/>
 </p>
 <p align="center">
     <img src="https://github.com/mitchwadair/tesjs/workflows/code%20analysis/badge.svg?branch=main" alt="code analysis"/>
