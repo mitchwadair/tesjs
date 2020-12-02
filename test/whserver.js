@@ -36,7 +36,7 @@ describe('whserver', _ => {
                 'Twitch-Eventsub-Subscription-Version': 1
             })
             .send({})
-            .expect(401, done);
+            .expect(403, done);
     });
 
     it('responds with challenge when challenged', done => {
