@@ -116,3 +116,6 @@ Want to help support me in maintaining TESjs? Consider sponsoring me on [GitHub 
         <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" height="75px" alt="GH Sponsors">
     </a>
 </p>
+
+# Community
+Have you made something with TESjs?  I'd love to hear about it!  You can tweet me [@imMtB_](https://twitter.com/imMtB_) and show off your project.
