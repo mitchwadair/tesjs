@@ -19,6 +19,10 @@ The configuration object is required as an argument when creating the TESjs inst
   - Keep in mind, this is the port of the Express http server, not your https endpoint (served at `baseURL`) which should have port 443
 - `server`: *Express App* - (Optional) your express app object
   - Used if integrating TESjs with an existing Express app
+- `ignoreDuplicateMessages`: *boolean* - (Optional) ignore messages with ids that have already been seen
+  - defaults to true
+- `ignoreOldMessages`: *boolean* - (Optional) ignore messages with timestamps older than 10 minutes
+  - defaults to true
 
 ## Examples
 ### Barebones
