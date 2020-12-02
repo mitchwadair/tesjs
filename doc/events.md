@@ -37,5 +37,6 @@ According to the [Twitch Documentation](https://dev.twitch.tv/docs/eventsub#subs
 ```js
 tes.on('revocation', (subscriptionId, status, type, version, condition, transport, createdAt) => {
     console.log(`subscription with ${subscriptionId} has been revoked`);
+    // perform cleanup here
 });
 ```
