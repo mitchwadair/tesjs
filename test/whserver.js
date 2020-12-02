@@ -133,9 +133,9 @@ describe('whserver', _ => {
             });
     });
 
-    it('responds with 200 OK when receiving a revocation and the event should not be fired', done => {
+    it('responds with 200 OK when receiving a revocation and the revocation event should be fired', done => {
         let notificationRecieved = false;
-        tes.on('channel.follow', _ => {
+        tes.on('revocation', _ => {
             notificationRecieved = true;
         });
         const payload = {
@@ -176,7 +176,7 @@ describe('whserver', _ => {
             .end((err, res) => {
                 if (err) return done(err);
                 res.text.should.eq('OK');
-                notificationRecieved.should.eq(false);
+                notificationRecieved.should.eq(true);
                 done();
             });
     });
@@ -259,12 +259,12 @@ describe('whserver', _ => {
         }
         const oldTime = new Date(Date.now() - 601000).toISOString()
         const signature = crypto.createHmac('sha256', secret)
-            .update('befa7b53-d79d-478f-86b9-120f112b044e' + oldTime + Buffer.from(JSON.stringify(payload), 'utf-8'))
+            .update('befa7b53-d79d-478f-86b9-120f112b044d' + oldTime + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
             .post('/teswh/event')
             .set({
-                'Twitch-Eventsub-Message-Id': 'befa7b53-d79d-478f-86b9-120f112b044e',
+                'Twitch-Eventsub-Message-Id': 'befa7b53-d79d-478f-86b9-120f112b044d',
                 'Twitch-Eventsub-Message-Retry': 0,
                 'Twitch-Eventsub-Message-Type': 'notification',
                 'Twitch-Eventsub-Message-Signature': `sha256=${signature}`,
