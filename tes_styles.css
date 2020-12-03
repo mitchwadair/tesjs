@@ -1,9 +1,3 @@
-@font-face {
-    font-family: 'Josefin-Sans';
-    src: url('./fonts/JosefinSansBoldItalic-EaJRg.ttf');
-    font-display: swap;
-}
-
 /* color pallette: https://coolors.co/1a1423-31303f-363546-372549-615585-6c5f95-738290-f5efed */
 :root {
     --font-color-primary: #f5efed;
@@ -89,17 +83,6 @@ pre {
 
 .footer-link {
     color: var(--font-color-primary);
-}
-
-.header-logo {
-    margin: 0 1rem;
-    text-decoration: none;
-    font-size: 1.5rem;
-}
-
-.tes-logo {
-   font-family: 'Josefin-Sans';
-   color: var(--font-color-primary);
 }
 
 .tes-body {
