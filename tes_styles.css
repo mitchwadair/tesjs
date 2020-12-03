@@ -194,3 +194,14 @@ pre {
     border-radius: .25rem;
     max-width: 57rem;
 }
+
+.tes-support-img {
+    height: 4rem;
+    margin: 0 .5rem;
+    padding: .75rem;
+    border-radius: 50%;
+}
+
+.tes-support-img:hover {
+    background-color: var(--bg-grey-light);
+}
