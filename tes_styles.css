@@ -208,7 +208,6 @@ pre {
 }
 
 .tes-code {
-    background-color: var(--bg-grey-light);
     border-radius: .25rem;
     max-width: 57rem;
 }
