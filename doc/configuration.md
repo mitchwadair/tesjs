@@ -6,7 +6,9 @@ The configuration object is required as an argument when creating the TESjs inst
 
 `options`: (Optional) Your basic configuration options
 - `debug`: *boolean* - (Optional) set to true for more in-depth logging
+  - defaults to false
 - `logging`: *boolean* - (Optional) set to false for no logging. Takes precendence over debug
+  - defaults to true
 
 `identity`: (Required) Set up your client's identity
 - `id`: *string* - (Required) your app's client id
@@ -15,10 +17,15 @@ The configuration object is required as an argument when creating the TESjs inst
 `listener`: (Required) Setting your notification listener details
 - `baseURL`: *string* - (Required) the url where your endpoint is hosted
   - See [Twitch doc](https://dev.twitch.tv/docs/eventsub) for details on local development
-- `port`: *number* - (Optional) the port to listen at. Defaults to process.env.PORT or 8080
+- `port`: *number* - (Optional) the port to listen at.
+  - defaults to process.env.PORT or 8080
   - Keep in mind, this is the port of the Express http server, not your https endpoint (served at `baseURL`) which should have port 443
 - `server`: *Express App* - (Optional) your express app object
   - Used if integrating TESjs with an existing Express app
+- `ignoreDuplicateMessages`: *boolean* - (Optional) ignore messages with ids that have already been seen
+  - defaults to true
+- `ignoreOldMessages`: *boolean* - (Optional) ignore messages with timestamps older than 10 minutes
+  - defaults to true
 
 ## Examples
 ### Barebones
