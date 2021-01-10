@@ -27,7 +27,7 @@ Event type names can be found in the Twitch EventSub documentation [here](https:
 
 For example, the `channel.ban` [event](https://dev.twitch.tv/docs/eventsub/eventsub-reference#channel-ban-event) has four parameters `user_id, user_name, broadcaster_user_id, broadcaster_user_name`.  The event handler would be created like so:
 ```js
-tes.on('channel.ban', (userId, userLogin, userName, broadcasterId, broadcasterName) => {
+tes.on('channel.ban', (userId, userLogin, userName, broadcasterId, broadcasterLogin, broadcasterName) => {
   // do your things here
 });
 ```
