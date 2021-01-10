@@ -143,7 +143,7 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
+tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
     console.log(`${userName}'s new title is ${title}`);
 });
                             </code>
