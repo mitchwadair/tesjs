@@ -39,7 +39,7 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
+tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
     console.log(`${userName}'s new title is ${title}`);
 });
 
@@ -84,7 +84,7 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userName, title, language, categoryId, categoryName, isMature) => {
+tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
     console.log(`${userName}'s new title is ${title}`);
 });
 
@@ -111,7 +111,7 @@ Want to help support me in maintaining TESjs? Consider sponsoring me on [GitHub 
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD">
         <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" height="75px" alt="PayPal Logo">
     </a>
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/sponsors/mitchwadair">
         <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" height="75px" alt="GH Sponsors">
     </a>
