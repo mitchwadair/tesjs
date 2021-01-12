@@ -39,8 +39,8 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
-    console.log(`${userName}'s new title is ${title}`);
+tes.on('channel.update', event => {
+    console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
 
 // create a new subscription for the 'channel.update' event for broadcaster '1337'
@@ -84,8 +84,8 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
-    console.log(`${userName}'s new title is ${title}`);
+tes.on('channel.update', event => {
+    console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
 
 // create a new subscription for the 'channel.update' event for broadcaster '1337'
