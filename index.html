@@ -143,8 +143,8 @@ const tes = new TES({
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
-    console.log(`${userName}'s new title is ${title}`);
+tes.on('channel.update', event => {
+    console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
                             </code>
                         </pre>
@@ -176,8 +176,8 @@ tes.subscribe('channel.update', {
                             <code class='js tes-code'>
 // the 'revocation' event will be fired if an subscription gets revoked by Twitch
 // if there is any necessary cleanup for your app, use this event to do it
-tes.on('revocation', (subscriptionId, status, type, version, condition, transport, createdAt) => {
-    console.log(`subscription with id ${subscriptionId} has been revoked`);
+tes.on('revocation', subscriptionData => {
+    console.log(`subscription with id ${subscriptionData.id} has been revoked`);
     // perform necessary cleanup here
 });
                             </code>
