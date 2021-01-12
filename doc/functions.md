@@ -38,7 +38,7 @@ tes.getSubscription('2d9e9f1f-39c3-426d-88f5-9f0251c9bfef').then(data => {
 ### By type and condition
 ```js
 const getCondition = {
-  broadcaster_id: '1337'
+  broadcaster_user_id: '1337'
 }
 
 tes.getSubscription('channel.update', getCondition).then(data => {
@@ -75,14 +75,14 @@ getAll(_ => console.log(subsArray));
 Subscribe to an EventSub topic
 ```js
 const condition = {
-  broadcaster_id: '1337'
+  broadcaster_user_id: '1337'
 }
 tes.subscribe('channel.update', condition)
 ```
 Optionally, you can do something once the subscription has been made, and catch any errors
 ```js
 const condition = {
-  broadcaster_id: '1337'
+  broadcaster_user_id: '1337'
 }
 tes.subscribe('channel.update', condition)
 .then(_ => {
@@ -112,14 +112,14 @@ tes.unsubscribe('2d9e9f1f-39c3-426d-88f5-9f0251c9bfef')
 This method is slightly slower because type and condition are used to find the correct id
 ```js
 const condition = {
-  broadcaster_id: '1337'
+  broadcaster_user_id: '1337'
 }
 tes.unsubscribe('channel.update', condition)
 ```
 Like subscribe, things can be done once unsubscribed
 ```js
 const condition = {
-  broadcaster_id: '1337'
+  broadcaster_user_id: '1337'
 }
 tes.unsubscribe('channel.update', condition)
 .then(_ => {
