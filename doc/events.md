@@ -34,6 +34,7 @@ tes.on('channel.ban', event => {
 
 ## Subscription Revocation
 According to the [Twitch Documentation](https://dev.twitch.tv/docs/eventsub#subscription-revocation), a subscription can be revoked at any time for various reasons.  There may be cases where you want to perform some cleanup based on which subscription got revoked.  You can do this by creating a handler for subscription revocation.
+**NOTE:** As this 'event' is fired when a currently subscribed event topic is revoked, no explicit subscription is needed for this event.
 ```js
 tes.on('revocation', event => {
     console.log(`subscription with id ${event.id} has been revoked`);
