@@ -7,6 +7,10 @@ The functions included with TESjs
   - By type and condition
 - [getSubscriptions](#getsubscriptions) - Get a list of subscriptions
   - With pagination
+- [getSubscriptionsByType](#getsubscriptionsbytype) - Get a list of subscriptions by type
+  - With pagination
+- [getSubscriptionsByStatus](#getsubscriptionsbystatus) - Get a list of subscriptions by status
+  - With pagination
 - [subscribe](#subscribe) - Subscribe to a topic
 - [unsubscribe](#unsubscribe) - Unsubscribe to a topic
   - By id
@@ -60,6 +64,56 @@ let subsArray = []
 //define a recursive function to get ALL subscriptions
 const getAll = (finishedCallback, cursor) => {
   tes.getSubscriptions(cursor).then(data => {
+    subsArray = subsArray.concat(data.data);
+    if (data.pagination.cursor)
+      getAll(callback, data.pagination.cursor);
+    else
+      callback();
+  });
+}
+//call our function and pass an arrow func that will print our results
+getAll(_ => console.log(subsArray));
+```
+
+## getSubscriptionsByType
+Get a list of your subscriptions of a specific type.  When calling this with no second argument, it will give you the first page of results.
+```js
+tes.getSubscriptionsByType('channel.update').then(data => {
+  console.log(data);
+});
+```
+### With pagination
+Use the optional cursor argument to get a specific page of results
+```js
+let subsArray = []
+//define a recursive function to get ALL subscriptions
+const getAll = (finishedCallback, cursor) => {
+  tes.getSubscriptionsByType('channel.update', cursor).then(data => {
+    subsArray = subsArray.concat(data.data);
+    if (data.pagination.cursor)
+      getAll(callback, data.pagination.cursor);
+    else
+      callback();
+  });
+}
+//call our function and pass an arrow func that will print our results
+getAll(_ => console.log(subsArray));
+```
+
+## getSubscriptionsByStatus
+Get a list of your subscriptions with a certain status.  When calling this with no second argument, it will give you the first page of results.
+```js
+tes.getSubscriptionsByStatus('enabled').then(data => {
+  console.log(data);
+});
+```
+### With pagination
+Use the optional cursor argument to get a specific page of results
+```js
+let subsArray = []
+//define a recursive function to get ALL subscriptions
+const getAll = (finishedCallback, cursor) => {
+  tes.getSubscriptionsByStatus('enabled', cursor).then(data => {
     subsArray = subsArray.concat(data.data);
     if (data.pagination.cursor)
       getAll(callback, data.pagination.cursor);
