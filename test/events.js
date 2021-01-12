@@ -54,9 +54,9 @@ describe('EventManager', _ => {
             arg2: 'test arg2'
         }
         let arg1Actual, arg2Actual;
-        EventManager.addListener('test', (arg1, arg2) => {
-            arg1Actual = arg1;
-            arg2Actual = arg2;
+        EventManager.addListener('test', event => {
+            arg1Actual = event.arg1;
+            arg2Actual = event.arg2;
         });
         EventManager.fire('test', argData).should.eq(true);
         arg1Actual.should.eq('test arg1');

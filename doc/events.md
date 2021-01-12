@@ -17,26 +17,27 @@ const tes = new TES({
 });
 
 // an example of an event handler for the 'channel.update' event
-tes.on('channel.update', (userId, userLogin, userName, title, language, categoryId, categoryName, isMature) => {
-    console.log(`${userName}'s new title is ${title}`);
+tes.on('channel.update', event => {
+    console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
 ```
 
 ## Event Types
-Event type names can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types).  Events and their respective parameters can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-reference#events).  When creating a handler for any event, the order of arguments to the handler function is reflected in the order they are listed in the documentation.
+Event type names can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types).  Events and their respective parameters can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-reference#events).
 
-For example, the `channel.ban` [event](https://dev.twitch.tv/docs/eventsub/eventsub-reference#channel-ban-event) has four parameters `user_id, user_name, broadcaster_user_id, broadcaster_user_name`.  The event handler would be created like so:
+For example, the `channel.ban` [event](https://dev.twitch.tv/docs/eventsub/eventsub-reference#channel-ban-event) has four parameters `user_id, user_login, user_name, broadcaster_user_id, broadcaster_user_login, broadcaster_user_name`.  The event handler would be created like so:
 ```js
-tes.on('channel.ban', (userId, userLogin, userName, broadcasterId, broadcasterLogin, broadcasterName) => {
-  // do your things here
+tes.on('channel.ban', event => {
+  console.log(`${event.user_name} with id ${event.user_id} and login ${event.user_login} was banned from channel ${event.broadcaster_user_name} with id ${event.broadcaster_user_id} and login ${event.broadcaster_user_login}`)
 });
 ```
 
 ## Subscription Revocation
 According to the [Twitch Documentation](https://dev.twitch.tv/docs/eventsub#subscription-revocation), a subscription can be revoked at any time for various reasons.  There may be cases where you want to perform some cleanup based on which subscription got revoked.  You can do this by creating a handler for subscription revocation.
+**NOTE:** As this 'event' is fired when a currently subscribed event topic is revoked, no explicit subscription is needed for this event.
 ```js
-tes.on('revocation', (subscriptionId, status, type, version, condition, transport, createdAt) => {
-    console.log(`subscription with id ${subscriptionId} has been revoked`);
-    // perform cleanup here
+tes.on('revocation', subscriptionData => {
+    console.log(`subscription with id ${subscriptionData.id} has been revoked`);
+    // perform necessary cleanup here
 });
 ```
