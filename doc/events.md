@@ -22,6 +22,14 @@ tes.on('channel.update', event => {
 });
 ```
 
+## Getting Subscription Data
+When an event is fired, TESjs will also include subscription information as an optional second argument to your callback.  This second argument will be the subscription object of the EventSub payload as described in the [Twitch Doc](https://dev.twitch.tv/docs/eventsub#receive-a-notification).
+```js
+tes.on('channel.update', (event, subscription) => {
+  console.log(`Channel Update event for subscription with id ${subscription.id}`);
+});
+```
+
 ## Event Types
 Event type names can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types).  Events and their respective parameters can be found in the Twitch EventSub documentation [here](https://dev.twitch.tv/docs/eventsub/eventsub-reference#events).
 
@@ -33,7 +41,7 @@ tes.on('channel.ban', event => {
 ```
 
 ## Subscription Revocation
-According to the [Twitch Documentation](https://dev.twitch.tv/docs/eventsub#subscription-revocation), a subscription can be revoked at any time for various reasons.  There may be cases where you want to perform some cleanup based on which subscription got revoked.  You can do this by creating a handler for subscription revocation.
+According to the [Twitch Documentation](https://dev.twitch.tv/docs/eventsub#subscription-revocation), a subscription can be revoked at any time for various reasons.  There may be cases where you want to perform some cleanup based on which subscription got revoked.  You can do this by creating a handler for subscription revocation.  
 **NOTE:** As this 'event' is fired when a currently subscribed event topic is revoked, no explicit subscription is needed for this event.
 ```js
 tes.on('revocation', subscriptionData => {
