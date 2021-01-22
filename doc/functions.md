@@ -62,7 +62,7 @@ Use the optional cursor argument to get a specific page of results
 ```js
 let subsArray = []
 //define a recursive function to get ALL subscriptions
-const getAll = (finishedCallback, cursor) => {
+const getAll = (callback, cursor) => {
   tes.getSubscriptions(cursor).then(data => {
     subsArray = subsArray.concat(data.data);
     if (data.pagination.cursor)
@@ -87,7 +87,7 @@ Use the optional cursor argument to get a specific page of results
 ```js
 let subsArray = []
 //define a recursive function to get ALL subscriptions
-const getAll = (finishedCallback, cursor) => {
+const getAll = (callback, cursor) => {
   tes.getSubscriptionsByType('channel.update', cursor).then(data => {
     subsArray = subsArray.concat(data.data);
     if (data.pagination.cursor)
@@ -112,7 +112,7 @@ Use the optional cursor argument to get a specific page of results
 ```js
 let subsArray = []
 //define a recursive function to get ALL subscriptions
-const getAll = (finishedCallback, cursor) => {
+const getAll = (callback, cursor) => {
   tes.getSubscriptionsByStatus('enabled', cursor).then(data => {
     subsArray = subsArray.concat(data.data);
     if (data.pagination.cursor)
