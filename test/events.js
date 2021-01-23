@@ -58,7 +58,7 @@ describe('EventManager', _ => {
             arg1Actual = event.arg1;
             arg2Actual = event.arg2;
         });
-        EventManager.fire('test', argData).should.eq(true);
+        EventManager.fire({type: 'test'}, argData).should.eq(true);
         arg1Actual.should.eq('test arg1');
         arg2Actual.should.eq('test arg2');
         done();
@@ -70,7 +70,7 @@ describe('EventManager', _ => {
             arg1: 'test arg1',
             arg2: 'test arg2'
         }
-        EventManager.fire('test', argData).should.eq(false);
+        EventManager.fire({type: 'test'}, argData).should.eq(false);
         done();
     });
 })
