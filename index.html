@@ -205,11 +205,12 @@ tes.on('revocation', subscriptionData => {
                 <div class='footer-container'>
                     <span class='mdi mdi-copyright' style="padding-right: .25rem;"></span>
                     <a href='https://github.com/mitchwadair' class='footer-link' target='_blank' rel='noopener noreferrer'>Mitchell Adair</a>
-                    <span style="padding-left: .25rem;">2021</span>
+                    <span id='footer-year' style="padding-left: .25rem;">2021</span>
                 </div>
             </footer>
         </div>
         <script src="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
+        <script>document.getElementById('footer-year').innerHTML = new Date().getFullYear()</script>
     </body>
 </html>
