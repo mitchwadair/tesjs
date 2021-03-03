@@ -19,7 +19,7 @@
                 display: block;
                 overflow-x: auto;
                 padding: 0.5em;
-                background: #363546;
+                background: #24232F; /*#363546;*/
                 -moz-tab-size: 4;
                 tab-size: 4;
             }
@@ -54,6 +54,7 @@
         <header>
             <div class='header-container'>
                 <a href='#' style='height: 1.5rem;'><img src='./assets/tesjs.svg' alt='TESjs' style='height: 100%'/></a>
+                <span id='header-version-number' style='margin: .25rem 0 0 .25rem; font-size: .75rem;'></span>
                 <div class='button-row' style='margin: 0 1rem 0 auto'>
                     <a href='https://www.npmjs.com/package/tesjs' class='button-icon mdi mdi-npm' target='_blank' rel='noopener noreferrer' title='TESjs on npm'></a>
                     <a href='https://github.com/mitchwadair/tesjs' class='button-icon mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'></a>
@@ -76,6 +77,10 @@
                                 <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'> GitHub</a>
                             </div>
                         </div>
+                        <div style='display: flex; flex-direction: row; align-items: center; margin-top: 1rem;'>
+                            <span style="font-weight: lighter; font-size: 1.5rem;">Current Version:</span>
+                            <span id='version-number' style='font-weight: lighter; font-size: 1.5rem; margin-left: .5rem'></span>
+                        </div>
                     </div>
                 </div>
                 <div class='tes-blurb'>
@@ -94,13 +99,15 @@
                         </p>
                     </div>
                 </div>
-                <div style='margin: 1rem; padding: 0 1rem 2rem 2rem; border-bottom: 1px solid var(--bg-primary)'>
-                    <h2 style='font-weight: lighter; font-size: 1.75rem;'>Documentation</h2>
-                    <p>
-                        For in-depth details and examples on using TESjs, check out the 
-                        <a href='https://github.com/mitchwadair/tesjs/tree/main/doc' style='color: var(--primary)' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'>documentation</a>
-                         on GitHub.  There you can learn about all of the features available to you in TESjs and get direct references to supplemental documentation from Twitch.
-                    </p>
+                <div class='tes-blurb'>
+                    <div class='tes-tile' style='max-width: unset'>
+                        <h2 style='font-weight: lighter; font-size: 1.75rem;'>Documentation</h2>
+                        <p>
+                            For in-depth details and examples on using TESjs, check out the 
+                            <a href='https://github.com/mitchwadair/tesjs/tree/main/doc' style='color: var(--primary)' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'>documentation</a>
+                             on GitHub.  There you can learn about all of the features available to you in TESjs and get direct references to supplemental documentation from Twitch.
+                        </p>
+                    </div>
                 </div>
                 <div class='tes-examples'>
                     <section style='margin-bottom: 1rem'>
@@ -193,10 +200,10 @@ tes.on('revocation', subscriptionData => {
                         <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD' target='_blank' rel='noopener noreferrer' title='PayPal Donation' style='color: var(--primary)'>PayPal donation</a>
                         .  Donations are not required but are much appreciated and will directly support efforts to continue developing TESjs.
                     </p>
-                    <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD' target='_blank' rel='noopener noreferrer' title='PayPal Donation'>
+                    <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD' target='_blank' rel='noopener noreferrer' title='PayPal Donation' style='text-decoration: none;'>
                         <img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/Badge_1.png" alt="PayPal Logo" class='tes-support-img'>
                     </a>
-                    <a href='https://github.com/sponsors/mitchwadair' target='_blank' rel='noopener noreferrer' title='GitHub Sponsors'>
+                    <a href='https://github.com/sponsors/mitchwadair' target='_blank' rel='noopener noreferrer' title='GitHub Sponsors' style='text-decoration: none;'>
                         <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" alt="GitHub Sponsors Logo" class='tes-support-img'>
                     </a>
                 </div>
@@ -211,6 +218,19 @@ tes.on('revocation', subscriptionData => {
         </div>
         <script src="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
-        <script>document.getElementById('footer-year').innerHTML = new Date().getFullYear()</script>
+        <script>
+            document.getElementById('footer-year').innerHTML = new Date().getFullYear();
+
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('version-number').innerHTML = req.response[0].name;
+                    document.getElementById('header-version-number').innerHTML = req.response[0].name;
+                }
+            }
+            req.responseType = 'json';
+            req.open('GET', 'https://api.github.com/repos/mitchwadair/tesjs/tags');
+            req.send();
+        </script>
     </body>
 </html>
