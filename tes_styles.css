@@ -65,6 +65,10 @@ pre {
     background-color: var(--primary-hover);
 }
 
+.button-icon::before {
+    margin-left: .0625rem;
+}
+
 .header-container {
     display: flex;
     align-items: center;
@@ -131,7 +135,7 @@ pre {
 .tes-content-heading {
     display: flex;
     align-items: center;
-    padding: 4rem 0;
+    padding: 3rem 0;
     margin: 0 1rem;
     border-bottom: 1px solid var(--bg-primary);
 }
