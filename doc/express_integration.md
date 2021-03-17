@@ -42,7 +42,7 @@ const express = require('express');
 const myMiddleware = require('my-middleware'); //a fake middleware for example
 const TES = require('tesjs');
 
-// Create an Express app which uses the express.json() middleware
+// Create an Express app which uses the myMiddleware middleware
 const app = express()
 app.use(TES.ignoreInMiddleware(myMiddleware)); //pass the middleware you want to ignore TESjs to the TES.ignoreInMiddleware middleware
 app.get('/', (req, res) => {
