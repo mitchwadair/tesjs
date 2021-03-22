@@ -133,7 +133,7 @@ const condition = {
 }
 tes.subscribe('channel.update', condition)
 ```
-Optionally, you can do something once the subscription has been made, and catch any errors
+Optionally, you can do something once the subscription has been made, and catch any errors.  The subscription promise will resolve after the handshake with Twitch is complete.  If the handshake times out for whatever reason, the promise will reject with the subscriptionID for any needed cleanup.
 ```js
 const condition = {
   broadcaster_user_id: '1337'
@@ -143,6 +143,15 @@ tes.subscribe('channel.update', condition)
   console.log('subscription has been created');
 })
 .catch(err => {
+  if (err.subscriptionID) {
+    // perform any cleanup needed
+    /* 
+      if the subscriptionID is present, the subscription was made but an error occurred when verifying it
+      this means that you will need to unsubscribe from that subscription to clean it up.
+    */
+    tes.unsubscribe(err.subscriptionID);
+  }
+  // if err.subscriptionID is not present, an error occurred with the request to Twitch
   console.log(err);
 });
 ```

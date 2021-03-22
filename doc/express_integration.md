@@ -36,42 +36,15 @@ const tes = new TES(config);
 ```
 
 ## Middleware Conflicts
-In some cases, especially in more complex Express apps, you may be using some middlewares that conflict with TESjs.  This will happen if you are using a middleware through the `app.use` method, but not if you are using the middleware on individual routes.  An example of this may look as follows:
+In some cases, especially in more complex Express apps, you may be using some middlewares that conflict with TESjs.  This will happen if you are using a middleware through the `app.use` method, but not if you are using the middleware on individual routes.  To mitigate this problem, TESjs includes a middleware that you can use to ignore TESjs in other middlewares.  This middleware is called `ignoreInMiddleware` and is included in the TES object.  Modifying your Express app to use this would make your app look like this:
 ```js
 const express = require('express');
+const myMiddleware = require('my-middleware'); //a fake middleware for example
 const TES = require('tesjs');
 
-// Create an Express app which uses the express.json() middleware
+// Create an Express app which uses the myMiddleware middleware
 const app = express()
-app.use(express.json());
-app.get('/', (req, res) => {
-    res.send('OK');
-});
-app.listen(8080);
-
-// TESjs configuration passing the Express app as the listener's server
-const config = {
-  identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
-  },
-  listener: {
-    baseURL: 'https://example.com',
-    server: app,
-  }
-}
-
-// Initialize TESjs with the config object
-const tes = new TES(config);
-```
-This will cause conflict with TESjs because `express.json()` modifies the contents of the `req` object before reaching the TESjs middleware which also modifies it.  To mitigate this problem, TESjs includes a middleware that you can use to ignore TESjs in other middlewares.  This middleware is called `ignoreInMiddleware` and is included in the TES object.  Modifying your Express app to use this would make your app look like this:
-```js
-const express = require('express');
-const TES = require('tesjs');
-
-// Create an Express app which uses the express.json() middleware
-const app = express()
-app.use(TES.ignoreInMiddleware(express.json())); //pass the middleware you want to ignore TESjs to the TES.ignoreInMiddleware middleware
+app.use(TES.ignoreInMiddleware(myMiddleware)); //pass the middleware you want to ignore TESjs to the TES.ignoreInMiddleware middleware
 app.get('/', (req, res) => {
     res.send('OK');
 });
@@ -96,6 +69,5 @@ With this change made, your Express app will still function normally and not cau
 
 ### Middlewares Known to Cause Conflict
 If you use any of these middlewares in your Express app, you will have to use `ignoreInMiddleware` to eliminate conflicts.  
-*If you find a middleware that is not on this list, feel free to put a PR in to keep the list up to date!*
-- [express.json()](https://expressjs.com/en/api.html#express.json)
-- [bodyParser.json()](http://expressjs.com/en/resources/middleware/body-parser.html#bodyparserjsonoptions)
+*If you find a middleware that is not on this list, feel free to put a PR in to keep the list up to date!*  
+- No known middlewares cause conflict at this time
