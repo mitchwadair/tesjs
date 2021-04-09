@@ -29,6 +29,14 @@ pre {
     margin-right: 4rem;
 }
 
+a {
+    color: var(--font-color-primary);
+}
+
+a:not(.button-link):hover {
+    color: var(--primary);
+}
+
 .button-row {
     display: flex;
     align-items: center;
@@ -38,7 +46,6 @@ pre {
 .button-link {
     text-decoration: none;
     background-color: var(--primary);
-    color: var(--font-color-primary);
     font-size: 1.25rem;
     padding: .5rem .75rem;
     margin: .25rem .5rem;
