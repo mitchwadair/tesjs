@@ -169,6 +169,19 @@ pre {
     margin-left: 2rem;
 }
 
+.tes-examples section {
+    margin: 0 1rem;
+}
+
+.tes-examples section pre code::-webkit-scrollbar {
+    background: transparent;
+    height: .5rem;
+}
+.tes-examples section pre code::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 100vw;
+}
+
 .tes-tile {
     display: flex;
     flex-direction: column;
