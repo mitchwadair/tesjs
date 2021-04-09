@@ -224,16 +224,16 @@ tes.on('revocation', subscriptionData => {
         <script>
             document.getElementById('footer-year').innerHTML = new Date().getFullYear();
 
-            let req = new XMLHttpRequest();
-            req.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('version-number').innerHTML = req.response[0].name;
-                    document.getElementById('header-version-number').innerHTML = req.response[0].name;
-                }
-            }
-            req.responseType = 'json';
-            req.open('GET', 'https://api.github.com/repos/mitchwadair/tesjs/tags');
-            req.send();
+            fetch('https://api.github.com/repos/mitchwadair/tesjs/tags', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(res => {
+                const [{name: tag}] = res;
+                document.getElementById('version-number').innerText = tag;
+                document.getElementById('header-version-number').innerText = tag;
+            });
         </script>
     </body>
 </html>
