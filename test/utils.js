@@ -5,28 +5,29 @@ describe('utils', _ => {
     describe('request()', _ => {
         it('POST should get an OK response', done => {
             const data = {
-                title: 'foo',
-                text: 'bar'
+                name: 'foo',
+                job: 'bar'
             }
             const headers = {
                 'Content-type': 'application/json; charset=UTF-8'
             }
-            utils.request('POST', 'https://jsonplaceholder.typicode.com/posts', headers, data).then(data => {
-                data.title.should.eq('foo');
+            utils.request('POST', 'https://reqres.in/api/users', headers, data).then(data => {
+                data.name.should.eq('foo');
                 done();
             });
         });
 
         it('GET should get an OK response', done => {
-            utils.request('GET', 'https://jsonplaceholder.typicode.com/posts/1').then(data => {
-                data.id.should.eq(1);
+            utils.request('GET', 'https://reqres.in/api/users/2').then(res => {
+                res.data.id.should.eq(2);
                 done();
             });
         });
 
         it('DELETE should get OK response', done => {
-            utils.request('DELETE', 'https://jsonplaceholder.typicode.com/posts/1').then(data => {
-                data.should.be.an('object').that.is.empty;
+            utils.request('DELETE', 'https://reqres.in/api/users/2').then(data => {
+                console.log(data);
+                data.should.be.a('string').that.is.empty;
                 done();
             });
         });
