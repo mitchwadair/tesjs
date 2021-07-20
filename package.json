@@ -32,7 +32,8 @@
   },
   "homepage": "https://www.tesjs.net",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
