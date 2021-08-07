@@ -1,44 +1,48 @@
 {
-  "name": "tesjs",
-  "version": "0.4.4",
-  "description": "A module to streamline the use of Twitch EventSub in Node.js applications",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mitchwadair/tesjs.git"
-  },
-  "keywords": [
-    "tes",
-    "tesjs",
-    "twitch",
-    "twitch.tv",
-    "eventsub",
-    "event",
-    "subscription",
-    "webhooks"
-  ],
-  "main": "main.js",
-  "files": [
-    "/lib",
-    "main.js",
-    "LICENSE"
-  ],
-  "scripts": {
-    "test": "mocha --exit"
-  },
-  "author": "Mitchell Adair (https://github.com/mitchwadair)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mitchwadair/tesjs/issues"
-  },
-  "homepage": "https://www.tesjs.net",
-  "dependencies": {
-    "express": "^4.17.1",
-    "ws": "^7.5.3"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.2.1",
-    "sinon": "^9.2.1",
-    "supertest": "^6.0.1"
-  }
+    "name": "tesjs",
+    "version": "0.4.4",
+    "description": "A module to streamline the use of Twitch EventSub in Node.js applications",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mitchwadair/tesjs.git"
+    },
+    "keywords": [
+        "tes",
+        "tesjs",
+        "twitch",
+        "twitch.tv",
+        "eventsub",
+        "event",
+        "subscription",
+        "webhooks"
+    ],
+    "main": "main.js",
+    "files": [
+        "/lib",
+        "main.js",
+        "LICENSE"
+    ],
+    "scripts": {
+        "test": "mocha --exit",
+        "build": "webpack"
+    },
+    "author": "Mitchell Adair (https://github.com/mitchwadair)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mitchwadair/tesjs/issues"
+    },
+    "homepage": "https://www.tesjs.net",
+    "dependencies": {
+        "express": "^4.17.1",
+        "ws": "^7.5.3"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^8.2.1",
+        "sinon": "^9.2.1",
+        "supertest": "^6.0.1",
+        "webpack": "^5.49.0",
+        "webpack-cli": "^4.7.2",
+        "webpack-node-externals": "^3.0.0"
+    }
 }
