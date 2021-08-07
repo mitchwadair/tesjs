@@ -34,6 +34,7 @@
     "homepage": "https://www.tesjs.net",
     "dependencies": {
         "express": "^4.17.1",
+        "node-fetch": "^2.6.1",
         "ws": "^7.5.3"
     },
     "devDependencies": {
