@@ -14,7 +14,8 @@
         "eventsub",
         "event",
         "subscription",
-        "webhooks"
+        "webhooks",
+        "websockets"
     ],
     "main": "main.js",
     "files": [
