@@ -10,6 +10,9 @@
 
 A module to streamline the use of Twitch EventSub in Node.js applications
 
+# WARNING
+For developers using TESjs versions less than v0.5.0, it is **HIGHLY** recommended to upgrade to at least that version.  See #34 for details.  This will require you to remake all current subscriptions made with TESjs in order for it to work.  Many apologies for the inconvenience!
+
 # Documentation
 Learn how to use TESjs by reading through the [documentation](/doc).  Supplement your development with the Twitch EventSub [documentation](https://dev.twitch.tv/docs/eventsub) as well.
 
