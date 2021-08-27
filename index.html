@@ -144,7 +144,8 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
-        baseURL: "https://example.com" //this MUST be an HTTPS endpoint on port 443
+        baseURL: "https://example.com", //this MUST be an HTTPS endpoint on port 443
+        secret: WEBHOOKS_SECRET //this should be different from your client secret and should also be using an environment variable
     }
 });
                             </code>
