@@ -6,6 +6,7 @@ const crypto = require('crypto');
 // example data taken from https://dev.twitch.tv/docs/eventsub examples
 
 const secret = 's3cRe7';
+const whSecret = 's3cRe7tW0';
 const timestamp = new Date().toISOString();
 const tes = new TES({
     identity: {
@@ -13,7 +14,8 @@ const tes = new TES({
         secret: secret
     },
     listener: {
-        baseURL: 'localhost'
+        baseURL: 'localhost',
+        secret: whSecret
     }
 });
 const app = tes.whserver;
@@ -60,7 +62,7 @@ describe('whserver', _ => {
                 "created_at": "2019-11-16T10:11:12.123Z"
             }
         }
-        const signature = crypto.createHmac('sha256', secret)
+        const signature = crypto.createHmac('sha256', whSecret)
             .update('e76c6bd4-55c9-4987-8304-da1588d8988b' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
@@ -109,7 +111,7 @@ describe('whserver', _ => {
                 "broadcaster_user_name":   "twitch"
             }
         }
-        const signature = crypto.createHmac('sha256', secret)
+        const signature = crypto.createHmac('sha256', whSecret)
             .update('befa7b53-d79d-478f-86b9-120f112b044e' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
@@ -157,7 +159,7 @@ describe('whserver', _ => {
             "total": 1,
             "pagination": {}
         }
-        const signature = crypto.createHmac('sha256', secret)
+        const signature = crypto.createHmac('sha256', whSecret)
             .update('84c1e79a-2a4b-4c13-ba0b-4312293e9308' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
@@ -207,7 +209,7 @@ describe('whserver', _ => {
                 "broadcaster_user_name":   "twitch"
             }
         }
-        const signature = crypto.createHmac('sha256', secret)
+        const signature = crypto.createHmac('sha256', whSecret)
             .update('befa7b53-d79d-478f-86b9-120f112b044e' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
@@ -258,7 +260,7 @@ describe('whserver', _ => {
             }
         }
         const oldTime = new Date(Date.now() - 601000).toISOString()
-        const signature = crypto.createHmac('sha256', secret)
+        const signature = crypto.createHmac('sha256', whSecret)
             .update('befa7b53-d79d-478f-86b9-120f112b044d' + oldTime + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
