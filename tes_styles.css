@@ -252,3 +252,11 @@ a:not(.button-link):not(.button-icon):hover {
     font-size: 125%;
     font-weight: bold;
 }
+
+.alert-text {
+    margin: .5rem 0;
+}
+
+.alert-text > a {
+    color: inherit;
+}
