@@ -33,7 +33,7 @@ a {
     color: var(--font-color-primary);
 }
 
-a:not(.button-link):hover {
+a:not(.button-link):not(.button-icon):hover {
     color: var(--primary);
 }
 
@@ -142,9 +142,8 @@ a:not(.button-link):hover {
 .tes-content-heading {
     display: flex;
     align-items: center;
-    padding: 3rem 0;
+    padding: 3rem 0 1rem 0;
     margin: 0 1rem;
-    border-bottom: 1px solid var(--bg-primary);
 }
 
 .tes-content-heading-blurb > h1 {
@@ -228,4 +227,28 @@ a:not(.button-link):hover {
 
 .tes-support-img:hover {
     background-color: var(--bg-grey-light);
+}
+
+.version-alert {
+    position: relative;
+    margin: 0 2rem 1rem 2rem;
+    padding: .5rem 1rem .5rem 4rem;
+
+    border: 2px solid #dd0000;
+    border-radius: .5rem;
+    background-color: #fcd4d5;
+    color: #dd0000;
+}
+
+.alert-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+    font-size: 2em;
+}
+
+.alert-title {
+    font-size: 125%;
+    font-weight: bold;
 }
