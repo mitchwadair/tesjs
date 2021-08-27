@@ -27,6 +27,7 @@ const config = {
   },
   listener: {
     baseURL: 'https://example.com',
+    secret: process.env.WEBHOOKS_SECRET,
     server: app,
   }
 }
@@ -58,6 +59,7 @@ const config = {
   },
   listener: {
     baseURL: 'https://example.com',
+    secret: process.env.WEBHOOKS_SECRET,
     server: app,
   }
 }

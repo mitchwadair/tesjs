@@ -12,11 +12,12 @@ The configuration object is required as an argument when creating the TESjs inst
 
 `identity`: (Required) Set up your client's identity
 - `id`: *string* - (Required) your app's client id
-- `secret`: *string* - (Required) your app's secret (make sure this is not in plaintext, use environment variables for this)
+- `secret`: *string* - (Required) your app's client secret (make sure this is not in plaintext, use environment variables for this)
 
 `listener`: (Required) Setting your notification listener details
 - `baseURL`: *string* - (Required) the url where your endpoint is hosted
   - See [Twitch doc](https://dev.twitch.tv/docs/eventsub) for details on local development
+- `secret`: *string* - (Required) the secret to use for your webhooks subscriptions (make sure this is not in plaintext, use environment variables for this)
 - `port`: *number* - (Optional) the port to listen at.
   - defaults to process.env.PORT or 8080
   - Keep in mind, this is the port of the Express http server, not your https endpoint (served at `baseURL`) which should have port 443
@@ -39,6 +40,7 @@ const config = {
   },
   listener: {
     baseURL: 'https://example.com',
+    secret: process.env.WEBHOOKS_SECRET,
   }
 }
 
@@ -56,6 +58,7 @@ const config = {
   },
   listener: {
     baseURL: 'https://example.com',
+    secret: process.env.WEBHOOKS_SECRET,
     port: 8081,
   }
 }
@@ -81,6 +84,7 @@ const config = {
   },
   listener: {
     baseURL: 'https://example.com',
+    secret: process.env.WEBHOOKS_SECRET,
     server: app,
   }
 }

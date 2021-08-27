@@ -12,7 +12,8 @@ const tes = new TES({
         secret: CLIENT_SECRET
     },
     listener: {
-        baseURL: "https://example.com"
+        baseURL: "https://example.com",
+        secret: process.env.WEBHOOKS_SECRET,
     }
 });
 
