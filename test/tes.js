@@ -9,8 +9,9 @@ describe('TES', _ => {
                 secret: 't35t'
             },
             listener: {
-                baseURL: 'https://test.com'
-            }
+                baseURL: 'https://test.com',
+            },
+            path : "/TEST/eventsub"
         });
         setTimeout(_ => {
             tes._whserverlistener.close();

@@ -5,6 +5,8 @@ const crypto = require('crypto');
 
 // example data taken from https://dev.twitch.tv/docs/eventsub examples
 
+const path = "/TEST/PATH";
+
 const secret = 's3cRe7';
 const whSecret = 's3cRe7tW0';
 const timestamp = new Date().toISOString();
@@ -15,22 +17,25 @@ const tes = new TES({
     },
     listener: {
         baseURL: 'localhost',
-        secret: whSecret
-    }
+        secret: whSecret,
+    },
+    path,
 });
+
+
 const app = tes.whserver;
 
 describe('whserver', _ => {
     it('responds with 401 to request without twitch message signature', done => {
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .send({})
             .expect(401, done);
     });
 
     it('responds with 403 to request with signature mismatch', done => {
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': 'e76c6bd4-55c9-4987-8304-da1588d8988b',
                 'Twitch-Eventsub-Message-Retry': 0,
@@ -66,7 +71,7 @@ describe('whserver', _ => {
             .update('e76c6bd4-55c9-4987-8304-da1588d8988b' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': 'e76c6bd4-55c9-4987-8304-da1588d8988b',
                 'Twitch-Eventsub-Message-Retry': 0,
@@ -115,7 +120,7 @@ describe('whserver', _ => {
             .update('befa7b53-d79d-478f-86b9-120f112b044e' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': 'befa7b53-d79d-478f-86b9-120f112b044e',
                 'Twitch-Eventsub-Message-Retry': 0,
@@ -163,7 +168,7 @@ describe('whserver', _ => {
             .update('84c1e79a-2a4b-4c13-ba0b-4312293e9308' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': '84c1e79a-2a4b-4c13-ba0b-4312293e9308',
                 'Twitch-Eventsub-Message-Retry': 0,
@@ -213,7 +218,7 @@ describe('whserver', _ => {
             .update('befa7b53-d79d-478f-86b9-120f112b044e' + timestamp + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': 'befa7b53-d79d-478f-86b9-120f112b044e',
                 'Twitch-Eventsub-Message-Retry': 0,
@@ -264,7 +269,7 @@ describe('whserver', _ => {
             .update('befa7b53-d79d-478f-86b9-120f112b044d' + oldTime + Buffer.from(JSON.stringify(payload), 'utf-8'))
             .digest('hex');
         request(app)
-            .post('/teswh/event')
+            .post(path)
             .set({
                 'Twitch-Eventsub-Message-Id': 'befa7b53-d79d-478f-86b9-120f112b044d',
                 'Twitch-Eventsub-Message-Retry': 0,
