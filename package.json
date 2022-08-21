@@ -23,7 +23,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "mocha --exit"
+    "test": "mocha ./test/tests.js --bail --exit"
   },
   "author": "Mitchell Adair (https://github.com/mitchwadair)",
   "license": "MIT",
