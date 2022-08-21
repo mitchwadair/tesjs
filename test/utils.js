@@ -1,9 +1,9 @@
-const utils = require("../lib/utils");
-const should = require("chai").should();
+const { expect } = require("chai");
+const { objectShallowEquals } = require("../lib/utils");
 
-describe("utils", (_) => {
-    describe("objectShallowEquals()", (_) => {
-        it("should return true when two objects match", (done) => {
+describe("utils", () => {
+    describe("objectShallowEquals()", () => {
+        it("should return true when two objects match", async () => {
             const obj1 = {
                 k1: "key1",
                 k2: "key2",
@@ -12,11 +12,10 @@ describe("utils", (_) => {
                 k1: "key1",
                 k2: "key2",
             };
-            utils.objectShallowEquals(obj1, obj2).should.eq(true);
-            done();
+            expect(objectShallowEquals(obj1, obj2)).to.eq(true);
         });
 
-        it("should return false when second object keys dont match first object keys", (done) => {
+        it("should return false when second object keys dont match first object keys", async () => {
             const obj1 = {
                 k1: "key1",
                 k2: "key2",
@@ -24,11 +23,10 @@ describe("utils", (_) => {
             const obj2 = {
                 wrong: "different",
             };
-            utils.objectShallowEquals(obj1, obj2).should.eq(false);
-            done();
+            expect(objectShallowEquals(obj1, obj2)).to.eq(false);
         });
 
-        it("should return false when second object values dont match first object values", (done) => {
+        it("should return false when second object values dont match first object values", async () => {
             const obj1 = {
                 k1: "key1",
                 k2: "key2",
@@ -37,11 +35,10 @@ describe("utils", (_) => {
                 k1: "not key1",
                 k2: "not key2",
             };
-            utils.objectShallowEquals(obj1, obj2).should.eq(false);
-            done();
+            expect(objectShallowEquals(obj1, obj2)).to.eq(false);
         });
 
-        it("should return false when second object has extra keys", (done) => {
+        it("should return false when second object has extra keys", async () => {
             const obj1 = {
                 k1: "key1",
                 k2: "key2",
@@ -51,8 +48,7 @@ describe("utils", (_) => {
                 k2: "key2",
                 k3: "new key",
             };
-            utils.objectShallowEquals(obj1, obj2).should.eq(false);
-            done();
+            expect(objectShallowEquals(obj1, obj2)).to.eq(false);
         });
     });
 });
