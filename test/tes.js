@@ -72,7 +72,7 @@ describe("TES", () => {
         const tes = tryInitTES(configValid);
         setTimeout(() => {
             tes._whserverlistener.close();
-            tes.should.be.an.instanceof(TES);
+            expect(tes).to.be.an.instanceOf(TES);
             done();
         }, 100);
     });
