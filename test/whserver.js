@@ -16,7 +16,7 @@ const REDIRECT_URL = "http://localhost:8080/teswh/event";
 
 describe("whserver", () => {
     let tes, app;
-    before((done) => {
+    before(() => {
         TES._instance = null;
         tes = new TES({
             identity: {
@@ -30,7 +30,6 @@ describe("whserver", () => {
             options: { logging: false },
         });
         app = tes.whserver;
-        setTimeout(done, 500);
     });
 
     it("responds with 401 to request without twitch message signature", (done) => {
@@ -51,7 +50,7 @@ describe("whserver", () => {
                     const out = await cmd(`twitch event verify channel.update -F ${REDIRECT_URL} -s ${whSecret}`);
                     expect(out).to.contain("Valid response");
                     done();
-                }, 100);
+                }, 10);
                 return {
                     data: [{ id: 1 }],
                 };
