@@ -15,6 +15,8 @@ const timestamp = new Date().toISOString();
 const REDIRECT_URL = "http://localhost:8080/teswh/event";
 
 describe("whserver", () => {
+    nock("https://id.twitch.tv").post("/oauth2/token").query(true).reply(200, { access_token: "token" });
+
     let tes, app;
     before(() => {
         TES._instance = null;
@@ -50,7 +52,7 @@ describe("whserver", () => {
                     const out = await cmd(`twitch event verify channel.update -F ${REDIRECT_URL} -s ${whSecret}`);
                     expect(out).to.contain("Valid response");
                     done();
-                }, 10);
+                });
                 return {
                     data: [{ id: 1 }],
                 };
