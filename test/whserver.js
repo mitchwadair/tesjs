@@ -15,23 +15,29 @@ const timestamp = new Date().toISOString();
 const REDIRECT_URL = "http://localhost:8080/teswh/event";
 
 describe("whserver", () => {
-    nock("https://id.twitch.tv").post("/oauth2/token").query(true).reply(200, { access_token: "token" });
-
     let tes, app;
-    before(() => {
-        TES._instance = null;
-        tes = new TES({
-            identity: {
-                id: "test",
-                secret: secret,
-            },
-            listener: {
-                baseURL: "localhost",
-                secret: whSecret,
-            },
-            options: { logging: false },
+    before((done) => {
+        nock("https://id.twitch.tv").post("/oauth2/token").query(true).reply(200, { access_token: "token" });
+        setTimeout(() => {
+            TES._instance = null;
+            tes = new TES({
+                identity: {
+                    id: "test",
+                    secret: secret,
+                },
+                listener: {
+                    baseURL: "localhost",
+                    secret: whSecret,
+                },
+                options: { logging: false },
+            });
+            app = tes.whserver;
+            done();
         });
-        app = tes.whserver;
+    });
+
+    afterEach(() => {
+        nock.cleanAll();
     });
 
     it("responds with 401 to request without twitch message signature", (done) => {

@@ -10,6 +10,10 @@ describe("RequestManager", () => {
         AuthManager._instance = undefined;
     });
 
+    afterEach(() => {
+        nock.cleanAll();
+    });
+
     it("makes a request given the url and config", async () => {
         nock(TEST_URL).post("/").reply(200, { data: 1 });
 
@@ -27,7 +31,7 @@ describe("RequestManager", () => {
 
     it("gets a new auth token when receiving 401 response and retries", async () => {
         let requested = false;
-        nock("https://id.twitch.tv").post("/oauth2/token").query(true).reply(200, { access_token: "token" });
+        nock("https://id.twitch.tv").persist().post("/oauth2/token").query(true).reply(200, { access_token: "token" });
         nock(TEST_URL)
             .persist()
             .post("/")
