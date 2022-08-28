@@ -47,7 +47,7 @@ describe("AuthManager", () => {
         expect(token).to.eq(expected2);
     });
 
-    it("refreshes token when _validate gets a 401", async () => {
+    it("refreshes token when _validateToken gets a 401", async () => {
         nock("https://id.twitch.tv").get("/oauth2/validate").reply(401, { message: "invalid token" });
 
         let token = await auth.getToken();
