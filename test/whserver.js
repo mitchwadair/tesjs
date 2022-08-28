@@ -5,6 +5,7 @@ const sinon = require("sinon");
 const crypto = require("crypto");
 const { cmd } = require("./testUtil");
 const { expect } = require("chai");
+const AuthManager = require("../lib/auth");
 
 // example data taken from https://dev.twitch.tv/docs/eventsub examples
 
@@ -19,7 +20,8 @@ describe("whserver", () => {
     before((done) => {
         nock("https://id.twitch.tv").post("/oauth2/token").query(true).reply(200, { access_token: "token" });
         setTimeout(() => {
-            TES._instance = null;
+            AuthManager._instance = undefined;
+            TES._instance = undefined;
             tes = new TES({
                 identity: {
                     id: "test",
