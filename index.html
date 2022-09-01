@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>TESjs - Streamlining Twitch EventSub</title>
-        <meta name="description" content="A module to streamline the use of Twitch EventSub in Node.js applications">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./tes_styles.css">
-        <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css" onload="this.onload=null;this.rel='stylesheet'">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+        <meta name="description" content="A module to streamline the use of Twitch EventSub in Node.js applications" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="./tes_styles.css" />
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet" />
 
-        <link rel='canonical' href='https://www.tesjs.com'/>
-        <link rel='canonical' href='https://tesjs.com'/>
+        <link rel="canonical" href="https://www.tesjs.com" />
+        <link rel="canonical" href="https://tesjs.com" />
 
         <style>
             .hljs {
                 display: block;
                 overflow-x: auto;
                 padding: 0.5em;
-                background: #24232F; /*#363546;*/
+                background: #24232f; /*#363546;*/
                 -moz-tab-size: 4;
                 tab-size: 4;
             }
@@ -31,106 +36,171 @@
             }
 
             .hljs-keyword {
-                color: #855CAD;
+                color: #855cad;
             }
 
             .hljs-built_in {
-                color: #FFAD99;
+                color: #ffad99;
             }
 
             .hljs-string {
-                color: #85EAA7;
+                color: #85eaa7;
             }
 
             .hljs-attr {
-                color: #A68C98;
+                color: #a68c98;
             }
             .hljs-subst {
-                color: #4E74BC; /*#6C61D1;*/
+                color: #4e74bc; /*#6C61D1;*/
             }
         </style>
     </head>
     <body>
         <header>
-            <div class='header-container'>
-                <a href='#' style='height: 1.5rem;'><img src='./assets/tesjs.svg' alt='TESjs' style='height: 100%'/></a>
-                <span id='header-version-number' style='margin: .25rem 0 0 .25rem; font-size: .75rem;'></span>
-                <div class='button-row' style='margin: 0 1rem 0 auto'>
-                    <a href='https://www.npmjs.com/package/tesjs' class='button-icon mdi mdi-npm' target='_blank' rel='noopener noreferrer' title='TESjs on npm'></a>
-                    <a href='https://github.com/mitchwadair/tesjs' class='button-icon mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'></a>
+            <div class="header-container">
+                <a href="#" style="height: 1.5rem"><img src="./assets/tesjs.svg" alt="TESjs" style="height: 100%" /></a>
+                <span id="header-version-number" style="margin: 0.25rem 0 0 0.25rem; font-size: 0.75rem"></span>
+                <div class="button-row" style="margin: 0 1rem 0 auto">
+                    <a
+                        href="https://www.npmjs.com/package/tesjs"
+                        class="button-icon mdi mdi-npm"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="TESjs on npm"
+                    ></a>
+                    <a
+                        href="https://github.com/mitchwadair/tesjs"
+                        class="button-icon mdi mdi-github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="TESjs on GitHub"
+                    ></a>
                 </div>
             </div>
         </header>
-        <div class='tes-body'>
-            <div class='tes-content'>
-                <div class='tes-content-heading'>
-                    <div class='tes-content-logo'>
-                        <img src='./assets/tesjs.svg' alt='TESjs' style='width: 100%'/>
+        <div class="tes-body">
+            <div class="tes-content">
+                <div class="tes-content-heading">
+                    <div class="tes-content-logo">
+                        <img src="./assets/tesjs.svg" alt="TESjs" style="width: 100%" />
                     </div>
-                    <div class='tes-content-heading-blurb'>
+                    <div class="tes-content-heading-blurb">
                         <h1>Streamlining the use of Twitch EventSub</h1>
-                        <p>Easily subscribe to Twitch EventSub topics.  Quickly start up a webhooks endpoint and listen for Twitch EventSub notifications.</p>
-                        <div style='display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 1rem;'>
-                            <div class='button-row'>
-                                <a href='https://www.npmjs.com/package/tesjs' class='button-link mdi mdi-npm' target='_blank' rel='noopener noreferrer' title='TESjs on npm'>
+                        <p>
+                            Easily subscribe to Twitch EventSub topics. Quickly start up a webhooks endpoint and listen
+                            for Twitch EventSub notifications.
+                        </p>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;
+                                margin-top: 1rem;
+                            "
+                        >
+                            <div class="button-row">
+                                <a
+                                    href="https://www.npmjs.com/package/tesjs"
+                                    class="button-link mdi mdi-npm"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title="TESjs on npm"
+                                >
                                     <span>NPM</span>
                                 </a>
-                                <a href='https://github.com/mitchwadair/tesjs' class='button-link mdi mdi-github' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'>
+                                <a
+                                    href="https://github.com/mitchwadair/tesjs"
+                                    class="button-link mdi mdi-github"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title="TESjs on GitHub"
+                                >
                                     <span>GitHub</span>
                                 </a>
                             </div>
                         </div>
-                        <div style='display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 1rem;'>
-                            <span style="font-weight: lighter; font-size: 1.5rem;">Current Version:</span>
-                            <span id='version-number' style='font-weight: lighter; font-size: 1.5rem; margin-left: .5rem'></span>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                align-items: center;
+                                margin-top: 1rem;
+                            "
+                        >
+                            <span style="font-weight: lighter; font-size: 1.5rem">Current Version:</span>
+                            <span
+                                id="version-number"
+                                style="font-weight: lighter; font-size: 1.5rem; margin-left: 0.5rem"
+                            ></span>
                         </div>
                     </div>
                 </div>
                 <div class="version-alert">
                     <div class="mdi mdi-alert-outline alert-icon"></div>
                     <div class="alert-title">Warning</div>
-                    <div class="alert-text">If you are using a version of TESjs lower than v0.5.0 it is <i>HIGHLY</i> recommended that you upgrade to at least v0.5.0</div>
                     <div class="alert-text">
-                        For more information on this, please see <a href='https://github.com/mitchwadair/tesjs/issues/34' target='_blank' rel='noopener noreferrer' title='Version Issue'>this issue</a>
+                        If you are using a version of TESjs lower than v0.5.0 it is <i>HIGHLY</i> recommended that you
+                        upgrade to at least v0.5.0
+                    </div>
+                    <div class="alert-text">
+                        For more information on this, please see
+                        <a
+                            href="https://github.com/mitchwadair/tesjs/issues/34"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Version Issue"
+                            >this issue</a
+                        >
                     </div>
                 </div>
-                <div class='tes-blurb' style="border-top: 1px solid var(--bg-primary)">
-                    <div class='tes-tile'>
+                <div class="tes-blurb" style="border-top: 1px solid var(--bg-primary)">
+                    <div class="tes-tile">
                         <h2>Skip the Hard Stuff</h2>
                         <p>
-                            TESjs makes it easy to get up and running by taking care of the tough stuff.  Under the hood, TESjs uses Express to create a wehbooks endpoint 
-                            for Twitch's EventSub notifications.  It also takes care of the tedious signature verification so you can focus on building your awesome app!
+                            TESjs makes it easy to get up and running by taking care of the tough stuff. Under the hood,
+                            TESjs uses Express to create a wehbooks endpoint for Twitch's EventSub notifications. It
+                            also takes care of the tedious signature verification so you can focus on building your
+                            awesome app!
                         </p>
                     </div>
-                    <div class='tes-tile'>
+                    <div class="tes-tile">
                         <h2>Integrate Seamlessly</h2>
                         <p>
-                            Already running an Express server in your app?  TESjs has you covered!  Just pass the Express object into TESjs' config and it will build a 
-                            webhooks route on top of your existing server!
+                            Already running an Express server in your app? TESjs has you covered! Just pass the Express
+                            object into TESjs' config and it will build a webhooks route on top of your existing server!
                         </p>
                     </div>
                 </div>
-                <div class='tes-blurb'>
-                    <div class='tes-tile' style='max-width: unset'>
-                        <h2 style='font-weight: lighter; font-size: 1.75rem;'>Documentation</h2>
+                <div class="tes-blurb">
+                    <div class="tes-tile" style="max-width: unset">
+                        <h2 style="font-weight: lighter; font-size: 1.75rem">Documentation</h2>
                         <p>
-                            For in-depth details and examples on using TESjs, check out the 
-                            <a href='https://github.com/mitchwadair/tesjs/tree/main/doc' target='_blank' rel='noopener noreferrer' title='TESjs on GitHub'>documentation</a>
-                             on GitHub.  There you can learn about all of the features available to you in TESjs and get direct references to supplemental documentation from Twitch.
+                            For in-depth details and examples on using TESjs, check out the
+                            <a
+                                href="https://github.com/mitchwadair/tesjs/tree/main/doc"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="TESjs on GitHub"
+                                >documentation</a
+                            >
+                            on GitHub. There you can learn about all of the features available to you in TESjs and get
+                            direct references to supplemental documentation from Twitch.
                         </p>
                     </div>
                 </div>
-                <div class='tes-examples'>
-                    <section style='margin-bottom: 1rem'>
-                        <span id='install'></span>
-                        <a href='#install' class='tes-anchor'>
+                <div class="tes-examples">
+                    <section style="margin-bottom: 1rem">
+                        <span id="install"></span>
+                        <a href="#install" class="tes-anchor">
                             <h1>Install</h1>
                         </a>
                         <pre><code class='sh tes-code'>npm install tesjs</code></pre>
                     </section>
                     <section>
-                        <span id='init-tes'></span>
-                        <a href='#init-tes' class='tes-anchor'>
+                        <span id="init-tes"></span>
+                        <a href="#init-tes" class="tes-anchor">
                             <h1>Initialise the TES Instance</h1>
                         </a>
                         <pre>
@@ -141,19 +211,19 @@ const TES = require('tesjs');
 const tes = new TES({
     identity: {
         id: YOUR_CLIENT_ID,
-        secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
+        secret: YOUR_CLIENT_SECRET // do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
-        baseURL: "https://example.com", //this MUST be an HTTPS endpoint on port 443
-        secret: WEBHOOKS_SECRET //this should be different from your client secret and should also be using an environment variable
+        baseURL: "https://example.com", // this MUST be an HTTPS endpoint on port 443
+        secret: WEBHOOKS_SECRET // this should be different from your client secret and should also be using an environment variable
     }
 });
                             </code>
                         </pre>
                     </section>
                     <section>
-                        <span id='create-event-listener'></span>
-                        <a href='#create-event-listener' class='tes-anchor'>
+                        <span id="create-event-listener"></span>
+                        <a href="#create-event-listener" class="tes-anchor">
                             <h1>Create an Event Listener</h1>
                         </a>
                         <pre>
@@ -169,8 +239,8 @@ tes.on('channel.update', event => {
                         </pre>
                     </section>
                     <section>
-                        <span id='subscribe-to-event'></span>
-                        <a href='#subscribe-to-event' class='tes-anchor'>
+                        <span id="subscribe-to-event"></span>
+                        <a href="#subscribe-to-event" class="tes-anchor">
                             <h1>Subscribe to an Event</h1>
                         </a>
                         <pre>
@@ -178,7 +248,7 @@ tes.on('channel.update', event => {
 // create a new subscription for the 'channel.update' event for broadcaster '1337'
 tes.subscribe('channel.update', {
     broadcaster_user_id: '1337'
-}).then(_ => {
+}).then(() => {
     console.log('Subscription successful');
 }).catch(err => {
     console.log(err);
@@ -187,8 +257,8 @@ tes.subscribe('channel.update', {
                         </pre>
                     </section>
                     <section>
-                        <span id='revocation-clean-up'></span>
-                        <a href='#revocation-clean-up' class='tes-anchor'>
+                        <span id="revocation-clean-up"></span>
+                        <a href="#revocation-clean-up" class="tes-anchor">
                             <h1>Clean Up Revoked Subscriptions</h1>
                         </a>
                         <pre>
@@ -202,47 +272,123 @@ tes.on('revocation', subscriptionData => {
                             </code>
                         </pre>
                     </section>
+                    <section>
+                        <span id="external-auth-handling"></span>
+                        <a href="#external-auth-handling" class="tes-anchor">
+                            <h1>Use External Authentication Handling</h1>
+                        </a>
+                        <pre>
+                            <code class='js tes-code'>
+const TES = require('tesjs');
+
+// example app access token fetching
+const customTokenRefresh = async () => {
+    // ... token fetching business logic ...
+    return yourFetchedToken;
+}
+
+// initialize TESjs
+// if you are using TESjs in conjunction with other Twitch-related libraries or API usage,
+// you can use the `identity.onAuthenticationFailure` configuration option to handle your
+// fetching/refreshing your app access token yourself
+const tes = new TES({
+    identity: {
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET, // do not ship this in plaintext!! use environment variables so this does not get exposed
+        onAuthenticationFailure: customTokenRefresh,
+        accessToken: EXISTING_ACCESS_TOKEN, // if you already have an app access token, put it here to avoid an unnecessary token refresh
+    },
+    listener: {
+        baseURL: "https://example.com", // this MUST be an HTTPS endpoint on port 443
+        secret: WEBHOOKS_SECRET // this should be different from your client secret and should also be using an environment variable
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
                 </div>
-                <div style='margin: 1rem; padding: 0 1rem 2rem 2rem; border-top: 1px solid var(--bg-primary);'>
-                    <h2 style='font-weight: lighter; font-size: 1.75rem;'>Support the Project</h2>
+                <div style="margin: 1rem; padding: 0 1rem 2rem 2rem; border-top: 1px solid var(--bg-primary)">
+                    <h2 style="font-weight: lighter; font-size: 1.75rem">Support the Project</h2>
                     <p>
-                        If you would like to support the development and maintenance of TESjs, please consider supporting the project through 
-                        <a href='https://github.com/sponsors/mitchwadair' target='_blank' rel='noopener noreferrer' title='GitHub Sponsors'>GitHub Sponsors</a> 
-                        or through a one-time 
-                        <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD' target='_blank' rel='noopener noreferrer' title='PayPal Donation'>PayPal donation</a>
-                        .  Donations are not required but are much appreciated and will directly support efforts to continue developing TESjs.
+                        If you would like to support the development and maintenance of TESjs, please consider
+                        supporting the project through
+                        <a
+                            href="https://github.com/sponsors/mitchwadair"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="GitHub Sponsors"
+                            >GitHub Sponsors</a
+                        >
+                        or through a one-time
+                        <a
+                            href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="PayPal Donation"
+                            >PayPal donation</a
+                        >
+                        . Donations are not required but are much appreciated and will directly support efforts to
+                        continue developing TESjs.
                     </p>
-                    <a href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD' target='_blank' rel='noopener noreferrer' title='PayPal Donation' style='text-decoration: none;'>
-                        <img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/Badge_1.png" alt="PayPal Logo" class='tes-support-img'>
+                    <a
+                        href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9WS3KJPAV8JDJ&currency_code=USD"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="PayPal Donation"
+                        style="text-decoration: none"
+                    >
+                        <img
+                            src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/Badge_1.png"
+                            alt="PayPal Logo"
+                            class="tes-support-img"
+                        />
                     </a>
-                    <a href='https://github.com/sponsors/mitchwadair' target='_blank' rel='noopener noreferrer' title='GitHub Sponsors' style='text-decoration: none;'>
-                        <img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg" alt="GitHub Sponsors Logo" class='tes-support-img'>
+                    <a
+                        href="https://github.com/sponsors/mitchwadair"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="GitHub Sponsors"
+                        style="text-decoration: none"
+                    >
+                        <img
+                            src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona-2.svg"
+                            alt="GitHub Sponsors Logo"
+                            class="tes-support-img"
+                        />
                     </a>
                 </div>
             </div>
             <footer>
-                <div class='footer-container'>
-                    <span class='mdi mdi-copyright' style="padding-right: .25rem;"></span>
-                    <a href='https://github.com/mitchwadair' class='footer-link' target='_blank' rel='noopener noreferrer'>Mitchell Adair</a>
-                    <span id='footer-year' style="padding-left: .25rem;">2021</span>
+                <div class="footer-container">
+                    <span class="mdi mdi-copyright" style="padding-right: 0.25rem"></span>
+                    <a
+                        href="https://github.com/mitchwadair"
+                        class="footer-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Mitchell Adair</a
+                    >
+                    <span id="footer-year" style="padding-left: 0.25rem">2021</span>
                 </div>
             </footer>
         </div>
         <script src="https://unpkg.com/@highlightjs/cdn-assets@10.4.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
         <script>
-            document.getElementById('footer-year').innerHTML = new Date().getFullYear();
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script>
+            document.getElementById("footer-year").innerHTML = new Date().getFullYear();
 
-            fetch('https://api.github.com/repos/mitchwadair/tesjs/tags', {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
+            fetch("https://api.github.com/repos/mitchwadair/tesjs/tags", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
             })
-            .then(res => res.json())
-            .then(res => {
-                const [{name: tag}] = res;
-                document.getElementById('version-number').innerText = tag;
-                document.getElementById('header-version-number').innerText = tag;
-            });
+                .then((res) => res.json())
+                .then((res) => {
+                    const [{ name: tag }] = res;
+                    document.getElementById("version-number").innerText = tag;
+                    document.getElementById("header-version-number").innerText = tag;
+                });
         </script>
     </body>
 </html>
