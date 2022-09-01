@@ -43,7 +43,7 @@ describe("RequestManager", () => {
                     return [401, { message: "invalid token" }];
                 }
             });
-        new AuthManager("testID", "testSecret");
+        new AuthManager({ clientID: "testID", clientSecret: "testSecret" });
 
         const { data } = await RequestManager.request(TEST_URL, { method: "POST", headers: {} });
         expect(requested).to.eq(true);
