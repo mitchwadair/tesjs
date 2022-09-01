@@ -15,7 +15,7 @@ The configuration object is required as an argument when creating the TESjs inst
 - `secret`: *string* - (Required) your app's client secret (make sure this is not in plaintext, use environment variables for this)
 - `onAuthenticationFailure`: *function* - (Optional) if you already have an authentication solution for your app elsewhere use this to avoid token conflicts
   - This function should return a Promise that resolves an app access token
-- `accessToken`: *string* (Optional) if you already have an app access token at the time of initing TESjs, you can pass it here
+- `accessToken`: *string* - (Optional) if you already have an app access token at the time of initing TESjs, you can pass it here
   - This should usually be paired with `onAuthenticationFailure`
 
 `listener`: (Required) Setting your notification listener details
