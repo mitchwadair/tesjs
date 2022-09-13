@@ -48,7 +48,7 @@ describe("whserver", () => {
 
     it("responds with 403 to request with signature mismatch", async () => {
         const out = await cmd(`twitch event trigger subscribe -F ${REDIRECT_URL} -s wrongsecret`);
-        expect(out).to.contain("Recieved Status Code: 403");
+        expect(out).to.contain("Received Status Code: 403");
         expect(out).to.contain("Request signature mismatch");
     });
 
