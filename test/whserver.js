@@ -101,7 +101,7 @@ describe("whserver", () => {
         const oldTimestamp = new Date(Date.now() - 601000).toISOString();
         const cb = sinon.spy();
         tes.on("channel.follow", cb);
-        sinon.assert.notCalled(cb);
         await cmd(`twitch event trigger channel.follow -F ${REDIRECT_URL} -s ${whSecret} --timestamp ${oldTimestamp}`);
+        sinon.assert.notCalled(cb);
     });
 });
