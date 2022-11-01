@@ -6,12 +6,8 @@ const { cmd } = require("./testUtil");
 const { expect } = require("chai");
 const AuthManager = require("../lib/auth");
 
-// example data taken from https://dev.twitch.tv/docs/eventsub examples
-
 const secret = "s3cRe7";
 const whSecret = "s3cRe7tW0o";
-const timestamp = new Date().toISOString();
-
 const REDIRECT_URL = "http://localhost:8080/teswh/event";
 
 describe("whserver", () => {
