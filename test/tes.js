@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const nock = require("nock");
 const TES = require("../main");
 const { buildObjectWithoutKey } = require("./testUtil");
 
@@ -7,32 +8,33 @@ describe("TES", () => {
         id: "test",
         secret: "t35t",
     };
-    const validListener = {
+    const validWebhookListener = {
+        type: "webhook",
         baseURL: "https://test.com",
         secret: "wh5ecr3t",
     };
     const configValid = {
         identity: validIdentity,
-        listener: validListener,
+        listener: validWebhookListener,
     };
 
     const configMissingIdentity = buildObjectWithoutKey(configValid, "identity");
     const configMissingListener = buildObjectWithoutKey(configValid, "listener");
     const configMissingId = {
         identity: buildObjectWithoutKey(validIdentity, "id"),
-        listener: validListener,
+        listener: validWebhookListener,
     };
     const configMissingIdentitySecret = {
         identity: buildObjectWithoutKey(validIdentity, "secret"),
-        listener: validListener,
+        listener: validWebhookListener,
     };
     const configMissingBaseURL = {
         identity: validIdentity,
-        listener: buildObjectWithoutKey(validListener, "baseURL"),
+        listener: buildObjectWithoutKey(validWebhookListener, "baseURL"),
     };
     const configMissingListenerSecret = {
         identity: validIdentity,
-        listener: buildObjectWithoutKey(validListener, "secret"),
+        listener: buildObjectWithoutKey(validWebhookListener, "secret"),
     };
 
     const tryInitTES = (config) => {
@@ -40,8 +42,16 @@ describe("TES", () => {
         return tes;
     };
 
+    before(() => {
+        nock("https://id.twitch.tv").persist().post("/oauth2/token").query(true).reply(200, { access_token: "token" });
+    });
+
     beforeEach(() => {
         TES._instance = null;
+    });
+
+    after(() => {
+        nock.cleanAll();
     });
 
     it("errors when 'identity' is missing in config", () => {

@@ -23,6 +23,7 @@ describe("whserver", () => {
                     secret: secret,
                 },
                 listener: {
+                    type: "webhook",
                     baseURL: "localhost",
                     secret: whSecret,
                 },
