@@ -25,7 +25,7 @@ npm install tesjs
 # Basic Usage
 Keep in mind that in order for your subscriptions to work, the url you are pointing to for the listener **MUST** use `HTTPS` and port `443`.  More information can be found in the Twitch documentation [here](https://dev.twitch.tv/docs/eventsub).  Their suggestion for testing locally is to use a product like [ngrok](https://ngrok.com/) to create an `HTTPS` endpoint to forward your local server (which is hosted on `HTTP`).
 ```js
-const TES = require('tesjs');
+const TES = require("tesjs");
 
 // initialize TESjs
 const tes = new TES({
@@ -34,40 +34,40 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
+        type: "webhook",
         baseURL: "https://example.com",
         secret: WEBHOOKS_SECRET,
     }
 });
 
-// define an event handler for the 'channel.update' event
+// define an event handler for the `channel.update` event
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', event => {
+tes.on("channel.update", (event) => {
     console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
 
-// create a new subscription for the 'channel.update' event for broadcaster '1337'
-tes.subscribe('channel.update', {
-    broadcaster_user_id: '1337'
-}).then(_ => {
-    console.log('Subscription successful');
-}).catch(err => {
-    console.log(err);
-});
+// create a new subscription for the `channel.update` event for broadcaster "1337"
+tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
+    .then(() => {
+        console.log("Subscription successful");
+    }).catch(err => {
+        console.log(err);
+    });
 ```
 
 # Use an Existing Express Server
 TESjs uses Express under the hood to host a webhooks endpoint.  If you already have a server running on Express that you want to use, you can pass it into the configuration object for TESjs.
 ```js
-const TES = require('tesjs');
-const express = require('express');
+const TES = require("tesjs");
+const express = require("express");
 
 // create our Express server
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('OK');
+app.get("/", (req, res) => {
+    res.send("OK");
 });
 
 app.listen(8080);
@@ -79,28 +79,28 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET //do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
+        type: "webhook",
         baseURL: "https://example.com",
         secret: WEBHOOKS_SECRET,
         server: app
     }
 });
 
-// define an event handler for the 'channel.update' event
+// define an event handler for the `channel.update` event
 // NOTES: 
 //   this handles ALL events of that type
 //   events will not be fired until there is a subscription made for them
-tes.on('channel.update', event => {
+tes.on("channel.update", (event) => {
     console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
 });
 
-// create a new subscription for the 'channel.update' event for broadcaster '1337'
-tes.subscribe('channel.update', {
-    broadcaster_user_id: '1337'
-}).then(_ => {
-    console.log('Subscription successful');
-}).catch(err => {
-    console.log(err);
-});
+// create a new subscription for the `channel.update` event for broadcaster "1337"
+tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
+    .then(() => {
+        console.log("Subscription successful");
+    }).catch(err => {
+        console.log(err);
+    });
 ```
 
 # Problems/Suggestions/Questions?
