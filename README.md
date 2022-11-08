@@ -64,44 +64,33 @@ tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
 # Browser
 TESjs supports WebSocket transport, and can be used in a browser environment
 ```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>TESjs for Browser</title>
-    </head>
-    <body>
-        Hello World!
+<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@<version-number>/dist/tes.min.js"></script>
+<script>
+    const config = {
+        identity: {
+            id: YOUR_CLIENT_ID,
+            accessToken: YOUR_USER_ACCESS_TOKEN,
+        },
+        listener: { type: "websocket" },
+    };
+    const tes = new TES(config);
 
-        <!-- Import TESjs using this script tag, it will be globally available as `TES` -->
-        <script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@<version-number>/dist/tes.min.js"></script>
-        <script>
-            const config = {
-                identity: {
-                    id: YOUR_CLIENT_ID,
-                    accessToken: YOUR_USER_ACCESS_TOKEN,
-                },
-                listener: { type: "websocket" },
-            };
-            const tes = new TES(config);
+    // define an event handler for the `channel.update` event
+    // NOTES: 
+    //   this handles ALL events of that type
+    //   events will not be fired until there is a subscription made for them
+    tes.on("channel.update", (event) => {
+        console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
+    });
 
-            // define an event handler for the `channel.update` event
-            // NOTES: 
-            //   this handles ALL events of that type
-            //   events will not be fired until there is a subscription made for them
-            tes.on("channel.update", (event) => {
-                console.log(`${event.broadcaster_user_name}'s new title is ${event.title}`);
-            });
-
-            // create a new subscription for the `channel.update` event for broadcaster "1337"
-            tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
-                .then(() => {
-                    console.log("Subscription successful");
-                }).catch(err => {
-                    console.log(err);
-                });
-        </script>
-    </body>
-</html>
+    // create a new subscription for the `channel.update` event for broadcaster "1337"
+    tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
+        .then(() => {
+            console.log("Subscription successful");
+        }).catch(err => {
+            console.log(err);
+        });
+</script>
 ```
 
 # Use an Existing Express Server
