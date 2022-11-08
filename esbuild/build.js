@@ -1,16 +1,16 @@
 const esbuild = require("esbuild");
 
-const excludeExternalsPlugin = {
-    name: "exclude-externals",
+const whserverExcludePlugin = {
+    name: "exclude-whserver",
     setup(build) {
-        build.onResolve({ filter: /whserver|node-fetch/ }, (args) => {
+        build.onResolve({ filter: /whserver/ }, (args) => {
             return {
                 path: args.path,
-                namespace: "exclude-externals",
+                namespace: "exclude-whserver",
             };
         });
 
-        build.onLoad({ filter: /.*/, namespace: "exclude-externals" }, () => ({ contents: "" }));
+        build.onLoad({ filter: /.*/, namespace: "exclude-whserver" }, () => ({ contents: "" }));
     },
 };
 
@@ -25,6 +25,6 @@ esbuild
         outdir: "dist",
         //keepNames: true,
         external: ["./node_modules/*", "./lib/whserver.js"],
-        plugins: [excludeExternalsPlugin],
+        plugins: [whserverExcludePlugin],
     })
     .catch(() => process.exit(1));
