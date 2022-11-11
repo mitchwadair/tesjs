@@ -4,6 +4,6 @@ require("./logger");
 require("./request");
 require("./auth");
 require("./tes");
-require("./wsclient"); // this MUST be before whserver tests for some reason???
 require("./whserver");
+require("./wsclient");
 require("./events");

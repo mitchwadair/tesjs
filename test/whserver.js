@@ -38,6 +38,10 @@ describe("whserver", () => {
         nock.cleanAll();
     });
 
+    after(() => {
+        tes._whserverlistener.close();
+    });
+
     it("responds with 401 to request without twitch message signature", (done) => {
         request(app).post("/teswh/event").send({}).expect(401, done);
     });
