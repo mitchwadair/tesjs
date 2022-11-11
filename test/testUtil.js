@@ -1,10 +1,8 @@
 const { exec } = require("child_process");
 
 const buildObjectWithoutKey = (obj, key) => {
-    const filteredEntries = Object.entries(obj).filter(([k]) => {
-        return k !== key;
-    });
-    return Object.fromEntries(filteredEntries);
+    const { [key]: _removed, ...rest } = obj;
+    return rest;
 };
 
 const cmd = (command) => {
