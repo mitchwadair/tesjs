@@ -2,6 +2,7 @@ const { spawn } = require("child_process");
 const sinon = require("sinon");
 const { expect } = require("chai");
 const WebSocketClient = require("../lib/wsclient");
+const EventManager = require("../lib/events");
 
 describe("wsclient", () => {
     let server;
@@ -21,6 +22,8 @@ describe("wsclient", () => {
         const messageSpy = sinon.spy(connection._events, "message");
         const closeSpy = sinon.spy(connection._events, "close");
         const addConnectionSpy = sinon.spy(client, "_addConnection");
+        const connectionLostSpy = sinon.spy(() => {});
+        EventManager.addListener("connection_lost", connectionLostSpy);
         setTimeout(() => {
             const messageTypes = ["session_welcome", "session_keepalive", "session_reconnect"];
             // `onmessage` should be called three times
@@ -38,6 +41,8 @@ describe("wsclient", () => {
             // when the new session is added and confirmed, the old one should be removed
             expect(sessionIDs).to.have.length(1);
             expect(firstSessionID).not.to.eq(sessionIDs[0]);
+            // the `connection_lost` event should not have fired
+            sinon.assert.notCalled(connectionLostSpy);
             done();
         }, 11500);
     }).timeout(12000);
