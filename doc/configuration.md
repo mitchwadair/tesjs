@@ -74,7 +74,7 @@ const tes = new TES(config);
 
 ```js
 // this script tag will be necessary if using TESjs in a browser:
-// <script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@<version-number>/dist/tes.min.js"></script>
+// <script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"></script>
 // otherwise, import as usual
 const TES = require("tesjs");
 
