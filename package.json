@@ -1,6 +1,6 @@
 {
   "name": "tesjs",
-  "version": "0.7.1",
+  "version": "1.0.0-beta.0",
   "description": "A module to streamline the use of Twitch EventSub in Node.js applications",
   "repository": {
     "type": "git",
