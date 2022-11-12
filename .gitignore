@@ -1,8 +1,5 @@
 # Dependency directories
 node_modules/
 
-# Builds
-dist
-
 # Test dirs
 test-browser
