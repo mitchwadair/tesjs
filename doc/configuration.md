@@ -80,8 +80,9 @@ const TES = require("tesjs");
 
 const config = {
   identity: {
-    id: "YOUR_CLIENT_ID",
-    accessToken: "YOUR_USER_ACCESS_TOKEN",
+    id: YOUR_CLIENT_ID,
+    accessToken: YOUR_USER_ACCESS_TOKEN,
+    refreshToken: YOUR_USER_REFRESH_TOKEN, // this is required if not in-browser
   },
   listener: {
     type: "websocket",
