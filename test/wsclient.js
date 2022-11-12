@@ -30,7 +30,7 @@ describe("wsclient", () => {
             expect(messageSpy.getCalls()).to.have.length(3);
             // the `message_type` for each should come in the order of the array above
             messageSpy.getCalls().forEach((call, index) => {
-                const messageType = JSON.parse(call.args[0].toString()).metadata?.message_type;
+                const messageType = JSON.parse(call.args[0].toString()).metadata.message_type;
                 expect(messageType).to.eq(messageTypes[index]);
             });
             // `onclose` should be called on the original connection
