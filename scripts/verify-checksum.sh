@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-git config --local core.autocrlf true
+git config core.autocrlf true
 
+echo $(git diff --name-only)
 CHANGED=$(git diff --name-only | grep "checksum")
 
 if [[ -n "$CHANGED" ]]; then
