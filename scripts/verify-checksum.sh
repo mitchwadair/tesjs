@@ -8,5 +8,6 @@ if [[ -n "$CHANGED" ]]; then
     echo "checksum changed from build, run 'npm run build' to commit new build"
     exit 1
 else
+    echo "checksums match, build is up to date"
     exit 0
 fi
