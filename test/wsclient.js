@@ -8,7 +8,7 @@ describe("wsclient", () => {
     let server;
     before((done) => {
         server = spawn("twitch", ["event", "start-websocket-server", "--reconnect", "11"]);
-        setTimeout(done, 500);
+        setTimeout(done, 1000);
     });
 
     after(() => {
