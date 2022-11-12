@@ -29,5 +29,4 @@ jobs:
       uses: Homebrew/actions/setup-homebrew@master
     - run: brew install twitchdev/twitch/twitch-cli
     - run: npm ci
-    - run: npm run build --if-present
     - run: npm test
