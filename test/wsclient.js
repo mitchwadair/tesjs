@@ -7,9 +7,9 @@ const EventManager = require("../lib/events");
 describe("wsclient", () => {
     let server;
     before(function (done) {
-        this.timeout(5000);
+        this.timeout(10000);
         server = spawn("twitch", ["event", "start-websocket-server", "--reconnect", "11"]);
-        setTimeout(done, 4500);
+        setTimeout(done, 9500);
     });
 
     after(() => {
