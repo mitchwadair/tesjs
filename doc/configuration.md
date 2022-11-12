@@ -57,13 +57,13 @@ const TES = require("tesjs");
 
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
     type: "webhook",
     baseURL: "https://example.com",
-    secret: process.env.WEBHOOKS_SECRET,
+    secret: YOUR_WEBHOOKS_SECRET,
   },
 };
 
@@ -100,13 +100,13 @@ const TES = require("tesjs");
 const config = {
   options: { debug: true },
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
     type: "webhook",
     baseURL: "https://example.com",
-    secret: process.env.WEBHOOKS_SECRET,
+    secret: YOUR_WEBHOOKS_SECRET,
     port: 8081,
   },
 };
@@ -129,13 +129,13 @@ app.listen(8080);
 
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
     type: "webhook",
     baseURL: "https://example.com",
-    secret: process.env.WEBHOOKS_SECRET,
+    secret: YOUR_WEBHOOKS_SECRET,
     server: app,
   },
 };

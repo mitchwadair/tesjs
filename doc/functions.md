@@ -22,12 +22,12 @@ const TES = require("tesjs");
 
 const tes = new TES({
     identity: {
-        id: process.env.CLIENT_ID,
-        secret: process.env.CLIENT_SECRET
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET
     },
     listener: {
         baseURL: "https://example.com",
-        secret: process.env.WEBHOOKS_SECRET,
+        secret: YOUR_WEBHOOKS_SECRET,
     }
 });
 ```
