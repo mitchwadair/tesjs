@@ -6,6 +6,8 @@ name: Publish to NPM
 on:
   release:
     types: [published]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   publish-npm:
@@ -16,14 +18,18 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - uses: Saionaro/extract-package-version@v1.1.1
       - run: npm ci
-      - if: "contains(steps.extract_version.outputs.version, 'beta')"
-        run: npm publish --tag beta
+      - name: Get Current Version
+        id: version
+        run: |
+          VERSION=$(cat package.json | jq '.version' | tr -d '"')
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      - if: "contains(steps.version.outputs.version, 'beta')"
+        run: echo "publishing beta version" && npm publish --tag beta --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-      - if: "!contains(steps.extract_version.outputs.version, 'beta')"
-        run: npm publish
+      - if: "!contains(steps.version.outputs.version, 'beta')"
+        run: echo "publishing release version" && npm publish --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         
