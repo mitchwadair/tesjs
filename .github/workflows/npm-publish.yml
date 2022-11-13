@@ -6,8 +6,6 @@ name: Publish to NPM
 on:
   release:
     types: [published]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   publish-npm:
@@ -25,11 +23,11 @@ jobs:
           VERSION=$(cat package.json | jq '.version' | tr -d '"')
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       - if: "contains(steps.version.outputs.version, 'beta')"
-        run: echo "publishing beta version" && npm publish --tag beta --dry-run
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - if: "!contains(steps.version.outputs.version, 'beta')"
-        run: echo "publishing release version" && npm publish --dry-run
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         
