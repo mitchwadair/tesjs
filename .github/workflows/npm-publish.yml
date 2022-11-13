@@ -16,13 +16,17 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - uses: Saionaro/extract-package-version@v1.1.1
       - run: npm ci
-      - if: "contains(steps.extract_version.outputs.version, 'beta')"
+      - name: Get Current Version
+        id: version
+        run: |
+          VERSION=$(cat package.json | jq '.version' | tr -d '"')
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      - if: "contains(steps.version.outputs.version, 'beta')"
         run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-      - if: "!contains(steps.extract_version.outputs.version, 'beta')"
+      - if: "!contains(steps.version.outputs.version, 'beta')"
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
