@@ -9,25 +9,26 @@ In TESjs you can integrate with an existing Express app.  Here you can learn abo
 ## The Basics
 At its most basic, TESjs has seamless integration with existing Express apps.  All you need is the app object to pass into TESjs.
 ```js
-const express = require('express');
-const TES = require('tesjs');
+const express = require("express");
+const TES = require("tesjs");
 
 // Creating the most basic Express app
 const app = express();
-app.get('/', (req, res) => {
-  res.send('OK')
+app.get("/", (req, res) => {
+  res.send("OK")
 });
 app.listen(8080);
 
 // TESjs configuration passing the Express app as the listener's server
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
-    baseURL: 'https://example.com',
-    secret: process.env.WEBHOOKS_SECRET,
+    type: "webhook",
+    baseURL: "https://example.com",
+    secret: YOUR_WEBHOOKS_SECRET,
     server: app,
   }
 }
@@ -39,27 +40,28 @@ const tes = new TES(config);
 ## Middleware Conflicts
 In some cases, especially in more complex Express apps, you may be using some middlewares that conflict with TESjs.  This will happen if you are using a middleware through the `app.use` method, but not if you are using the middleware on individual routes.  To mitigate this problem, TESjs includes a middleware that you can use to ignore TESjs in other middlewares.  This middleware is called `ignoreInMiddleware` and is included in the TES object.  Modifying your Express app to use this would make your app look like this:
 ```js
-const express = require('express');
-const myMiddleware = require('my-middleware'); //a fake middleware for example
-const TES = require('tesjs');
+const express = require("express");
+const myMiddleware = require("my-middleware"); //a fake middleware for example
+const TES = require("tesjs");
 
 // Create an Express app which uses the myMiddleware middleware
 const app = express()
 app.use(TES.ignoreInMiddleware(myMiddleware)); //pass the middleware you want to ignore TESjs to the TES.ignoreInMiddleware middleware
-app.get('/', (req, res) => {
-    res.send('OK');
+app.get("/", (req, res) => {
+  res.send("OK")
 });
 app.listen(8080);
 
 // TESjs configuration passing the Express app as the listener's server
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
-    baseURL: 'https://example.com',
-    secret: process.env.WEBHOOKS_SECRET,
+    type: "webhook",
+    baseURL: "https://example.com",
+    secret: YOUR_WEBHOOKS_SECRET,
     server: app,
   }
 }

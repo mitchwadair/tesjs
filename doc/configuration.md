@@ -1,97 +1,144 @@
 # Configuration of TESjs
-TESjs has a config object that gets passed in when instantiating the instance.  This will go over your configuration options.
+
+TESjs has a config object that gets passed in when instantiating the instance. This will go over your configuration options.
 
 ## The Config Object
-The configuration object is required as an argument when creating the TESjs instance.  It has three sub-objects for different configuration.
 
-`options`: (Optional) Your basic configuration options
-- `debug`: *boolean* - (Optional) set to true for more in-depth logging
+The configuration object is required as an argument when creating the TESjs instance. It has three sub-objects for different configuration.
+
+`options`: (Optional) your basic configuration options
+- `debug`: _boolean_ - (Optional) set to true for more in-depth logging
   - defaults to false
-- `logging`: *boolean* - (Optional) set to false for no logging. Takes precendence over debug
+- `logging`: _boolean_ - (Optional) set to false for no logging
+  - takes precendence over debug
   - defaults to true
 
-`identity`: (Required) Set up your client's identity
-- `id`: *string* - (Required) your app's client id
-- `secret`: *string* - (Required) your app's client secret (make sure this is not in plaintext, use environment variables for this)
-- `onAuthenticationFailure`: *function* - (Optional) if you already have an authentication solution for your app elsewhere use this to avoid token conflicts
-  - This function should return a Promise that resolves an app access token
-- `accessToken`: *string* - (Optional) if you already have an app access token at the time of initing TESjs, you can pass it here
-  - This should usually be paired with `onAuthenticationFailure`
+`identity`: (Required) set up your client's identity
+- `id`: _string_ - (Required) your app's client id
+- `secret`: _string_ - (Optional) your app's client secret (make sure this is not in plaintext, use environment variables for this)
+  - required for `webhook` transport
+  - required if not using `onAuthenticationFailure` for `websocket` transport in server-side applications
+- `onAuthenticationFailure`: _function_ - (Optional) if you already have an authentication solution for your app elsewhere use this to avoid token conflicts
+  - this function should return a Promise that resolves an access token
+- `accessToken`: _string_ - (Optional) if you already have an access token at the time of initing TESjs, you can pass it here
+  - must be a user access token for `websocket` transport
+  - must be an app access token for `webhook` transport
+  - this should usually be paired with `onAuthenticationFailure` on server-side applications
+- `refreshToken`: _string_ - (Optional) the refresh token to use if using `websocket` transport server-side
+  - required if not using `onAuthenticationFailure` for `websocket` transport in server-side applications
 
-`listener`: (Required) Setting your notification listener details
-- `baseURL`: *string* - (Required) the url where your endpoint is hosted
+`listener`: (Required) setting your notification listener details
+- `type`: _string_ - (Required) the type of transport to use
+  - can be either `webhook` or `websocket`
+- `baseURL`: _string_ - (Optional) the url where your endpoint is hosted
   - See [Twitch doc](https://dev.twitch.tv/docs/eventsub) for details on local development
-- `secret`: *string* - (Required) the secret to use for your webhooks subscriptions (make sure this is not in plaintext, use environment variables for this)
-- `port`: *number* - (Optional) the port to listen at.
+  - required for `webhook` transport
+- `secret`: _string_ - (Optional) the secret to use for your webhooks subscriptions (make sure this is not in plaintext, use environment variables for this)
+  - required for `webhook` transport
+  - this should be different from your client secret
+- `port`: _number_ - (Optional) the port to listen at.
   - defaults to process.env.PORT or 8080
-  - Keep in mind, this is the port of the Express http server, not your https endpoint (served at `baseURL`) which should have port 443
-- `server`: *Express App* - (Optional) your express app object
-  - Used if integrating TESjs with an existing Express app
-- `ignoreDuplicateMessages`: *boolean* - (Optional) ignore messages with ids that have already been seen
+  - keep in mind, this is the port of the Express http server, not your https endpoint (served at `baseURL`) which should have port 443
+- `server`: _Express App_ - (Optional) your express app object
+  - used if integrating TESjs with an existing Express app
+- `ignoreDuplicateMessages`: _boolean_ - (Optional) ignore messages with ids that have already been seen
   - defaults to true
-- `ignoreOldMessages`: *boolean* - (Optional) ignore messages with timestamps older than 10 minutes
+  - only used for `webhook` transport
+- `ignoreOldMessages`: _boolean_ - (Optional) ignore messages with timestamps older than 10 minutes
   - defaults to true
+  - only used for `webhook` transport
 
 ## Examples
-### Barebones
+
+### Simple Webhooks Transport
+
 ```js
-const TES = require('tesjs');
+const TES = require("tesjs");
 
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
-    baseURL: 'https://example.com',
-    secret: process.env.WEBHOOKS_SECRET,
-  }
-}
+    type: "webhook",
+    baseURL: "https://example.com",
+    secret: YOUR_WEBHOOKS_SECRET,
+  },
+};
 
 const tes = new TES(config);
 ```
-### With Debug and Custom Port
+
+### Simple WebSockets Transport
+
 ```js
-const TES = require('tesjs');
+// this script tag will be necessary if using TESjs in a browser:
+// <script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"></script>
+// otherwise, import as usual
+const TES = require("tesjs");
+
+const config = {
+  identity: {
+    id: YOUR_CLIENT_ID,
+    accessToken: YOUR_USER_ACCESS_TOKEN,
+    refreshToken: YOUR_USER_REFRESH_TOKEN, // this is required if not in-browser
+  },
+  listener: {
+    type: "websocket",
+  },
+};
+
+const tes = new TES(config);
+```
+
+### With Debug and Custom Port
+
+```js
+const TES = require("tesjs");
 
 const config = {
   options: { debug: true },
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
-    baseURL: 'https://example.com',
-    secret: process.env.WEBHOOKS_SECRET,
+    type: "webhook",
+    baseURL: "https://example.com",
+    secret: YOUR_WEBHOOKS_SECRET,
     port: 8081,
-  }
-}
+  },
+};
 
 const tes = new TES(config);
 ```
+
 ### With Existing Express Server
+
 ```js
-const TES = require('tesjs');
-const express = require('express');
+const TES = require("tesjs");
+const express = require("express");
 
 // basic express app for example
 const app = express();
-app.get('/', (req, res) => {
-  res.send('OK')
+app.get("/", (req, res) => {
+    res.send("OK");
 });
 app.listen(8080);
 
 const config = {
   identity: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: YOUR_CLIENT_ID,
+    secret: YOUR_CLIENT_SECRET,
   },
   listener: {
-    baseURL: 'https://example.com',
-    secret: process.env.WEBHOOKS_SECRET,
+    type: "webhook",
+    baseURL: "https://example.com",
+    secret: YOUR_WEBHOOKS_SECRET,
     server: app,
-  }
-}
+  },
+};
 
 const tes = new TES(config);
 ```

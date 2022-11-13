@@ -5,4 +5,5 @@ require("./request");
 require("./auth");
 require("./tes");
 require("./whserver");
+require("./wsclient");
 require("./events");

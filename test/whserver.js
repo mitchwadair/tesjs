@@ -23,6 +23,7 @@ describe("whserver", () => {
                     secret: secret,
                 },
                 listener: {
+                    type: "webhook",
                     baseURL: "localhost",
                     secret: whSecret,
                 },
@@ -35,6 +36,10 @@ describe("whserver", () => {
 
     afterEach(() => {
         nock.cleanAll();
+    });
+
+    after(() => {
+        tes._whserverlistener.close();
     });
 
     it("responds with 401 to request without twitch message signature", (done) => {

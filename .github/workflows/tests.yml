@@ -11,17 +11,16 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12, 14, 16]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Homebrew
@@ -29,5 +28,16 @@ jobs:
       uses: Homebrew/actions/setup-homebrew@master
     - run: brew install twitchdev/twitch/twitch-cli
     - run: npm ci
-    - run: npm run build --if-present
     - run: npm test
+
+  build-check: 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - run: npm ci
+    - run: npm run build
+    - run: bash scripts/verify-checksum.sh
