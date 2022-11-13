@@ -6,8 +6,6 @@ name: Publish to NPM
 on:
   release:
     types: [published]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   publish-npm:
