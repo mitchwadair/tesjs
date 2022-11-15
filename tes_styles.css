@@ -4,6 +4,7 @@
     --bg-primary: #1a1423;
     --bg-grey-dark: #31303f;
     --bg-grey-light: #363546;
+    --bg-light: #d2cedf;
     --bg-secondary: #372549;
     --primary: #615585;
     --primary-hover: #6c5f95;
@@ -11,7 +12,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 300;
     margin: 0;
     background-color: var(--bg-primary);
@@ -19,7 +20,8 @@ body {
     height: 100vh;
 }
 
-header,footer {
+header,
+footer {
     background-color: var(--bg-secondary);
     height: 3rem;
     width: 100%;
@@ -31,6 +33,10 @@ pre {
 
 a {
     color: var(--font-color-primary);
+}
+
+a.link-dark {
+    color: var(--secondary);
 }
 
 a:not(.button-link):not(.button-icon):hover {
@@ -47,9 +53,9 @@ a:not(.button-link):not(.button-icon):hover {
     text-decoration: none;
     background-color: var(--primary);
     font-size: 1.25rem;
-    padding: .5rem .75rem;
-    margin: .25rem .5rem;
-    border-radius: .25rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
 }
 
 .button-link:hover {
@@ -64,7 +70,7 @@ a:not(.button-link):not(.button-icon):hover {
     line-height: 2.5rem;
     width: 2.5rem;
     height: 2.5rem;
-    margin: .25rem .5rem;
+    margin: 0.25rem 0.5rem;
     border-radius: 50%;
 }
 
@@ -73,7 +79,7 @@ a:not(.button-link):not(.button-icon):hover {
 }
 
 .button-icon::before {
-    margin-left: .0625rem;
+    margin-left: 0.0625rem;
 }
 
 .header-container {
@@ -181,7 +187,7 @@ a:not(.button-link):not(.button-icon):hover {
 
 .tes-examples section pre code::-webkit-scrollbar {
     background: transparent;
-    height: .5rem;
+    height: 0.25rem;
 }
 .tes-examples section pre code::-webkit-scrollbar-thumb {
     background-color: var(--primary);
@@ -195,7 +201,7 @@ a:not(.button-link):not(.button-icon):hover {
     padding: 1rem;
     max-width: 50%;
     width: 100%;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 .tes-tile > h2 {
@@ -214,14 +220,14 @@ a:not(.button-link):not(.button-icon):hover {
 }
 
 .tes-code {
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     max-width: 57rem;
 }
 
 .tes-support-img {
     height: 4rem;
-    margin: 0 .5rem;
-    padding: .75rem;
+    margin: 0 0.5rem;
+    padding: 0.75rem;
     border-radius: 50%;
 }
 
@@ -229,13 +235,24 @@ a:not(.button-link):not(.button-icon):hover {
     background-color: var(--bg-grey-light);
 }
 
+.announcement {
+    position: relative;
+    margin: 0 2rem 1rem 2rem;
+    padding: 0.5rem 1rem 0.5rem 4rem;
+
+    border: 2px solid var(--primary);
+    border-radius: 0.5rem;
+    background-color: var(--bg-light);
+    color: var(--primary);
+}
+
 .version-alert {
     position: relative;
     margin: 0 2rem 1rem 2rem;
-    padding: .5rem 1rem .5rem 4rem;
+    padding: 0.5rem 1rem 0.5rem 4rem;
 
     border: 2px solid #dd0000;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     background-color: #fcd4d5;
     color: #dd0000;
 }
@@ -248,13 +265,13 @@ a:not(.button-link):not(.button-icon):hover {
     font-size: 2em;
 }
 
-.alert-title {
+.title {
     font-size: 125%;
     font-weight: bold;
 }
 
 .alert-text {
-    margin: .5rem 0;
+    margin: 0.5rem 0;
 }
 
 .alert-text > a {

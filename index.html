@@ -137,23 +137,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="version-alert">
-                    <div class="mdi mdi-alert-outline alert-icon"></div>
-                    <div class="alert-title">Warning</div>
-                    <div class="alert-text">
-                        If you are using a version of TESjs lower than v0.5.0 it is <i>HIGHLY</i> recommended that you
-                        upgrade to at least v0.5.0
-                    </div>
-                    <div class="alert-text">
-                        For more information on this, please see
-                        <a
-                            href="https://github.com/mitchwadair/tesjs/issues/34"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="Version Issue"
-                            >this issue</a
+                <div class="announcement">
+                    <div class="mdi mdi-alert-circle-outline alert-icon"></div>
+                    <div class="title">WebSockets are here!</div>
+                    <p>
+                        With WebSocket transport now in open beta, TESjs also supports WebSocket transport. To give it a
+                        try, you can install any version <i>v1.0.0-beta.0</i> or later
+                    </p>
+                    <p>
+                        Be sure to check out the
+                        <a href="https://github.com/mitchwadair/tesjs/tree/main/doc" class="link-dark"
+                            >updated documentation</a
                         >
-                    </div>
+                        on how to use WebSockets with TESjs!
+                    </p>
                 </div>
                 <div class="tes-blurb" style="border-top: 1px solid var(--bg-primary)">
                     <div class="tes-tile">
@@ -197,6 +194,8 @@
                             <h1>Install</h1>
                         </a>
                         <pre><code class='sh tes-code'>npm install tesjs</code></pre>
+                        <p>or, in-browser</p>
+                        <pre><code class='html tes-code'>&lt;script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"&gt;&lt;/script&gt;</code></pre>
                     </section>
                     <section>
                         <span id="init-tes"></span>
@@ -214,10 +213,28 @@ const tes = new TES({
         secret: YOUR_CLIENT_SECRET // do not ship this in plaintext!! use environment variables so this does not get exposed
     },
     listener: {
+        type: "webhook",
         baseURL: "https://example.com", // this MUST be an HTTPS endpoint on port 443
         secret: WEBHOOKS_SECRET // this should be different from your client secret and should also be using an environment variable
     }
 });
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class='html tes-code'>
+&lt;script&gt;
+// TES is available globally as `TES` when importing from CDN in-browser
+// initialize TESjs
+const tes = new TES({
+    identity: {
+        id: YOUR_CLIENT_ID,
+        authToken: YOUR_USER_ACCESS_TOKEN,
+    },
+    listener: {
+        type: "websocket",
+    }
+});
+&lt;/script&gt;
                             </code>
                         </pre>
                     </section>
@@ -299,6 +316,7 @@ const tes = new TES({
         accessToken: EXISTING_ACCESS_TOKEN, // if you already have an app access token, put it here to avoid an unnecessary token refresh
     },
     listener: {
+        type: "webhook",
         baseURL: "https://example.com", // this MUST be an HTTPS endpoint on port 443
         secret: WEBHOOKS_SECRET // this should be different from your client secret and should also be using an environment variable
     }
@@ -385,7 +403,13 @@ const tes = new TES({
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    const [{ name: tag }] = res;
+                    let tag;
+                    for ({ name } of res) {
+                        if (!name.includes("beta")) {
+                            tag = name;
+                            break;
+                        }
+                    }
                     document.getElementById("version-number").innerText = tag;
                     document.getElementById("header-version-number").innerText = tag;
                 });
