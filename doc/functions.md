@@ -127,7 +127,7 @@ getAll(() => console.log(subsArray));
 Subscribe to an EventSub topic
 ```js
 const condition = { broadcaster_user_id: "1337" };
-tes.subscribe("channel.update", condition);
+tes.subscribe("channel.update", condition); // optionally, a third `version` arg can be passed, which defaults to "1"
 ```
 Optionally, you can do something once the subscription has been made, and catch any errors.  The subscription promise will resolve after the handshake with Twitch is complete.  If the handshake times out for whatever reason, the promise will reject with the subscriptionID for any needed cleanup.
 ```js
