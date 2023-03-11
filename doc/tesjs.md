@@ -31,6 +31,7 @@
     * [.getSubscriptionsByStatus(status, [cursor])](#TES+getSubscriptionsByStatus) ⇒ <code>Promise</code>
     * [.getSubscription(idOrType, [condition])](#TES+getSubscription) ⇒ <code>Promise</code>
     * [.subscribe(type, condition, [version])](#TES+subscribe) ⇒ <code>Promise</code>
+    * [.unsubscribe(idOrType, [condition])](#TES+unsubscribe) ⇒ <code>Promise</code>
 
 
 * * *
@@ -117,16 +118,16 @@ Get subscription data for an individual subscription. Search either by id or by 
 | [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
 
 **Example**  
-```js// find a subscription by idconst sub = await getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+```js// find a subscription by idconst sub = await tes.getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 **Example**  
-```js// find a subscription by type and conditionconst condition = { broadcaster_user_id: "1337" };const sub = await getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+```js// find a subscription by type and conditionconst condition = { broadcaster_user_id: "1337" };const sub = await tes.getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 
 * * *
 
 <a name="TES+subscribe"></a>
 
 ### tes.subscribe(type, condition, [version]) ⇒ <code>Promise</code>
-Subscribe to an event topic
+Subscribe to an event
 
 **Kind**: instance method of [<code>TES</code>](#TES)  
 **Returns**: <code>Promise</code> - A Promise that resolves when subscribing is complete with the subscription data  
@@ -139,6 +140,28 @@ Subscribe to an event topic
 
 **Example**  
 ```jsconst condition = { broadcaster_user_id: "1337" };const sub = tes.subscribe("channel.update", condition);console.log(`Created subscription to ${sub.type}, subscription id ${sub.id}`);```
+
+* * *
+
+<a name="TES+unsubscribe"></a>
+
+### tes.unsubscribe(idOrType, [condition]) ⇒ <code>Promise</code>
+Unsubscribe from an event. Unsubscribe either by id, or by type and condition
+
+**Kind**: instance method of [<code>TES</code>](#TES)  
+**Returns**: <code>Promise</code> - Resolves when unsubscribed  
+**Signature**: `unsubscribe(id)`  
+**Signature**: `unsubscribe(type, condition)`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| idOrType | <code>string</code> | The subscription id or [type](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) |
+| [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
+
+**Example**  
+```js// unsubscribe by idawait tes.unsubscribe("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log("Successfully unsubscribed");```
+**Example**  
+```js// unsubscribe by type and conditionconst condition = { broadcaster_user_id: "1337" };await tes.unsubscribe("channel.update", condition);console.log("Successfully unsubscribed");```
 
 * * *
 
