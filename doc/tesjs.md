@@ -45,7 +45,9 @@
 | config | [<code>TESConfig</code>](#TESConfig) | The TES configuration |
 
 **Example**  
-```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN    }    listener: { type: "websocket" },};const tes = new TES(config);```
+```js// minimum `websocket` configconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN,    }    listener: { type: "websocket" },};const tes = new TES(config);```
+**Example**  
+```js// minimum `webhook` configconst config = {    identity: {        id: YOUR_CLIENT_ID,        secret: YOUR_CLIENT_SECRET,    },    listener: {        type: "webhook",        baseURL: "https://example.com",        secret: YOUR_WEBHOOKS_SECRET,    },};const tes = new TES(config);```
 
 * * *
 
