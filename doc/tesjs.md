@@ -16,8 +16,6 @@
 <dd></dd>
 <dt><a href="#TESConfigListener">TESConfigListener</a></dt>
 <dd></dd>
-<dt><a href="#onAuthenticationFailure">onAuthenticationFailure</a> ⇒ <code>Promise</code></dt>
-<dd></dd>
 </dl>
 
 <a name="TES"></a>
@@ -67,10 +65,17 @@ TESjs
 | --- | --- | --- |
 | id | <code>string</code> | Your client ID |
 | [secret] | <code>string</code> | Your client secret, required for webhook transport or     when not using `onAuthenticationFailure` in server-side `websocket` applications |
-| [onAuthenticationFailure] | [<code>onAuthenticationFailure</code>](#onAuthenticationFailure) | If you already have an     authentication solution for your app elsewhere use this to avoid token conflicts |
+| [onAuthenticationFailure] | [<code>onAuthenticationFailure</code>](#TESConfigIdentity..onAuthenticationFailure) | Callback function called     when API requests get an auth failure. If you already have an authentication solution for your app     elsewhere use this to avoid token conflicts |
 | [accessToken] | <code>string</code> | If you already have an access token, put it here. Must     be user access token for `websocket` transport, must be app access token for `webhook` transport.  Should     usually be paired with `onAuthenticationFailure` on server-side applications |
 | [refreshToken] | <code>string</code> | The refresh token to use if using `websocket` transport     server-side. Required when not using `onAuthenticationFailure` in server-side `websocket` applications |
 
+<a name="TESConfigIdentity..onAuthenticationFailure"></a>
+
+### TESConfigIdentity~onAuthenticationFailure ⇒ <code>Promise</code>
+**Kind**: inner typedef of [<code>TESConfigIdentity</code>](#TESConfigIdentity)  
+**Returns**: <code>Promise</code> - Promise that resolves a new access token  
+**Example**  
+```jsasync function onAuthenticationFailure() {    const res = await getNewAccessToken(); // your token refresh logic    return res.access_token;}```
 <a name="TESConfigListener"></a>
 
 ## TESConfigListener
@@ -85,10 +90,3 @@ TESjs
 | [ignoreDuplicateMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with IDs that have already     been seen. Only used in `webhook` transport |
 | [ignoreOldMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with timestamps older than ten     minutes. Only used in `webhook` transport |
 
-<a name="onAuthenticationFailure"></a>
-
-## onAuthenticationFailure ⇒ <code>Promise</code>
-**Kind**: global typedef  
-**Returns**: <code>Promise</code> - Promise that resolves a new access token  
-**Example**  
-```jsasync function onAuthenticationFailure() {    const res = await getNewAccessToken(); // your token refresh logic    return res.access_token;}```
