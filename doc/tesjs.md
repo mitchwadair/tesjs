@@ -231,6 +231,7 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 | [baseURL] | <code>string</code> |  | Required for `webhook` transport. The base URL where your app is     hosted. See [Twitch doc](https://dev.twitch.tv/docs/eventsub) for details on local development |
 | [secret] | <code>string</code> |  | Required for `webhook` transport. The secret to use for your `webhook`     subscriptions. Should be different from your client secret |
 | [server] | <code>Express</code> |  | The Express app object. Use if integrating with an existing Express app |
+| [port] | <code>number</code> | <code>process.env.PORT,8080</code> | A custom port to use |
 | [ignoreDuplicateMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with IDs that have already     been seen. Only used in `webhook` transport |
 | [ignoreOldMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with timestamps older than ten     minutes. Only used in `webhook` transport |
 
