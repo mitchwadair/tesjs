@@ -29,6 +29,7 @@
     * [.getSubscriptions([cursor])](#TES+getSubscriptions) ⇒ <code>Promise</code>
     * [.getSubscriptionsByType(type, [cursor])](#TES+getSubscriptionsByType) ⇒ <code>Promise</code>
     * [.getSubscriptionsByStatus(status, [cursor])](#TES+getSubscriptionsByStatus) ⇒ <code>Promise</code>
+    * [.getSubscription(idOrType, [condition])](#TES+getSubscription) ⇒ <code>Promise</code>
 
 
 * * *
@@ -42,7 +43,7 @@
 | config | [<code>TESConfig</code>](#TESConfig) | The TES configuration |
 
 **Example**  
-```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN    }    listener: { type: "websocket" },}const tes = new TES(config)```
+```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN    }    listener: { type: "websocket" },};const tes = new TES(config);```
 
 * * *
 
@@ -59,7 +60,7 @@ Get a list of your event subscriptions
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptions();console.log(`I have ${subs.total} event subscriptions`)```
+```jsconst subs = await tes.getSubscriptions();console.log(`I have ${subs.total} event subscriptions`);```
 
 * * *
 
@@ -77,7 +78,7 @@ Get a list of your event subscriptions by type
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`)```
+```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`);```
 
 * * *
 
@@ -95,7 +96,29 @@ Get a list of your event subscriptions by status
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`)```
+```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`);```
+
+* * *
+
+<a name="TES+getSubscription"></a>
+
+### tes.getSubscription(idOrType, [condition]) ⇒ <code>Promise</code>
+Get subscription data for an individual subscription. Search either by id or by type and condition
+
+**Kind**: instance method of [<code>TES</code>](#TES)  
+**Returns**: <code>Promise</code> - The subscription data  
+**Signature**: `getSubscription(id)`  
+**Signature**: `getSubscription(type, condition)`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| idOrType | <code>string</code> | The subscription id or [type](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) |
+| [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
+
+**Example**  
+```js// find a subscription by idconst sub = await getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+**Example**  
+```js// find a subscription by type and conditionconst condition = { broadcaster_user_id: "1337" };const sub = await getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 
 * * *
 
