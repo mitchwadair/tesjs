@@ -54,7 +54,7 @@
 Get a list of your event subscriptions
 
 **Kind**: instance method of [<code>TES</code>](#TES)  
-**Returns**: <code>Promise</code> - Subscription data see [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
+**Returns**: <code>Promise</code> - Subscription data. See [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -71,11 +71,11 @@ Get a list of your event subscriptions
 Get a list of your event subscriptions by type
 
 **Kind**: instance method of [<code>TES</code>](#TES)  
-**Returns**: <code>Promise</code> - Subscription data see [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
+**Returns**: <code>Promise</code> - Subscription data. See [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>string</code> | The type of subscription see [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
+| type | <code>string</code> | The type of subscription. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
@@ -89,11 +89,11 @@ Get a list of your event subscriptions by type
 Get a list of your event subscriptions by status
 
 **Kind**: instance method of [<code>TES</code>](#TES)  
-**Returns**: <code>Promise</code> - Subscription data see [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
+**Returns**: <code>Promise</code> - Subscription data. See [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| status | <code>string</code> | The subscription status see [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details |
+| status | <code>string</code> | The subscription status. See [Twitch doc](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions) for details |
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
