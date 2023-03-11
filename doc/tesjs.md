@@ -1,23 +1,3 @@
-## Classes
-
-<dl>
-<dt><a href="#TES">TES</a></dt>
-<dd></dd>
-</dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#TESConfig">TESConfig</a></dt>
-<dd></dd>
-<dt><a href="#TESConfigOptions">TESConfigOptions</a></dt>
-<dd></dd>
-<dt><a href="#TESConfigIdentity">TESConfigIdentity</a></dt>
-<dd></dd>
-<dt><a href="#TESConfigListener">TESConfigListener</a></dt>
-<dd></dd>
-</dl>
-
 <a name="TES"></a>
 
 ## TES
@@ -26,12 +6,21 @@
 
 * [TES](#TES)
     * [new TES(config)](#new_TES_new)
-    * [.getSubscriptions([cursor])](#TES+getSubscriptions) ⇒ <code>Promise</code>
-    * [.getSubscriptionsByType(type, [cursor])](#TES+getSubscriptionsByType) ⇒ <code>Promise</code>
-    * [.getSubscriptionsByStatus(status, [cursor])](#TES+getSubscriptionsByStatus) ⇒ <code>Promise</code>
-    * [.getSubscription(idOrType, [condition])](#TES+getSubscription) ⇒ <code>Promise</code>
-    * [.subscribe(type, condition, [version])](#TES+subscribe) ⇒ <code>Promise</code>
-    * [.unsubscribe(idOrType, [condition])](#TES+unsubscribe) ⇒ <code>Promise</code>
+    * _instance_
+        * [.getSubscriptions([cursor])](#TES+getSubscriptions) ⇒ <code>Promise</code>
+        * [.getSubscriptionsByType(type, [cursor])](#TES+getSubscriptionsByType) ⇒ <code>Promise</code>
+        * [.getSubscriptionsByStatus(status, [cursor])](#TES+getSubscriptionsByStatus) ⇒ <code>Promise</code>
+        * [.getSubscription(idOrType, [condition])](#TES+getSubscription) ⇒ <code>Promise</code>
+        * [.subscribe(type, condition, [version])](#TES+subscribe) ⇒ <code>Promise</code>
+        * [.unsubscribe(idOrType, [condition])](#TES+unsubscribe) ⇒ <code>Promise</code>
+        * [.on(type, callback)](#TES+on) ⇒ <code>void</code>
+    * _inner_
+        * [~Config](#TES..Config) : <code>Object</code>
+            * [~Options](#TES..Config..Options) : <code>Object</code>
+            * [~Identity](#TES..Config..Identity) : <code>Object</code>
+                * [~onAuthenticationFailure](#TES..Config..Identity..onAuthenticationFailure) ⇒ <code>Promise</code>
+            * [~Listener](#TES..Config..Listener) : <code>Object</code>
+        * [~onEventCallback](#TES..onEventCallback) ⇒ <code>void</code>
 
 
 * * *
@@ -39,10 +28,11 @@
 <a name="new_TES_new"></a>
 
 ### new TES(config)
+**Returns**: [<code>TES</code>](#TES) - The TESjs instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | [<code>TESConfig</code>](#TESConfig) | The TES configuration |
+| config | [<code>Config</code>](#TES..Config) | The TES configuration |
 
 **Example**  
 ```js// minimum `websocket` configconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN,    }    listener: { type: "websocket" },};const tes = new TES(config);```
@@ -167,24 +157,48 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 
 * * *
 
-<a name="TESConfig"></a>
+<a name="TES+on"></a>
 
-## TESConfig
-**Kind**: global typedef  
+### tes.on(type, callback) ⇒ <code>void</code>
+Add an event handler. This will handle ALL events of the type
+
+**Kind**: instance method of [<code>TES</code>](#TES)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [options] | [<code>TESConfigOptions</code>](#TESConfigOptions) | Basic configuration options |
-| identity | [<code>TESConfigIdentity</code>](#TESConfigIdentity) | Identity information |
-| listener | [<code>TESConfigListener</code>](#TESConfigListener) | Your notification listener details |
+| type | <code>string</code> | The subscription type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
+| callback | [<code>onEventCallback</code>](#TES..onEventCallback) | The function to call when the event happens |
 
 
 * * *
 
-<a name="TESConfigOptions"></a>
+<a name="TES..Config"></a>
 
-## TESConfigOptions
-**Kind**: global typedef  
+### TES~Config : <code>Object</code>
+**Kind**: inner typedef of [<code>TES</code>](#TES)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | [<code>Options</code>](#TES..Config..Options) | Basic configuration options |
+| identity | [<code>Identity</code>](#TES..Config..Identity) | Identity information |
+| listener | [<code>Listener</code>](#TES..Config..Listener) | Your notification listener details |
+
+
+* [~Config](#TES..Config) : <code>Object</code>
+    * [~Options](#TES..Config..Options) : <code>Object</code>
+    * [~Identity](#TES..Config..Identity) : <code>Object</code>
+        * [~onAuthenticationFailure](#TES..Config..Identity..onAuthenticationFailure) ⇒ <code>Promise</code>
+    * [~Listener](#TES..Config..Listener) : <code>Object</code>
+
+
+* * *
+
+<a name="TES..Config..Options"></a>
+
+#### Config~Options : <code>Object</code>
+Basic configuration options
+
+**Kind**: inner typedef of [<code>Config</code>](#TES..Config)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -194,36 +208,42 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 
 * * *
 
-<a name="TESConfigIdentity"></a>
+<a name="TES..Config..Identity"></a>
 
-## TESConfigIdentity
-**Kind**: global typedef  
+#### Config~Identity : <code>Object</code>
+Identity configuration
+
+**Kind**: inner typedef of [<code>Config</code>](#TES..Config)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>string</code> | Your client ID |
 | [secret] | <code>string</code> | Your client secret, required for webhook transport or     when not using `onAuthenticationFailure` in server-side `websocket` applications |
-| [onAuthenticationFailure] | [<code>onAuthenticationFailure</code>](#TESConfigIdentity..onAuthenticationFailure) | Callback function called     when API requests get an auth failure. If you already have an authentication solution for your app     elsewhere use this to avoid token conflicts |
+| [onAuthenticationFailure] | [<code>onAuthenticationFailure</code>](#TES..Config..Identity..onAuthenticationFailure) | Callback function called     when API requests get an auth failure. If you already have an authentication solution for your app     elsewhere use this to avoid token conflicts |
 | [accessToken] | <code>string</code> | If you already have an access token, put it here. Must     be user access token for `websocket` transport, must be app access token for `webhook` transport.  Should     usually be paired with `onAuthenticationFailure` on server-side applications |
 | [refreshToken] | <code>string</code> | The refresh token to use if using `websocket` transport     server-side. Required when not using `onAuthenticationFailure` in server-side `websocket` applications |
 
 
 * * *
 
-<a name="TESConfigIdentity..onAuthenticationFailure"></a>
+<a name="TES..Config..Identity..onAuthenticationFailure"></a>
 
-### TESConfigIdentity~onAuthenticationFailure ⇒ <code>Promise</code>
-**Kind**: inner typedef of [<code>TESConfigIdentity</code>](#TESConfigIdentity)  
+##### Identity~onAuthenticationFailure ⇒ <code>Promise</code>
+Callback function called when API requests get an auth failure. If you already have an authentication solutionfor your app elsewhere use this to avoid token conflicts
+
+**Kind**: inner typedef of [<code>Identity</code>](#TES..Config..Identity)  
 **Returns**: <code>Promise</code> - Promise that resolves a new access token  
 **Example**  
 ```jsasync function onAuthenticationFailure() {    const res = await getNewAccessToken(); // your token refresh logic    return res.access_token;}```
 
 * * *
 
-<a name="TESConfigListener"></a>
+<a name="TES..Config..Listener"></a>
 
-## TESConfigListener
-**Kind**: global typedef  
+#### Config~Listener : <code>Object</code>
+Listener configuration
+
+**Kind**: inner typedef of [<code>Config</code>](#TES..Config)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -234,6 +254,21 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 | [port] | <code>number</code> | <code>process.env.PORT,8080</code> | A custom port to use |
 | [ignoreDuplicateMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with IDs that have already     been seen. Only used in `webhook` transport |
 | [ignoreOldMessages] | <code>boolean</code> | <code>true</code> | Ignore event messages with timestamps older than ten     minutes. Only used in `webhook` transport |
+
+
+* * *
+
+<a name="TES..onEventCallback"></a>
+
+### TES~onEventCallback ⇒ <code>void</code>
+Called when an event TES is listening for is triggered
+
+**Kind**: inner typedef of [<code>TES</code>](#TES)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [event] | <code>Object</code> | The event data. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#events) for details |
+| [subscription] | <code>Object</code> | The subscription data corresponding to the event. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#subscription) for details |
 
 
 * * *
