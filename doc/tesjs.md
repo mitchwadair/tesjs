@@ -166,9 +166,15 @@ Add an event handler. This will handle ALL events of the type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>string</code> | The subscription type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
+| type | <code>string</code> \| <code>&quot;revocation&quot;</code> \| <code>&quot;connection\_lost&quot;</code> | The subscription type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details.     See the examples for details on `revocation` and `connection_lost` |
 | callback | [<code>onEventCallback</code>](#TES..onEventCallback) | The function to call when the event happens |
 
+**Example**  
+```jstes.on("channel.update", (event, subscription) => {    console.log(`Event triggered for subscription ${subscription.id}`);    console.log(`${event.broadcaster_user_id}'s title is now "${event.title}"`);});```
+**Example**  
+```js// The `revocation` event is fired when Twitch revokes a subscription. This can happen// for various reasons according to Twitch (https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#revoking-your-subscription)// NOTE: No explicit subscription is needed for this event// The "event" argument is the subscription data. This means that for this, the first and second arguments are identicaltes.on("revocation", (subscriptionData) => {    console.log(`Subscription ${subscriptionData.id} has been revoked`);    // perform necessary cleanup here});```
+**Example**  
+```js// The `connection_lost` event is fired when a WebSocket connection is lost. All related// subscriptions should be considered stale if this happens. You can read more about this case// in the Twitch doc (https://dev.twitch.tv/docs/eventsub/handling-websocket-events/#keepalive-message)// NOTE: No explicit subscription is needed for this event to be fired// The "event" argument is an Object which has subscription ids as keys and type and condition as the valuestes.on("connection_lost", (subscriptions) => {    // if your subscriptions are important to you, resubscribe to them    Object.values(subscriptions).forEach((subscription) => {        tes.subscribe(subscription.type, subscription.condition);    });});```
 
 * * *
 
@@ -261,13 +267,13 @@ Listener configuration
 <a name="TES..onEventCallback"></a>
 
 ### TES~onEventCallback ⇒ <code>void</code>
-Called when an event TES is listening for is triggered
+Called when an event TES is listening for is triggered. See [TES.on](#TES+on) for examples
 
 **Kind**: inner typedef of [<code>TES</code>](#TES)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [event] | <code>Object</code> | The event data. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#events) for details |
+| [event] | <code>Object</code> | The event data. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#events) for details.     See the [TES.on](#TES+on) examples for details on `revocation` and `connection_lost` |
 | [subscription] | <code>Object</code> | The subscription data corresponding to the event. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#subscription) for details |
 
 
