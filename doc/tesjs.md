@@ -30,6 +30,7 @@
     * [.getSubscriptionsByType(type, [cursor])](#TES+getSubscriptionsByType) ⇒ <code>Promise</code>
     * [.getSubscriptionsByStatus(status, [cursor])](#TES+getSubscriptionsByStatus) ⇒ <code>Promise</code>
     * [.getSubscription(idOrType, [condition])](#TES+getSubscription) ⇒ <code>Promise</code>
+    * [.subscribe(type, condition, [version])](#TES+subscribe) ⇒ <code>Promise</code>
 
 
 * * *
@@ -119,6 +120,25 @@ Get subscription data for an individual subscription. Search either by id or by 
 ```js// find a subscription by idconst sub = await getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 **Example**  
 ```js// find a subscription by type and conditionconst condition = { broadcaster_user_id: "1337" };const sub = await getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+
+* * *
+
+<a name="TES+subscribe"></a>
+
+### tes.subscribe(type, condition, [version]) ⇒ <code>Promise</code>
+Subscribe to an event topic
+
+**Kind**: instance method of [<code>TES</code>](#TES)  
+**Returns**: <code>Promise</code> - A Promise that resolves when subscribing is complete with the subscription data  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| type | <code>string</code> |  | The subscription type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
+| condition | <code>Object</code> |  | The subscription condition. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
+| [version] | <code>string</code> | <code>&quot;1&quot;</code> | The subscription version. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
+
+**Example**  
+```jsconst condition = { broadcaster_user_id: "1337" };const sub = tes.subscribe("channel.update", condition);console.log(`Created subscription to ${sub.type}, subscription id ${sub.id}`);```
 
 * * *
 
