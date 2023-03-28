@@ -35,9 +35,9 @@
 | config | [<code>Config</code>](#TES..Config) | The TES configuration |
 
 **Example**  
-```js// minimum `websocket` configconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN,    }    listener: { type: "websocket" },};const tes = new TES(config);```
+Minimum `websocket` config```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN,    }    listener: { type: "websocket" },};const tes = new TES(config);```
 **Example**  
-```js// minimum `webhook` configconst config = {    identity: {        id: YOUR_CLIENT_ID,        secret: YOUR_CLIENT_SECRET,    },    listener: {        type: "webhook",        baseURL: "https://example.com",        secret: YOUR_WEBHOOKS_SECRET,    },};const tes = new TES(config);```
+Minimum `webhook` config```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        secret: YOUR_CLIENT_SECRET,    },    listener: {        type: "webhook",        baseURL: "https://example.com",        secret: YOUR_WEBHOOKS_SECRET,    },};const tes = new TES(config);```
 
 * * *
 
@@ -110,9 +110,9 @@ Get subscription data for an individual subscription. Search either by id or by 
 | [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
 
 **Example**  
-```js// find a subscription by idconst sub = await tes.getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+Find a subscription by id```jsconst sub = await tes.getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 **Example**  
-```js// find a subscription by type and conditionconst condition = { broadcaster_user_id: "1337" };const sub = await tes.getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+Find a subscription by type and condition```jsconst condition = { broadcaster_user_id: "1337" };const sub = await tes.getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
 
 * * *
 
@@ -151,9 +151,9 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 | [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
 
 **Example**  
-```js// unsubscribe by idawait tes.unsubscribe("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log("Successfully unsubscribed");```
+Unsubscribe by id```jsawait tes.unsubscribe("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log("Successfully unsubscribed");```
 **Example**  
-```js// unsubscribe by type and conditionconst condition = { broadcaster_user_id: "1337" };await tes.unsubscribe("channel.update", condition);console.log("Successfully unsubscribed");```
+Unsubscribe by type and condition```jsconst condition = { broadcaster_user_id: "1337" };await tes.unsubscribe("channel.update", condition);console.log("Successfully unsubscribed");```
 
 * * *
 
@@ -172,9 +172,9 @@ Add an event handler. This will handle ALL events of the type
 **Example**  
 ```jstes.on("channel.update", (event, subscription) => {    console.log(`Event triggered for subscription ${subscription.id}`);    console.log(`${event.broadcaster_user_id}'s title is now "${event.title}"`);});```
 **Example**  
-```js// The `revocation` event is fired when Twitch revokes a subscription. This can happen// for various reasons according to Twitch (https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#revoking-your-subscription)// NOTE: No explicit subscription is needed for this event// The "event" argument is the subscription data. This means that for this, the first and second arguments are identicaltes.on("revocation", (subscriptionData) => {    console.log(`Subscription ${subscriptionData.id} has been revoked`);    // perform necessary cleanup here});```
+The `revocation` event is fired when Twitch revokes a subscription. This can happenfor various reasons [according to Twitch](https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#revoking-your-subscription).The "event" argument is the subscription data. This means that for this, the first and second arguments are basically identical**NOTE**: No explicit subscription is needed for this event to be fired```jstes.on("revocation", (subscriptionData) => {    console.log(`Subscription ${subscriptionData.id} has been revoked`);    // perform necessary cleanup here});```
 **Example**  
-```js// The `connection_lost` event is fired when a WebSocket connection is lost. All related// subscriptions should be considered stale if this happens. You can read more about this case// in the Twitch doc (https://dev.twitch.tv/docs/eventsub/handling-websocket-events/#keepalive-message)// NOTE: No explicit subscription is needed for this event to be fired// The "event" argument is an Object which has subscription ids as keys and type and condition as the valuestes.on("connection_lost", (subscriptions) => {    // if your subscriptions are important to you, resubscribe to them    Object.values(subscriptions).forEach((subscription) => {        tes.subscribe(subscription.type, subscription.condition);    });});```
+The `connection_lost` event is fired when a WebSocket connection is lost. All relatedsubscriptions should be considered stale if this happens. You can read more about this casein the [Twitch doc](https://dev.twitch.tv/docs/eventsub/handling-websocket-events/#keepalive-message).The "event" argument is an `Object` which has subscription ids as keys and type and condition as the values**NOTE**: No explicit subscription is needed for this event to be fired```jstes.on("connection_lost", (subscriptions) => {    // if your subscriptions are important to you, resubscribe to them    Object.values(subscriptions).forEach((subscription) => {        tes.subscribe(subscription.type, subscription.condition);    });});```
 
 * * *
 
