@@ -1,8 +1,8 @@
 # Documentation
 This is the documentation section of TESjs.
 
-# Contents
-- [Configuration](configuration.md) - information about configuring TESjs
-- [Events](events.md) - information about defining event handlers
-- [Functions](functions.md) - information about TESjs' provided functions
-- [Express Integration](express_integration.md) - extra information on integrating with an existing express app
+# Quick Links
+- [TESjs](tesjs.md) - TESjs main documentation
+- [Configuration](tesjs.md#TES..Config) - configuring TESjs
+- [Events](tesjs.md#TES+on) - handling events with TESjs
+- [Express Integration](express_integration.md) - extra information on integrating TESjs with an existing express app
