@@ -40,9 +40,9 @@ jobs:
         node-version: 18
     - run: npm ci
     - run: npm run build
-    - run: |
-        git diff --name-only
-        CHANGED=$(git diff --name-only | grep -w "dist/tes.min.js")
+    - shell: bash
+      run: |
+        CHANGED=$(git diff --name-only dist/tes.min.js)
         if [[ -n "$CHANGED" ]]; then
             echo "build changed, run 'npm run build' to commit new build"
             exit 1
