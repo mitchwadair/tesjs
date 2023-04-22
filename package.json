@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "test": "mocha ./test/tests.js --bail --exit",
-    "build": "node ./scripts/build.js && node ./scripts/checksum.js"
+    "build": "node ./scripts/build.js"
   },
   "author": "Mitchell Adair (https://github.com/mitchwadair)",
   "license": "MIT",
