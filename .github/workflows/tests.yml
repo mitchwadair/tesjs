@@ -40,4 +40,4 @@ jobs:
         node-version: 18
     - run: npm ci
     - run: npm run build
-    - run: bash scripts/verify-checksum.sh
+    - run: bash scripts/verify-build.sh
