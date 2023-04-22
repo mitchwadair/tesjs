@@ -74,14 +74,16 @@ describe("whserver", () => {
     it("responds with 200 OK when receiving a notification and the event should be fired", async () => {
         const cb = sinon.spy();
         tes.on("channel.follow", cb);
-        await cmd(`twitch event trigger channel.follow -F ${REDIRECT_URL} -s ${whSecret}`);
+        await cmd(`twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret}`);
         sinon.assert.called(cb);
     });
 
     it("responds with 200 OK when receiving a revocation and the revocation event should be fired", async () => {
         const cb = sinon.spy();
         tes.on("revocation", cb);
-        await cmd(`twitch event trigger channel.follow -F ${REDIRECT_URL} -s ${whSecret} -r authorization_revoked`);
+        await cmd(
+            `twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret} -r authorization_revoked`
+        );
         sinon.assert.called(cb);
     });
 
@@ -93,7 +95,7 @@ describe("whserver", () => {
         const spy = sinon.spy(cb);
         tes.on("channel.follow", spy);
 
-        await cmd(`twitch event trigger channel.follow -F ${REDIRECT_URL} -s ${whSecret}`);
+        await cmd(`twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret}`);
         await cmd(`twitch event retrigger channel.follow -F ${REDIRECT_URL} -s ${whSecret} -i ${resendID}`);
         sinon.assert.calledOnce(spy);
     });
@@ -102,7 +104,9 @@ describe("whserver", () => {
         const oldTimestamp = new Date(Date.now() - 601000).toISOString();
         const cb = sinon.spy();
         tes.on("channel.follow", cb);
-        await cmd(`twitch event trigger channel.follow -F ${REDIRECT_URL} -s ${whSecret} --timestamp ${oldTimestamp}`);
+        await cmd(
+            `twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret} --timestamp ${oldTimestamp}`
+        );
         sinon.assert.notCalled(cb);
     });
 });
