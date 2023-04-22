@@ -3,7 +3,11 @@
 git config --local core.autocrlf false
 git config --local core.safecrlf false
 
+git diff --name-only
+
 CHANGED=$(git diff --name-only | grep -w "dist/tes.min.js")
+
+echo "$CHANGED"
 
 if [[ -n "$CHANGED" ]]; then
     echo "build changed, run 'npm run build' to commit new build"
