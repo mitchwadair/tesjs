@@ -53,31 +53,40 @@ describe("wsclient", () => {
         const closeSpy = sinon.spy(connection._events, "close");
         const addConnectionSpy = sinon.spy(client, "_addConnection");
         await cmd(`twitch event websocket reconnect`);
-        expect(messageSpy.getCalls().length).to.be.greaterThan(0);
-        expect(
-            messageSpy
-                .getCalls()
-                .some((call) => JSON.parse(call.args[0].toString()).metadata.message_type === "session_reconnect")
-        ).to.be.true;
-        // `onclose` should be called on the original connection
-        sinon.assert.calledOnce(closeSpy);
-        // a new connection should be added on reconnect
-        sinon.assert.calledOnce(addConnectionSpy);
-        const sessionIDs = Object.keys(client._connections);
-        // when the new session is added and confirmed, the old one should be removed
-        expect(sessionIDs).to.have.length(1);
-        expect(firstSessionID).not.to.eq(sessionIDs[0]);
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                expect(messageSpy.getCalls().length).to.be.greaterThan(0);
+                expect(
+                    messageSpy
+                        .getCalls()
+                        .some(
+                            (call) => JSON.parse(call.args[0].toString()).metadata.message_type === "session_reconnect"
+                        )
+                ).to.be.true;
+                // `onclose` should be called on the original connection
+                sinon.assert.calledOnce(closeSpy);
+                // a new connection should be added on reconnect
+                sinon.assert.calledOnce(addConnectionSpy);
+                const sessionIDs = Object.keys(client._connections);
+                // when the new session is added and confirmed, the old one should be removed
+                expect(sessionIDs).to.have.length(1);
+                expect(firstSessionID).not.to.eq(sessionIDs[0]);
+                resolve();
+            }, 500);
+        });
     });
 
     it("fires events", async () => {
         const eventSpy = sinon.spy();
         EventManager.addListener("channel.ban", eventSpy);
         const client = new WebSocketClient();
-        let sessionID;
-        client._addConnection((id) => {
-            sessionID = id;
-        }, "ws://localhost:8080/ws");
+        client._addConnection(() => {}, "ws://localhost:8080/ws");
         await cmd(`twitch event trigger channel.ban --transport=websocket`);
-        sinon.assert.calledOnce(eventSpy);
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                sinon.assert.calledOnce(eventSpy);
+                resolve();
+            }, 500);
+        });
     });
 });
