@@ -10,6 +10,7 @@ describe("wsclient", () => {
     let server;
     // Start a new WebSocket server for each test so we are 100% fresh each time
     beforeEach(function (done) {
+        logger.setLevel("debug");
         server = spawn("twitch", ["event", "websocket", "start-server"]);
         setTimeout(done, 100);
     });
