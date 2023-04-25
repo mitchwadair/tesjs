@@ -2,7 +2,10 @@
 
 ## TES
 **Kind**: global class  
-**License**: Copyright (c) 2020-2023 Mitchell AdairThis software is released under the MIT License.https://opensource.org/licenses/MIT  
+**License**: Copyright (c) 2020-2023 Mitchell Adair
+
+This software is released under the MIT License.
+https://opensource.org/licenses/MIT  
 
 * [TES](#TES)
     * [new TES(config)](#new_TES_new)
@@ -35,9 +38,33 @@
 | config | [<code>Config</code>](#TES..Config) | The TES configuration |
 
 **Example**  
-Minimum `websocket` config```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        accessToken: YOUR_USER_ACCESS_TOKEN,    }    listener: { type: "websocket" },};const tes = new TES(config);```
+Minimum `websocket` config
+```js
+const config = {
+    identity: {
+        id: YOUR_CLIENT_ID,
+        accessToken: YOUR_USER_ACCESS_TOKEN,
+    }
+    listener: { type: "websocket" },
+};
+const tes = new TES(config);
+```
 **Example**  
-Minimum `webhook` config```jsconst config = {    identity: {        id: YOUR_CLIENT_ID,        secret: YOUR_CLIENT_SECRET,    },    listener: {        type: "webhook",        baseURL: "https://example.com",        secret: YOUR_WEBHOOKS_SECRET,    },};const tes = new TES(config);```
+Minimum `webhook` config
+```js
+const config = {
+    identity: {
+        id: YOUR_CLIENT_ID,
+        secret: YOUR_CLIENT_SECRET,
+    },
+    listener: {
+        type: "webhook",
+        baseURL: "https://example.com",
+        secret: YOUR_WEBHOOKS_SECRET,
+    },
+};
+const tes = new TES(config);
+```
 
 * * *
 
@@ -54,7 +81,10 @@ Get a list of your event subscriptions
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptions();console.log(`I have ${subs.total} event subscriptions`);```
+```js
+const subs = await tes.getSubscriptions();
+console.log(`I have ${subs.total} event subscriptions`);
+```
 
 * * *
 
@@ -72,7 +102,10 @@ Get a list of your event subscriptions by type
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`);```
+```js
+const subs = await tes.getSubscriptionsByType("channel.update");
+console.log(`I have ${subs.total} "channel.update" event subscriptions`);
+```
 
 * * *
 
@@ -90,7 +123,10 @@ Get a list of your event subscriptions by status
 | [cursor] | <code>string</code> | The pagination cursor |
 
 **Example**  
-```jsconst subs = await tes.getSubscriptionsByType("channel.update");console.log(`I have ${subs.total} "channel.update" event subscriptions`);```
+```js
+const subs = await tes.getSubscriptionsByType("channel.update");
+console.log(`I have ${subs.total} "channel.update" event subscriptions`);
+```
 
 * * *
 
@@ -110,9 +146,18 @@ Get subscription data for an individual subscription. Search either by id or by 
 | [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
 
 **Example**  
-Find a subscription by id```jsconst sub = await tes.getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+Find a subscription by id
+```js
+const sub = await tes.getSubscription("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");
+console.log(`The status for subscription ${sub.id} is ${sub.status}`);
+```
 **Example**  
-Find a subscription by type and condition```jsconst condition = { broadcaster_user_id: "1337" };const sub = await tes.getSubscription("channel.update", condition);console.log(`The status for subscription ${sub.id} is ${sub.status}`);```
+Find a subscription by type and condition
+```js
+const condition = { broadcaster_user_id: "1337" };
+const sub = await tes.getSubscription("channel.update", condition);
+console.log(`The status for subscription ${sub.id} is ${sub.status}`);
+```
 
 * * *
 
@@ -131,7 +176,11 @@ Subscribe to an event
 | [version] | <code>string</code> | <code>&quot;1&quot;</code> | The subscription version. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#subscription-types) for details |
 
 **Example**  
-```jsconst condition = { broadcaster_user_id: "1337" };const sub = tes.subscribe("channel.update", condition);console.log(`Created subscription to ${sub.type}, subscription id ${sub.id}`);```
+```js
+const condition = { broadcaster_user_id: "1337" };
+const sub = tes.subscribe("channel.update", condition);
+console.log(`Created subscription to ${sub.type}, subscription id ${sub.id}`);
+```
 
 * * *
 
@@ -151,9 +200,18 @@ Unsubscribe from an event. Unsubscribe either by id, or by type and condition
 | [condition] | <code>Object</code> | The subscription condition, required when finding by type. See [Twitch doc](https://dev.twitch.tv/docs/eventsub/eventsub-reference/#conditions) for details |
 
 **Example**  
-Unsubscribe by id```jsawait tes.unsubscribe("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");console.log("Successfully unsubscribed");```
+Unsubscribe by id
+```js
+await tes.unsubscribe("2d9e9f1f-39c3-426d-88f5-9f0251c9bfef");
+console.log("Successfully unsubscribed");
+```
 **Example**  
-Unsubscribe by type and condition```jsconst condition = { broadcaster_user_id: "1337" };await tes.unsubscribe("channel.update", condition);console.log("Successfully unsubscribed");```
+Unsubscribe by type and condition
+```js
+const condition = { broadcaster_user_id: "1337" };
+await tes.unsubscribe("channel.update", condition);
+console.log("Successfully unsubscribed");
+```
 
 * * *
 
@@ -170,11 +228,39 @@ Add an event handler. This will handle ALL events of the type
 | callback | [<code>onEventCallback</code>](#TES..onEventCallback) | The function to call when the event happens |
 
 **Example**  
-```jstes.on("channel.update", (event, subscription) => {    console.log(`Event triggered for subscription ${subscription.id}`);    console.log(`${event.broadcaster_user_id}'s title is now "${event.title}"`);});```
+```js
+tes.on("channel.update", (event, subscription) => {
+    console.log(`Event triggered for subscription ${subscription.id}`);
+    console.log(`${event.broadcaster_user_id}'s title is now "${event.title}"`);
+});
+```
 **Example**  
-The `revocation` event is fired when Twitch revokes a subscription. This can happenfor various reasons [according to Twitch](https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#revoking-your-subscription).The "event" argument is the subscription data. This means that for this, the first and second arguments are basically identical**NOTE**: No explicit subscription is needed for this event to be fired```jstes.on("revocation", (subscriptionData) => {    console.log(`Subscription ${subscriptionData.id} has been revoked`);    // perform necessary cleanup here});```
+The `revocation` event is fired when Twitch revokes a subscription. This can happen
+for various reasons [according to Twitch](https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#revoking-your-subscription).
+The "event" argument is the subscription data. This means that for this, the first and second arguments are basically identical
+
+**NOTE**: No explicit subscription is needed for this event to be fired
+```js
+tes.on("revocation", (subscriptionData) => {
+    console.log(`Subscription ${subscriptionData.id} has been revoked`);
+    // perform necessary cleanup here
+});
+```
 **Example**  
-The `connection_lost` event is fired when a WebSocket connection is lost. All relatedsubscriptions should be considered stale if this happens. You can read more about this casein the [Twitch doc](https://dev.twitch.tv/docs/eventsub/handling-websocket-events/#keepalive-message).The "event" argument is an `Object` which has subscription ids as keys and type and condition as the values**NOTE**: No explicit subscription is needed for this event to be fired```jstes.on("connection_lost", (subscriptions) => {    // if your subscriptions are important to you, resubscribe to them    Object.values(subscriptions).forEach((subscription) => {        tes.subscribe(subscription.type, subscription.condition);    });});```
+The `connection_lost` event is fired when a WebSocket connection is lost. All related
+subscriptions should be considered stale if this happens. You can read more about this case
+in the [Twitch doc](https://dev.twitch.tv/docs/eventsub/handling-websocket-events/#keepalive-message).
+The "event" argument is an `Object` which has subscription ids as keys and type and condition as the values
+
+**NOTE**: No explicit subscription is needed for this event to be fired
+```js
+tes.on("connection_lost", (subscriptions) => {
+    // if your subscriptions are important to you, resubscribe to them
+    Object.values(subscriptions).forEach((subscription) => {
+        tes.subscribe(subscription.type, subscription.condition);
+    });
+});
+```
 
 * * *
 
@@ -235,12 +321,18 @@ Identity configuration
 <a name="TES..Config..Identity..onAuthenticationFailure"></a>
 
 ##### Identity~onAuthenticationFailure ⇒ <code>Promise</code>
-Callback function called when API requests get an auth failure. If you already have an authentication solutionfor your app elsewhere use this to avoid token conflicts
+Callback function called when API requests get an auth failure. If you already have an authentication solution
+for your app elsewhere use this to avoid token conflicts
 
 **Kind**: inner typedef of [<code>Identity</code>](#TES..Config..Identity)  
 **Returns**: <code>Promise</code> - Promise that resolves a new access token  
 **Example**  
-```jsasync function onAuthenticationFailure() {    const res = await getNewAccessToken(); // your token refresh logic    return res.access_token;}```
+```js
+async function onAuthenticationFailure() {
+    const res = await getNewAccessToken(); // your token refresh logic
+    return res.access_token;
+}
+```
 
 * * *
 
