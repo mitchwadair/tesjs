@@ -8,10 +8,10 @@
     <a href="https://www.npmjs.com/package/tesjs"><img src='https://img.shields.io/npm/dt/tesjs' alt="downloads"></a>
 </p>
 
-A module to streamline the use of Twitch EventSub in Node.js applications
+A module to streamline the use of Twitch EventSub in Node.js and Web applications
 
 # WebSockets now Available!
-WebSocket transport is now available in TESjs!  You can use TESjs with WebSocket transport in your client and server-side applications.  Keep in mind that the WebSocket transport is currently in [open beta](https://discuss.dev.twitch.tv/t/eventsub-websockets-are-now-available-in-open-beta/41639), so changes could be made that may affect your application negatively until TESjs is able to update.  You can try this out in TESjs `v1.0.0-beta.0` and higher.
+WebSocket transport is now available in TESjs!  You can use TESjs with WebSocket transport in your client and server-side applications.  Keep in mind that the WebSocket transport is currently in [open beta](https://discuss.dev.twitch.tv/t/eventsub-websockets-are-now-available-in-open-beta/41639), so changes could be made that may affect your application negatively until TESjs is able to update.  You can try this out in TESjs `v1.0.0` and higher.
 
 # Documentation
 Learn how to use TESjs by reading through the [documentation](/doc).  Supplement your development with the Twitch EventSub [documentation](https://dev.twitch.tv/docs/eventsub) as well.
@@ -23,7 +23,7 @@ npm install tesjs
 ```
 Or in browsers through a CDN
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0/dist/tes.min.js"></script>
 ```
 
 # Basic Usage
@@ -64,7 +64,7 @@ tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
 # Browser
 TESjs supports WebSocket transport, and can be used in a browser environment
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0/dist/tes.min.js"></script>
 <script>
     const config = {
         identity: {
