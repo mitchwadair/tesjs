@@ -1,14 +1,13 @@
-/* color pallette: https://coolors.co/1a1423-31303f-363546-372549-615585-6c5f95-738290-f5efed */
 :root {
     --font-color-primary: #f5efed;
     --bg-primary: #1a1423;
-    --bg-grey-dark: #31303f;
-    --bg-grey-light: #363546;
-    --bg-light: #d2cedf;
-    --bg-secondary: #372549;
+    --bg-grey-dark: #26242d;
+    --bg-grey-light: #353341;
+    --bg-light: #e1dee9;
+    --bg-secondary: #3c2948;
     --primary: #615585;
     --primary-hover: #6c5f95;
-    --secondary: #738290;
+    --secondary: #9aa0ab;
 }
 
 body {
@@ -36,7 +35,7 @@ a {
 }
 
 a.link-dark {
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 a:not(.button-link):not(.button-icon):hover {

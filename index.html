@@ -24,7 +24,7 @@
                 display: block;
                 overflow-x: auto;
                 padding: 0.5em;
-                background: #24232f; /*#363546;*/
+                background: #353341;
                 -moz-tab-size: 4;
                 tab-size: 4;
             }
@@ -85,10 +85,11 @@
                         <img src="./assets/tesjs.svg" alt="TESjs" style="width: 100%" />
                     </div>
                     <div class="tes-content-heading-blurb">
-                        <h1>Streamlining the use of Twitch EventSub</h1>
+                        <h1>Streamline your Twitch EventSub integration with TESjs</h1>
                         <p>
-                            Easily subscribe to Twitch EventSub topics. Quickly start up a webhooks endpoint and listen
-                            for Twitch EventSub notifications.
+                            Whether you prefer Webhooks or WebSockets as your transport method, TESjs has you covered.
+                            TESjs is the ideal solution for developers who want to save time and effort when integrating
+                            Twitch's EventSub system into their app.
                         </p>
                         <div
                             style="
@@ -141,8 +142,8 @@
                     <div class="mdi mdi-alert-circle-outline alert-icon"></div>
                     <div class="title">WebSockets are here!</div>
                     <p>
-                        With WebSocket transport now in open beta, TESjs also supports WebSocket transport. To give it a
-                        try, you can install any version <i>v1.0.0-beta.0</i> or later
+                        With WebSocket transport now available, TESjs also supports WebSocket transport. To give it a
+                        try, you can install any version <i>v1.0.0</i> or later
                     </p>
                     <p>
                         Be sure to check out the
@@ -156,17 +157,19 @@
                     <div class="tes-tile">
                         <h2>Skip the Hard Stuff</h2>
                         <p>
-                            TESjs makes it easy to get up and running by taking care of the tough stuff. Under the hood,
-                            TESjs uses Express to create a wehbooks endpoint for Twitch's EventSub notifications. It
-                            also takes care of the tedious signature verification so you can focus on building your
-                            awesome app!
+                            Twitch's EventSub system is an essential component of building real-time applications that
+                            engage with Twitch users. However, the process of setting up and managing EventSub can be
+                            time-consuming and frustrating. TESjs takes the hassle out of EventSub integration, allowing
+                            you to focus on building the features that matter.
                         </p>
                     </div>
                     <div class="tes-tile">
                         <h2>Integrate Seamlessly</h2>
                         <p>
-                            Already running an Express server in your app? TESjs has you covered! Just pass the Express
-                            object into TESjs' config and it will build a webhooks route on top of your existing server!
+                            Already running an Express server in your app? TESjs has you covered! TESjs seamlessly
+                            integrates with your existing Express application, enabling you to quickly add EventSub
+                            functionality without any additional setup. Just pass your Express ap into the TESjs config
+                            and you're already done.
                         </p>
                     </div>
                 </div>
@@ -174,7 +177,8 @@
                     <div class="tes-tile" style="max-width: unset">
                         <h2 style="font-weight: lighter; font-size: 1.75rem">Documentation</h2>
                         <p>
-                            For in-depth details and examples on using TESjs, check out the
+                            TESjs documentation provides detailed information on how to integrate EventSub into your app
+                            using our library. For in-depth details and examples on using TESjs, check out the
                             <a
                                 href="https://github.com/mitchwadair/tesjs/tree/main/doc"
                                 target="_blank"
@@ -193,15 +197,17 @@
                         <a href="#install" class="tes-anchor">
                             <h1>Install</h1>
                         </a>
+                        <p>Download TESjs now and take your Twitch EventSub integration to the next level!</p>
                         <pre><code class='sh tes-code'>npm install tesjs</code></pre>
                         <p>or, in-browser</p>
-                        <pre><code class='html tes-code'>&lt;script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0-beta.0/dist/tes.min.js"&gt;&lt;/script&gt;</code></pre>
+                        <pre><code class='html tes-code'>&lt;script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0/dist/tes.min.js"&gt;&lt;/script&gt;</code></pre>
                     </section>
                     <section>
                         <span id="init-tes"></span>
                         <a href="#init-tes" class="tes-anchor">
-                            <h1>Initialise the TES Instance</h1>
+                            <h2>Initialise the TES Instance</h2>
                         </a>
+                        <h3>Node</h3>
                         <pre>
                             <code class='js tes-code'>
 const TES = require('tesjs');
@@ -220,6 +226,7 @@ const tes = new TES({
 });
                             </code>
                         </pre>
+                        <h3>Web Browser</h3>
                         <pre>
                             <code class='html tes-code'>
 &lt;script&gt;
@@ -241,7 +248,7 @@ const tes = new TES({
                     <section>
                         <span id="create-event-listener"></span>
                         <a href="#create-event-listener" class="tes-anchor">
-                            <h1>Create an Event Listener</h1>
+                            <h2>Create an Event Listener</h2>
                         </a>
                         <pre>
                             <code class='js tes-code'>
@@ -258,7 +265,7 @@ tes.on('channel.update', event => {
                     <section>
                         <span id="subscribe-to-event"></span>
                         <a href="#subscribe-to-event" class="tes-anchor">
-                            <h1>Subscribe to an Event</h1>
+                            <h2>Subscribe to an Event</h2>
                         </a>
                         <pre>
                             <code class='js tes-code'>
@@ -276,7 +283,7 @@ tes.subscribe('channel.update', {
                     <section>
                         <span id="revocation-clean-up"></span>
                         <a href="#revocation-clean-up" class="tes-anchor">
-                            <h1>Clean Up Revoked Subscriptions</h1>
+                            <h2>Clean Up Revoked Subscriptions</h2>
                         </a>
                         <pre>
                             <code class='js tes-code'>
@@ -292,7 +299,7 @@ tes.on('revocation', subscriptionData => {
                     <section>
                         <span id="external-auth-handling"></span>
                         <a href="#external-auth-handling" class="tes-anchor">
-                            <h1>Use External Authentication Handling</h1>
+                            <h2>Use External Authentication Handling</h2>
                         </a>
                         <pre>
                             <code class='js tes-code'>
@@ -395,7 +402,7 @@ const tes = new TES({
             hljs.initHighlightingOnLoad();
         </script>
         <script>
-            document.getElementById("footer-year").innerHTML = new Date().getFullYear();
+            document.getElementById("footer-year").innerHTML = `2020 - ${new Date().getFullYear()}`;
 
             fetch("https://api.github.com/repos/mitchwadair/tesjs/tags", {
                 method: "GET",
