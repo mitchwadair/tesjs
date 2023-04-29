@@ -11,7 +11,7 @@
 A module to streamline the use of Twitch EventSub in Node.js and Web applications
 
 # WebSockets now Available!
-WebSocket transport is now available in TESjs!  You can use TESjs with WebSocket transport in your client and server-side applications.  Keep in mind that the WebSocket transport is currently in [open beta](https://discuss.dev.twitch.tv/t/eventsub-websockets-are-now-available-in-open-beta/41639), so changes could be made that may affect your application negatively until TESjs is able to update.  You can try this out in TESjs `v1.0.0` and higher.
+WebSocket transport is now available in TESjs!  You can use TESjs with WebSocket transport in your client and server-side applications. You can try this out in TESjs `v1.0.0` and higher.
 
 # Documentation
 Learn how to use TESjs by reading through the [documentation](/doc).  Supplement your development with the Twitch EventSub [documentation](https://dev.twitch.tv/docs/eventsub) as well.
