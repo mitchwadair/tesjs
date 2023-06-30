@@ -347,6 +347,7 @@ Listener configuration
 | --- | --- | --- | --- |
 | type | <code>&quot;webhook&quot;</code> \| <code>&quot;websocket&quot;</code> |  | The type of transport to use |
 | [baseURL] | <code>string</code> |  | Required for `webhook` transport. The base URL where your app is     hosted. See [Twitch doc](https://dev.twitch.tv/docs/eventsub) for details on local development |
+| [websocketURL] | <code>string</code> |  | A custom websocket URL to use for `websocket` transport. Useful for     local testing with [Twitch CLI](https://dev.twitch.tv/docs/cli/) |
 | [secret] | <code>string</code> |  | Required for `webhook` transport. The secret to use for your `webhook`     subscriptions. Should be different from your client secret |
 | [server] | <code>Express</code> |  | The Express app object. Use if integrating with an existing Express app |
 | [port] | <code>number</code> | <code>process.env.PORT,8080</code> | A custom port to use |
