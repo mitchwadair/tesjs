@@ -200,7 +200,7 @@
                         <p>Download TESjs now and take your Twitch EventSub integration to the next level!</p>
                         <pre><code class='sh tes-code'>npm install tesjs</code></pre>
                         <p>or, in-browser</p>
-                        <pre><code class='html tes-code'>&lt;script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0/dist/tes.min.js"&gt;&lt;/script&gt;</code></pre>
+                        <pre><code id="browser-script-example" class='html tes-code'>&lt;script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.0/dist/tes.min.js"&gt;&lt;/script&gt;</code></pre>
                     </section>
                     <section>
                         <span id="init-tes"></span>
@@ -419,6 +419,8 @@ const tes = new TES({
                     }
                     document.getElementById("version-number").innerText = tag;
                     document.getElementById("header-version-number").innerText = tag;
+                    const bse = document.getElementById("browser-script-example");
+                    bse.innerHTML = bse.innerHTML.replace("v1.0.0", tag);
                 });
         </script>
     </body>
