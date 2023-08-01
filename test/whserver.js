@@ -57,7 +57,7 @@ describe("whserver", () => {
             .post("/helix/eventsub/subscriptions")
             .reply(201, () => {
                 setTimeout(async () => {
-                    const out = await cmd(`twitch event verify channel.update -F ${REDIRECT_URL} -s ${whSecret} -u 1`);
+                    const out = await cmd(`twitch event verify channel.ban -F ${REDIRECT_URL} -s ${whSecret} -u 1`);
                     expect(out).to.contain("Valid response.");
                     expect(out).to.contain("Valid content-type header.");
                     expect(out).to.contain("Valid status code.");
