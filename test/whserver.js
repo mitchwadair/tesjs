@@ -109,4 +109,11 @@ describe("whserver", () => {
         );
         sinon.assert.notCalled(cb);
     });
+
+    it("responsds with 200 OK when recieving a notification with an & in the payload", async () => {
+        const cb = sinon.spy();
+        tes.on("channel.channel_points_custom_reward_redemption.add", cb);
+        await cmd(`twitch event trigger add-redemption -F ${REDIRECT_URL} -s ${whSecret} -n "test&name"`);
+        sinon.assert.called(cb);
+    });
 });
