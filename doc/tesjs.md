@@ -124,8 +124,8 @@ Get a list of your event subscriptions by status
 
 **Example**  
 ```js
-const subs = await tes.getSubscriptionsByType("channel.update");
-console.log(`I have ${subs.total} "channel.update" event subscriptions`);
+const subs = await tes.getSubscriptionsByStatus("enabled");
+console.log(`I have ${subs.total} "enabled" event subscriptions`);
 ```
 
 * * *
