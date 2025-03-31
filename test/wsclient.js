@@ -13,8 +13,9 @@ describe("wsclient", () => {
         setTimeout(done, 100);
     });
 
-    afterEach(() => {
+    afterEach((done) => {
         server.kill("SIGINT");
+        setTimeout(done, 100);
     });
 
     /**
@@ -23,7 +24,7 @@ describe("wsclient", () => {
      */
     it("connects to a websocket server", (done) => {
         const client = new WebSocketClient();
-        const connection = client._addConnection(() => {}, "ws://localhost:8080/ws");
+        const connection = client._addConnection(() => {}, "ws://127.0.0.1:8080/ws");
         const messageSpy = sinon.spy(connection._events, "message");
         setTimeout(() => {
             const messageTypes = ["session_welcome", "session_keepalive"];
@@ -46,7 +47,7 @@ describe("wsclient", () => {
         let firstSessionID;
         const connection = client._addConnection((id) => {
             firstSessionID = id;
-        }, "ws://localhost:8080/ws");
+        }, "ws://127.0.0.1:8080/ws");
         const messageSpy = sinon.spy(connection._events, "message");
         const closeSpy = sinon.spy(connection._events, "close");
         const addConnectionSpy = sinon.spy(client, "_addConnection");
@@ -78,7 +79,7 @@ describe("wsclient", () => {
         const eventSpy = sinon.spy();
         EventManager.addListener("channel.ban", eventSpy);
         const client = new WebSocketClient();
-        client._addConnection(() => {}, "ws://localhost:8080/ws");
+        client._addConnection(() => {}, "ws://127.0.0.1:8080/ws");
         await cmd(`twitch event trigger channel.ban --transport=websocket`);
         await new Promise((resolve) => {
             setTimeout(() => {
