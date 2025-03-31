@@ -88,15 +88,13 @@ describe("whserver", () => {
     });
 
     it("responds with 200 OK when receiving a duplicate notification and the event should not be fired", async () => {
-        let resendID;
-        const cb = (_event, { id }) => {
-            resendID = id;
-        };
+        const eventID = 1234;
+        const cb = () => {};
         const spy = sinon.spy(cb);
         tes.on("channel.follow", spy);
 
-        await cmd(`twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret}`);
-        await cmd(`twitch event retrigger channel.follow -F ${REDIRECT_URL} -s ${whSecret} -i ${resendID}`);
+        await cmd(`twitch event trigger channel.follow --version 2 -F ${REDIRECT_URL} -s ${whSecret} -I ${eventID}`);
+        await cmd(`twitch event retrigger -i ${eventID} -F ${REDIRECT_URL} -s ${whSecret}`);
         sinon.assert.calledOnce(spy);
     });
 

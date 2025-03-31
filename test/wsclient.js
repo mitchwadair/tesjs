@@ -13,8 +13,9 @@ describe("wsclient", () => {
         setTimeout(done, 100);
     });
 
-    afterEach(() => {
+    afterEach((done) => {
         server.kill("SIGINT");
+        setTimeout(done, 100);
     });
 
     /**
