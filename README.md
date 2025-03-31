@@ -23,7 +23,7 @@ npm install tesjs
 ```
 Or in browsers through a CDN
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.2/dist/tes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.5/dist/tes.min.js"></script>
 ```
 
 # Basic Usage
@@ -64,7 +64,7 @@ tes.subscribe("channel.update", { broadcaster_user_id: "1337" })
 # Browser
 TESjs supports WebSocket transport, and can be used in a browser environment
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.2/dist/tes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.5/dist/tes.min.js"></script>
 <script>
     const config = {
         identity: {
